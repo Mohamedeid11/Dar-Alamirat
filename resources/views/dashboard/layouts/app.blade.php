@@ -4,7 +4,16 @@
 <html lang="en">
 <!--<![endif]-->
 
+@section('meta')
+    <meta charset="utf-8" />
+    <title>Dar Alamirat| Dashboard</title>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+@endsection
+
 @include('dashboard.layouts.head')
+
 
 <body>
 <!-- begin #page-loader -->
@@ -151,7 +160,7 @@
                                 <li class="left">
                                     <span class="date-time">yesterday 11:23pm</span>
                                     <a href="javascript:;" class="name">Sowse Bawdy</a>
-                                    <a href="javascript:;" class="image"><img alt="" src="{{asset('dashboard/assets/img/user-12.jpg')}}" /></a>
+                                    <a href="javascript:;" class="image"><img alt="" src="{{asset('admin-panel/assets/img/user-12.jpg')}}" /></a>
                                     <div class="message">
                                         Lorem ipsum dolor sit amet, consectetuer adipiscing elit volutpat. Praesent mattis interdum arcu eu feugiat.
                                     </div>
@@ -159,7 +168,7 @@
                                 <li class="right">
                                     <span class="date-time">08:12am</span>
                                     <a href="#" class="name"><span class="label label-primary">ADMIN</span> Me</a>
-                                    <a href="javascript:;" class="image"><img alt="" src="{{asset('dashboard/assets/img/user-13.jpg')}}" /></a>
+                                    <a href="javascript:;" class="image"><img alt="" src="{{asset('admin-panel/assets/img/user-13.jpg')}}" /></a>
                                     <div class="message">
                                         Nullam posuere, nisl a varius rhoncus, risus tellus hendrerit neque.
                                     </div>
@@ -167,7 +176,7 @@
                                 <li class="left">
                                     <span class="date-time">09:20am</span>
                                     <a href="#" class="name">Neck Jolly</a>
-                                    <a href="javascript:;" class="image"><img alt="" src="{{asset('dashboard/assets/img/user-10.jpg')}}" /></a>
+                                    <a href="javascript:;" class="image"><img alt="" src="{{asset('admin-panel/assets/img/user-10.jpg')}}" /></a>
                                     <div class="message">
                                         Euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
                                     </div>
@@ -175,7 +184,7 @@
                                 <li class="left">
                                     <span class="date-time">11:15am</span>
                                     <a href="#" class="name">Shag Strap</a>
-                                    <a href="javascript:;" class="image"><img alt="" src="{{asset('dashboard/assets/img/user-14.jpg')}}" /></a>
+                                    <a href="javascript:;" class="image"><img alt="" src="{{asset('admin-panel/assets/img/user-14.jpg')}}" /></a>
                                     <div class="message">
                                         Nullam iaculis pharetra pharetra. Proin sodales tristique sapien mattis placerat.
                                     </div>
@@ -226,56 +235,56 @@
                     </div>
                     <ul class="registered-users-list clearfix">
                         <li>
-                            <a href="javascript:;"><img src="{{asset('dashboard/assets/img/user-5.jpg')}}" alt="" /></a>
+                            <a href="javascript:;"><img src="{{asset('admin-panel/assets/img/user-5.jpg')}}" alt="" /></a>
                             <h4 class="username text-ellipsis">
                                 Savory Posh
                                 <small>Algerian</small>
                             </h4>
                         </li>
                         <li>
-                            <a href="javascript:;"><img src="{{asset('dashboard/assets/img/user-3.jpg')}}" alt="" /></a>
+                            <a href="javascript:;"><img src="{{asset('admin-panel/assets/img/user-3.jpg')}}" alt="" /></a>
                             <h4 class="username text-ellipsis">
                                 Ancient Caviar
                                 <small>Korean</small>
                             </h4>
                         </li>
                         <li>
-                            <a href="javascript:;"><img src="{{asset('dashboard/assets/img/user-1.jpg')}}" alt="" /></a>
+                            <a href="javascript:;"><img src="{{asset('admin-panel/assets/img/user-1.jpg')}}" alt="" /></a>
                             <h4 class="username text-ellipsis">
                                 Marble Lungs
                                 <small>Indian</small>
                             </h4>
                         </li>
                         <li>
-                            <a href="javascript:;"><img src="{{asset('dashboard/assets/img/user-8.jpg')}}" alt="" /></a>
+                            <a href="javascript:;"><img src="{{asset('admin-panel/assets/img/user-8.jpg')}}" alt="" /></a>
                             <h4 class="username text-ellipsis">
                                 Blank Bloke
                                 <small>Japanese</small>
                             </h4>
                         </li>
                         <li>
-                            <a href="javascript:;"><img src="{{asset('dashboard/assets/img/user-2.jpg')}}" alt="" /></a>
+                            <a href="javascript:;"><img src="{{asset('admin-panel/assets/img/user-2.jpg')}}" alt="" /></a>
                             <h4 class="username text-ellipsis">
                                 Hip Sculling
                                 <small>Cuban</small>
                             </h4>
                         </li>
                         <li>
-                            <a href="javascript:;"><img src="{{asset('dashboard/assets/img/user-6.jpg')}}" alt="" /></a>
+                            <a href="javascript:;"><img src="{{asset('admin-panel/assets/img/user-6.jpg')}}" alt="" /></a>
                             <h4 class="username text-ellipsis">
                                 Flat Moon
                                 <small>Nepalese</small>
                             </h4>
                         </li>
                         <li>
-                            <a href="javascript:;"><img src="{{asset('dashboard/assets/img/user-4.jpg')}}" alt="" /></a>
+                            <a href="javascript:;"><img src="{{asset('admin-panel/assets/img/user-4.jpg')}}" alt="" /></a>
                             <h4 class="username text-ellipsis">
                                 Packed Puffs
                                 <small>Malaysian></small>
                             </h4>
                         </li>
                         <li>
-                            <a href="javascript:;"><img src="{{asset('dashboard/assets/img/user-9.jpg')}}" alt="" /></a>
+                            <a href="javascript:;"><img src="{{asset('admin-panel/assets/img/user-9.jpg')}}" alt="" /></a>
                             <h4 class="username text-ellipsis">
                                 Clay Hike
                                 <small>Swedish</small>
@@ -294,82 +303,7 @@
     </div>
     <!-- end #content -->
 
-    <!-- begin theme-panel -->
-    <div class="theme-panel">
-        <a href="javascript:;" data-click="theme-panel-expand" class="theme-collapse-btn"><i class="fa fa-cog"></i></a>
-        <div class="theme-panel-content">
-            <h5 class="m-t-0">Color Theme</h5>
-            <ul class="theme-list clearfix">
-                <li class="active"><a href="javascript:;" class="bg-green" data-theme="default" data-click="theme-selector" data-toggle="tooltip" data-trigger="hover" data-container="body" data-title="Default">&nbsp;</a></li>
-                <li><a href="javascript:;" class="bg-red" data-theme="red" data-click="theme-selector" data-toggle="tooltip" data-trigger="hover" data-container="body" data-title="Red">&nbsp;</a></li>
-                <li><a href="javascript:;" class="bg-blue" data-theme="blue" data-click="theme-selector" data-toggle="tooltip" data-trigger="hover" data-container="body" data-title="Blue">&nbsp;</a></li>
-                <li><a href="javascript:;" class="bg-purple" data-theme="purple" data-click="theme-selector" data-toggle="tooltip" data-trigger="hover" data-container="body" data-title="Purple">&nbsp;</a></li>
-                <li><a href="javascript:;" class="bg-orange" data-theme="orange" data-click="theme-selector" data-toggle="tooltip" data-trigger="hover" data-container="body" data-title="Orange">&nbsp;</a></li>
-                <li><a href="javascript:;" class="bg-black" data-theme="black" data-click="theme-selector" data-toggle="tooltip" data-trigger="hover" data-container="body" data-title="Black">&nbsp;</a></li>
-            </ul>
-            <div class="divider"></div>
-            <div class="row m-t-10">
-                <div class="col-md-5 control-label double-line">Header Styling</div>
-                <div class="col-md-7">
-                    <select name="header-styling" class="form-control input-sm">
-                        <option value="1">default</option>
-                        <option value="2">inverse</option>
-                    </select>
-                </div>
-            </div>
-            <div class="row m-t-10">
-                <div class="col-md-5 control-label">Header</div>
-                <div class="col-md-7">
-                    <select name="header-fixed" class="form-control input-sm">
-                        <option value="1">fixed</option>
-                        <option value="2">default</option>
-                    </select>
-                </div>
-            </div>
-            <div class="row m-t-10">
-                <div class="col-md-5 control-label double-line">Sidebar Styling</div>
-                <div class="col-md-7">
-                    <select name="sidebar-styling" class="form-control input-sm">
-                        <option value="1">default</option>
-                        <option value="2">grid</option>
-                    </select>
-                </div>
-            </div>
-            <div class="row m-t-10">
-                <div class="col-md-5 control-label">Sidebar</div>
-                <div class="col-md-7">
-                    <select name="sidebar-fixed" class="form-control input-sm">
-                        <option value="1">fixed</option>
-                        <option value="2">default</option>
-                    </select>
-                </div>
-            </div>
-            <div class="row m-t-10">
-                <div class="col-md-5 control-label double-line">Sidebar Gradient</div>
-                <div class="col-md-7">
-                    <select name="content-gradient" class="form-control input-sm">
-                        <option value="1">disabled</option>
-                        <option value="2">enabled</option>
-                    </select>
-                </div>
-            </div>
-            <div class="row m-t-10">
-                <div class="col-md-5 control-label double-line">Content Styling</div>
-                <div class="col-md-7">
-                    <select name="content-styling" class="form-control input-sm">
-                        <option value="1">default</option>
-                        <option value="2">black</option>
-                    </select>
-                </div>
-            </div>
-            <div class="row m-t-10">
-                <div class="col-md-12">
-                    <a href="#" class="btn btn-inverse btn-block btn-sm" data-click="reset-local-storage"><i class="fa fa-refresh m-r-3"></i> Reset Local Storage</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- end theme-panel -->
+    @include('dashboard.layouts.them-panel')
 
     <!-- begin scroll to top btn -->
     <a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>

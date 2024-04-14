@@ -6,7 +6,7 @@
         <ul class="nav">
             <li class="nav-profile">
                 <div class="image">
-                    <a href="javascript:;"><img src="{{asset('dashboard/assets/img/user-13.jpg')}}" alt="" /></a>
+                    <a href="javascript:;"><img src="{{asset('admin-panel/assets/img/user-13.jpg')}}" alt="" /></a>
                 </div>
                 <div class="info">
                     Sean Ngu

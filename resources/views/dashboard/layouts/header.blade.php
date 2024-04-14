@@ -41,7 +41,7 @@
                     </li>
                     <li class="media">
                         <a href="javascript:;">
-                            <div class="media-left"><img src="{{asset('dashboard/assets/img/user-1.jpg')}}" class="media-object" alt="" /></div>
+                            <div class="media-left"><img src="{{asset('admin-panel/assets/img/user-1.jpg')}}" class="media-object" alt="" /></div>
                             <div class="media-body">
                                 <h6 class="media-heading">John Smith</h6>
                                 <p>Quisque pulvinar tellus sit amet sem scelerisque tincidunt.</p>
@@ -51,7 +51,7 @@
                     </li>
                     <li class="media">
                         <a href="javascript:;">
-                            <div class="media-left"><img src="{{asset('dashboard/assets/img/user-2.jpg')}}" class="media-object" alt="" /></div>
+                            <div class="media-left"><img src="{{asset('admin-panel/assets/img/user-2.jpg')}}" class="media-object" alt="" /></div>
                             <div class="media-body">
                                 <h6 class="media-heading">Olivia</h6>
                                 <p>Quisque pulvinar tellus sit amet sem scelerisque tincidunt.</p>
@@ -84,7 +84,7 @@
             </li>
             <li class="dropdown navbar-user">
                 <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
-                    <img src="{{asset('dashboard/assets/img/user-13.jpg')}}" alt="" />
+                    <img src="{{asset('admin-panel/assets/img/user-13.jpg')}}" alt="" />
                     <span class="hidden-xs">Adam Schwartz</span> <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu animated fadeInLeft">

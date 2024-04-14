@@ -444,7 +444,7 @@ var handleThemePageStructureControl = function() {
 
     // THEME - theme selection
     $('.theme-list [data-theme]').click(function() {
-        var cssFileSrc = 'dashboard/assets/css/theme/' + $(this).attr('data-theme') + '.css';
+        var cssFileSrc = 'admin-panel/assets/css/theme/' + $(this).attr('data-theme') + '.css';
         $('#theme').attr('href', cssFileSrc);
         $('.theme-list [data-theme]').not(this).closest('li').removeClass('active');
         $(this).closest('li').addClass('active');

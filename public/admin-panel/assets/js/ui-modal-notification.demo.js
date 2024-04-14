@@ -10,7 +10,7 @@ var handleGritterNotification = function() {
 		$.gritter.add({
 			title: 'This is a sticky notice!',
 			text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempus lacus ut lectus rutrum placerat. ',
-			image: 'dashboard/assets/img/user-2.jpg',
+			image: 'admin-panel/assets/img/user-2.jpg',
 			sticky: true,
 			time: '',
 			class_name: 'my-sticky-class'
@@ -21,7 +21,7 @@ var handleGritterNotification = function() {
 		$.gritter.add({
 			title: 'This is a regular notice!',
 			text: 'This will fade out after a certain amount of time. Sed tempus lacus ut lectus rutrum placerat. ',
-			image: 'dashboard/assets/img/user-3.jpg',
+			image: 'admin-panel/assets/img/user-3.jpg',
 			sticky: false,
 			time: ''
 		});
@@ -32,7 +32,7 @@ var handleGritterNotification = function() {
 			title: 'This is a notice with a max of 3 on screen at one time!',
 			text: 'This will fade out after a certain amount of time. Sed tempus lacus ut lectus rutrum placerat. ',
 			sticky: false,
-			image: 'dashboard/assets/img/user-4.jpg',
+			image: 'admin-panel/assets/img/user-4.jpg',
 			before_open: function() {
 				if($('.gritter-item-wrapper').length === 3) {
 					return false;
