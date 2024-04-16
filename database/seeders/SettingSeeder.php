@@ -53,5 +53,10 @@ class SettingSeeder extends Seeder
             'value'  => 'admin-panel/assets/img/logo.png'
         ]);
 
+        Setting::create([
+            'type' => 'maintenance_mode',
+            'value'  => 0
+        ]);
+
     }
 }

@@ -15,6 +15,7 @@ return [
 
     'login_page' => 'Login Page',
     'here' => 'here',
+    'general' => 'General',
     'register' => 'Register.',
     'to' => 'to ',
     'forms' => [
@@ -24,5 +25,10 @@ return [
         'not_member_button' => 'Not a member yet? Click',
         'sign_in' => 'Sign me in',
     ],
+    'settings' => [
+        'general-settings' => [
+            'title' => 'General Settings',
+        ]
+    ]
 
 ];
