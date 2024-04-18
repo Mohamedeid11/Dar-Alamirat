@@ -14,6 +14,9 @@ define(function () {
   }
 
   return {
+    errorLoading: function () {
+      return 'Preuzimanje nije uspelo.';
+    },
     inputTooLong: function (args) {
       var overChars = args.input.length - args.maximum;
 
@@ -47,6 +50,9 @@ define(function () {
     },
     searching: function () {
       return 'Pretraga…';
+    },
+    removeAllItems: function () {
+      return 'Уклоните све ставке';
     }
   };
 });

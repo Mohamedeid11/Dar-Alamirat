@@ -23,7 +23,8 @@ define(function () {
       return 'Meer resultaten laden…';
     },
     maximumSelected: function (args) {
-      var message = 'Er kunnen maar ' + args.maximum + ' item';
+      var verb = args.maximum == 1 ? 'kan' : 'kunnen';
+      var message = 'Er ' + verb + ' maar ' + args.maximum + ' item';
 
       if (args.maximum != 1) {
         message += 's';
@@ -37,6 +38,9 @@ define(function () {
     },
     searching: function () {
       return 'Zoeken…';
+    },
+    removeAllItems: function () {
+      return 'Verwijder alle items';
     }
   };
 });

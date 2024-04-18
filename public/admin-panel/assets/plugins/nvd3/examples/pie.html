@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <link href="../build/nv.d3.css" rel="stylesheet" type="text/css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.2/d3.min.js" charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js" charset="utf-8"></script>
     <script src="../build/nv.d3.js"></script>
     <script src="lib/stream_layers.js"></script>
 
@@ -63,6 +63,18 @@
                 .attr('height', height)
                 .call(chart);
 
+        // LISTEN TO CLICK EVENTS ON THE PIE CONTAINER
+        // chart.dispatch.on('chartClick', function() {
+        //   code...
+        // });
+
+        // LISTEN TO CLICK EVENTS ON THE SLICES OF THE PIE
+        // chart.dispatch.on('elementClick', function() {
+        //   code...
+        // });
+
+        // OTHER EVENTS DISPATCHED BY THE PIE INCLUDE: elementDblClick, elementMouseover, elementMouseout, elementMousemove, renderEnd
+        // @see nv.models.pie
         return chart;
     });
 

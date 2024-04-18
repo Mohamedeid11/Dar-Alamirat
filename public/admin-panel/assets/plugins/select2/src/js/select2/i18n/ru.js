@@ -14,6 +14,9 @@ define(function () {
   }
 
   return {
+    errorLoading: function () {
+      return 'Невозможно загрузить результаты';
+    },
     inputTooLong: function (args) {
       var overChars = args.input.length - args.maximum;
 
@@ -28,7 +31,7 @@ define(function () {
     inputTooShort: function (args) {
       var remainingChars = args.minimum - args.input.length;
 
-      var message = 'Пожалуйста, введите еще хотя бы ' + remainingChars +
+      var message = 'Пожалуйста, введите ещё хотя бы ' + remainingChars +
         ' символ';
 
       message += ending(remainingChars, '', 'a', 'ов');
@@ -50,6 +53,9 @@ define(function () {
     },
     searching: function () {
       return 'Поиск…';
+    },
+    removeAllItems: function () {
+      return 'Удалить все элементы';
     }
   };
 });

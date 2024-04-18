@@ -1,6 +1,9 @@
 define(function () {
   // Indonesian
   return {
+    errorLoading: function () {
+      return 'Data tidak boleh diambil.';
+    },
     inputTooLong: function (args) {
       var overChars = args.input.length - args.maximum;
 
@@ -22,6 +25,9 @@ define(function () {
     },
     searching: function () {
       return 'Mencari…';
+    },
+    removeAllItems: function () {
+      return 'Hapus semua item';
     }
   };
 });

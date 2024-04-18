@@ -15,26 +15,29 @@
 @include('dashboard.layouts.head')
 
 
-<body>
-<!-- begin #page-loader -->
-<div id="page-loader" class="fade in"><span class="spinner"></span></div>
-<!-- end #page-loader -->
+<body class="dark-mode">
 
-<!-- begin #page-container -->
-<div id="page-container" class="fade page-sidebar-fixed page-header-fixed">
-    @include('dashboard.layouts.header')
+    <!-- BEGIN #loader -->
+    <div id="loader" class="app-loader">
+        <span class="spinner"></span>
+    </div>
+    <!-- END #loader -->
 
-    @include('dashboard.layouts.sidebar')
+    <!-- BEGIN #app -->
+    <div id="app" class="app app-header-fixed app-sidebar-fixed">
 
-    @yield('content')
+        @include('dashboard.layouts.header')
 
-{{--    @include('dashboard.layouts.them-panel')--}}
+        @include('dashboard.layouts.sidebar')
 
-    <!-- begin scroll to top btn -->
-    <a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
-    <!-- end scroll to top btn -->
-</div>
-<!-- end page container -->
+        @yield('content')
+
+        <!-- BEGIN scroll-top-btn -->
+        <a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top" data-toggle="scroll-to-top"><i class="fa fa-angle-up"></i></a>
+        <!-- END scroll-top-btn -->
+
+    </div>
+    <!-- END #app -->
 
 @include('dashboard.layouts.foot')
 

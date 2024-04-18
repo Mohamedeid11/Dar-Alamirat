@@ -7,10 +7,10 @@
 (function (factory) {
 	"use strict";
 	if (typeof define === 'function' && define.amd) {
-		define('jstree.types', ['jquery','jstree'], factory);
+		define('jstree.types', ['jquery','./jstree.js'], factory);
 	}
 	else if(typeof exports === 'object') {
-		factory(require('jquery'), require('jstree'));
+		factory(require('jquery'), require('./jstree.js'));
 	}
 	else {
 		factory(jQuery, jQuery.jstree);
@@ -27,6 +27,8 @@
 	 * * `max_depth` the maximum number of nesting this node type can have. A value of `1` would mean that the node can have children, but no grandchildren. Do not specify or set to `-1` for unlimited.
 	 * * `valid_children` an array of node type strings, that nodes of this type can have as children. Do not specify or set to `-1` for no limits.
 	 * * `icon` a string - can be a path to an icon or a className, if using an image that is in the current directory use a `./` prefix, otherwise it will be detected as a class. Omit to use the default icon from your theme.
+	 * * `li_attr` an object of values which will be used to add HTML attributes on the resulting LI DOM node (merged with the node's own data)
+	 * * `a_attr` an object of values which will be used to add HTML attributes on the resulting A DOM node (merged with the node's own data)
 	 *
 	 * There are two predefined types:
 	 *
@@ -37,16 +39,16 @@
 	 * @plugin types
 	 */
 	$.jstree.defaults.types = {
-		'#' : {},
 		'default' : {}
 	};
+	$.jstree.defaults.types[$.jstree.root] = {};
 
 	$.jstree.plugins.types = function (options, parent) {
 		this.init = function (el, options) {
 			var i, j;
 			if(options && options.types && options.types['default']) {
 				for(i in options.types) {
-					if(i !== "default" && i !== "#" && options.types.hasOwnProperty(i)) {
+					if(i !== "default" && i !== $.jstree.root && options.types.hasOwnProperty(i)) {
 						for(j in options.types['default']) {
 							if(options.types['default'].hasOwnProperty(j) && options.types[i][j] === undefined) {
 								options.types[i][j] = options.types['default'][j];
@@ -56,19 +58,19 @@
 				}
 			}
 			parent.init.call(this, el, options);
-			this._model.data['#'].type = '#';
+			this._model.data[$.jstree.root].type = $.jstree.root;
 		};
 		this.refresh = function (skip_loading, forget_state) {
 			parent.refresh.call(this, skip_loading, forget_state);
-			this._model.data['#'].type = '#';
+			this._model.data[$.jstree.root].type = $.jstree.root;
 		};
 		this.bind = function () {
 			this.element
-				.on('model.jstree', $.proxy(function (e, data) {
+				.on('model.jstree', function (e, data) {
 						var m = this._model.data,
 							dpc = data.nodes,
 							t = this.settings.types,
-							i, j, c = 'default';
+							i, j, c = 'default', k;
 						for(i = 0, j = dpc.length; i < j; i++) {
 							c = 'default';
 							if(m[dpc[i]].original && m[dpc[i]].original.type && t[m[dpc[i]].original.type]) {
@@ -81,9 +83,42 @@
 							if(m[dpc[i]].icon === true && t[c].icon !== undefined) {
 								m[dpc[i]].icon = t[c].icon;
 							}
+							if(t[c].li_attr !== undefined && typeof t[c].li_attr === 'object') {
+								for (k in t[c].li_attr) {
+									if (t[c].li_attr.hasOwnProperty(k)) {
+										if (k === 'id') {
+											continue;
+										}
+										else if (m[dpc[i]].li_attr[k] === undefined) {
+											m[dpc[i]].li_attr[k] = t[c].li_attr[k];
+										}
+										else if (k === 'class') {
+											m[dpc[i]].li_attr['class'] = t[c].li_attr['class'] + ' ' + m[dpc[i]].li_attr['class'];
+										}
+									}
+								}
+							}
+							if(t[c].a_attr !== undefined && typeof t[c].a_attr === 'object') {
+								for (k in t[c].a_attr) {
+									if (t[c].a_attr.hasOwnProperty(k)) {
+										if (k === 'id') {
+											continue;
+										}
+										else if (m[dpc[i]].a_attr[k] === undefined) {
+											m[dpc[i]].a_attr[k] = t[c].a_attr[k];
+										}
+										else if (k === 'href' && m[dpc[i]].a_attr[k] === '#') {
+											m[dpc[i]].a_attr['href'] = t[c].a_attr['href'];
+										}
+										else if (k === 'class') {
+											m[dpc[i]].a_attr['class'] = t[c].a_attr['class'] + ' ' + m[dpc[i]].a_attr['class'];
+										}
+									}
+								}
+							}
 						}
-						m['#'].type = '#';
-					}, this));
+						m[$.jstree.root].type = $.jstree.root;
+					}.bind(this));
 			parent.bind.call(this);
 		};
 		this.get_json = function (obj, options, flat) {
@@ -92,7 +127,7 @@
 				opt = options ? $.extend(true, {}, options, {no_id:false}) : {},
 				tmp = parent.get_json.call(this, obj, opt, flat);
 			if(tmp === false) { return false; }
-			if($.isArray(tmp)) {
+			if($.vakata.is_array(tmp)) {
 				for(i = 0, j = tmp.length; i < j; i++) {
 					tmp[i].type = tmp[i].id && m[tmp[i].id] && m[tmp[i].id].type ? m[tmp[i].id].type : "default";
 					if(options && options.no_id) {
@@ -115,7 +150,7 @@
 			return tmp;
 		};
 		this._delete_ids = function (tmp) {
-			if($.isArray(tmp)) {
+			if($.vakata.is_array(tmp)) {
 				for(var i = 0, j = tmp.length; i < j; i++) {
 					tmp[i] = this._delete_ids(tmp[i]);
 				}
@@ -128,7 +163,7 @@
 			if(tmp.a_attr && tmp.a_attr.id) {
 				delete tmp.a_attr.id;
 			}
-			if(tmp.children && $.isArray(tmp.children)) {
+			if(tmp.children && $.vakata.is_array(tmp.children)) {
 				tmp.children = this._delete_ids(tmp.children);
 			}
 			return tmp;
@@ -211,8 +246,8 @@
 		 * @plugin types
 		 */
 		this.set_type = function (obj, type) {
-			var t, t1, t2, old_type, old_icon;
-			if($.isArray(obj)) {
+			var m = this._model.data, t, t1, t2, old_type, old_icon, k, d, a;
+			if($.vakata.is_array(obj)) {
 				obj = obj.slice();
 				for(t1 = 0, t2 = obj.length; t1 < t2; t1++) {
 					this.set_type(obj[t1], type);
@@ -222,12 +257,113 @@
 			t = this.settings.types;
 			obj = this.get_node(obj);
 			if(!t[type] || !obj) { return false; }
+			d = this.get_node(obj, true);
+			if (d && d.length) {
+				a = d.children('.jstree-anchor');
+			}
 			old_type = obj.type;
 			old_icon = this.get_icon(obj);
 			obj.type = type;
-			if(old_icon === true || (t[old_type] && t[old_type].icon !== undefined && old_icon === t[old_type].icon)) {
+			if(old_icon === true || !t[old_type] || (t[old_type].icon !== undefined && old_icon === t[old_type].icon)) {
 				this.set_icon(obj, t[type].icon !== undefined ? t[type].icon : true);
 			}
+
+			// remove old type props
+			if(t[old_type] && t[old_type].li_attr !== undefined && typeof t[old_type].li_attr === 'object') {
+				for (k in t[old_type].li_attr) {
+					if (t[old_type].li_attr.hasOwnProperty(k)) {
+						if (k === 'id') {
+							continue;
+						}
+						else if (k === 'class') {
+							m[obj.id].li_attr['class'] = (m[obj.id].li_attr['class'] || '').replace(t[old_type].li_attr[k], '');
+							if (d) { d.removeClass(t[old_type].li_attr[k]); }
+						}
+						else if (m[obj.id].li_attr[k] === t[old_type].li_attr[k]) {
+							m[obj.id].li_attr[k] = null;
+							if (d) { d.removeAttr(k); }
+						}
+					}
+				}
+			}
+			if(t[old_type] && t[old_type].a_attr !== undefined && typeof t[old_type].a_attr === 'object') {
+				for (k in t[old_type].a_attr) {
+					if (t[old_type].a_attr.hasOwnProperty(k)) {
+						if (k === 'id') {
+							continue;
+						}
+						else if (k === 'class') {
+							m[obj.id].a_attr['class'] = (m[obj.id].a_attr['class'] || '').replace(t[old_type].a_attr[k], '');
+							if (a) { a.removeClass(t[old_type].a_attr[k]); }
+						}
+						else if (m[obj.id].a_attr[k] === t[old_type].a_attr[k]) {
+							if (k === 'href') {
+								m[obj.id].a_attr[k] = '#';
+								if (a) { a.attr('href', '#'); }
+							}
+							else {
+								delete m[obj.id].a_attr[k];
+								if (a) { a.removeAttr(k); }
+							}
+						}
+					}
+				}
+			}
+
+			// add new props
+			if(t[type].li_attr !== undefined && typeof t[type].li_attr === 'object') {
+				for (k in t[type].li_attr) {
+					if (t[type].li_attr.hasOwnProperty(k)) {
+						if (k === 'id') {
+							continue;
+						}
+						else if (m[obj.id].li_attr[k] === undefined) {
+							m[obj.id].li_attr[k] = t[type].li_attr[k];
+							if (d) {
+								if (k === 'class') {
+									d.addClass(t[type].li_attr[k]);
+								}
+								else {
+									d.attr(k, t[type].li_attr[k]);
+								}
+							}
+						}
+						else if (k === 'class') {
+							m[obj.id].li_attr['class'] = t[type].li_attr[k] + ' ' + m[obj.id].li_attr['class'];
+							if (d) { d.addClass(t[type].li_attr[k]); }
+						}
+					}
+				}
+			}
+			if(t[type].a_attr !== undefined && typeof t[type].a_attr === 'object') {
+				for (k in t[type].a_attr) {
+					if (t[type].a_attr.hasOwnProperty(k)) {
+						if (k === 'id') {
+							continue;
+						}
+						else if (m[obj.id].a_attr[k] === undefined) {
+							m[obj.id].a_attr[k] = t[type].a_attr[k];
+							if (a) {
+								if (k === 'class') {
+									a.addClass(t[type].a_attr[k]);
+								}
+								else {
+									a.attr(k, t[type].a_attr[k]);
+								}
+							}
+						}
+						else if (k === 'href' && m[obj.id].a_attr[k] === '#') {
+							m[obj.id].a_attr['href'] = t[type].a_attr['href'];
+							if (a) { a.attr('href', t[type].a_attr['href']); }
+						}
+						else if (k === 'class') {
+							m[obj.id].a_attr['class'] = t[type].a_attr['class'] + ' ' + m[obj.id].a_attr['class'];
+							if (a) { a.addClass(t[type].a_attr[k]); }
+						}
+					}
+				}
+			}
+
 			return true;
 		};
 	};

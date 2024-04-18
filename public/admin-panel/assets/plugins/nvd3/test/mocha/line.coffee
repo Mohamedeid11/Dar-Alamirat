@@ -118,5 +118,33 @@ describe 'NVD3', ->
         it 'can add custom CSS class to series', ->
             builder.updateData sampleData2
 
-            lines = builder.$ '.nv-linesWrap .nv-groups .nv-group.dashed'
-            lines.length.should.equal 1, 'dashed class exists'
+            classed = builder.$ '.nv-linesWrap .nv-groups .nv-group.dashed'
+            
+            # Since classing has been implemented at the data-level for
+            # scatter points, there will actually be 2 elements matching
+            # the above selector, one for the scatter g element,
+            # and one for the line.
+            
+            classed.length.should.equal 2, 'dashed class exists'
+
+            scatter = builder.$ '.nv-scatterWrap .nv-groups .nv-group.dashed'
+            scatter.length.should.equal 1, 'one classed element is from scatter'
+
+        it 'shows focus chart when focusEnable is set to true', ->
+            builder.model.focusEnable(true).update();
+            focus = builder.$ '.nv-focusWrap .nv-focus'
+            should.exist focus[0]
+
+        it 'hides focus chart when focusEnable is set to false', ->
+            builder.model.focusEnable(true).update();
+            builder.model.focusEnable(false).update();
+            focusWrap = builder.$ '.nv-focusWrap'
+            focusWrap[0].style.display.should.equal 'none'
+
+        it 'does not reset selected focus range when focusEnable is set to false', ->
+            builder.model.focusEnable(true).update();
+            builder.model.brushExtent([0, 1]).update();
+            builder.model.focusEnable(false).update();
+            builder.model.brushExtent()[0].should.equal 0
+            builder.model.brushExtent()[1].should.equal 1
+
