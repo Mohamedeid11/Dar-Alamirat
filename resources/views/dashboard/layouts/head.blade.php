@@ -1,7 +1,6 @@
 <head>
     @yield('meta')
     <!-- ================== BEGIN BASE CSS STYLE ================== -->
-    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
     <link href="{{asset('admin-panel/assets/plugins/jquery-ui/themes/base/minified/jquery-ui.min.css')}}" rel="stylesheet" />
     <link href="{{asset('admin-panel/assets/plugins/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet" />
     <link href="{{asset('admin-panel/assets/plugins/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet" />
@@ -9,8 +8,11 @@
     <link href="{{asset('admin-panel/assets/css/style.min.css')}}" rel="stylesheet" />
     <link href="{{asset('admin-panel/assets/css/style-responsive.min')}}.css" rel="stylesheet" />
     <link href="{{asset('admin-panel/assets/css/theme/default.css')}}" rel="stylesheet" id="theme" />
+    <link href="{{asset('admin-panel/assets/css/style-responsive.min.css')}}" rel="stylesheet" />
+    <link href="{{asset('admin-panel/assets/plugins/switchery/switchery.min.css')}}" rel="stylesheet" />
+    <link href="{{asset('admin-panel/assets/plugins/powerange/powerange.min.css')}}" rel="stylesheet" />
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css">
-    <link href="{{asset('assets/css/style-responsive.min.css')}}" rel="stylesheet" />
     <!-- ================== END BASE CSS STYLE ================== -->
 
     <!-- ================== BEGIN PAGE LEVEL CSS STYLE ================== -->
@@ -23,4 +25,10 @@
     <!-- ================== BEGIN BASE JS ================== -->
     <script src="{{asset('admin-panel/assets/plugins/pace/pace.min.js')}}"></script>
     <!-- ================== END BASE JS ================== -->
+
+
+
+    <!-- ================== BEGIN PAGE CSS STYLE ================== -->
+
+    <!-- ================== END PAGE CSS STYLE ================== -->
 </head>

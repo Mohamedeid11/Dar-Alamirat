@@ -11,6 +11,9 @@
 <![endif]-->
 <script src="{{asset('admin-panel/assets/plugins/slimscroll/jquery.slimscroll.min.js')}}"></script>
 <script src="{{asset('admin-panel/assets/plugins/jquery-cookie/jquery.cookie.js')}}"></script>
+<script src="{{asset('admin-panel/assets/plugins/switchery/switchery.min.js')}}"></script>
+<script src="{{asset('admin-panel/assets/plugins/powerange/powerange.min.js')}}"></script>
+<script src="{{asset('admin-panel/assets/js/form-slider-switcher.demo.min.js')}}"></script>
 <!-- ================== END BASE JS ================== -->
 
 <!-- ================== BEGIN PAGE LEVEL JS ================== -->
