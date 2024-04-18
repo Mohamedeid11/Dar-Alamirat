@@ -406,7 +406,7 @@ var handleThemePageStructureControl = function() {
             $('.theme-list [data-theme]').closest('li').removeClass('active');
             $('.theme-list [data-theme="'+ $.cookie('theme') +'"]').closest('li').addClass('active');
         }
-        var cssFileSrc = 'dashboard/assets/css/theme/' + $.cookie('theme') + '.css';
+        var cssFileSrc = 'admin-panel/assets/css/theme/' + $.cookie('theme') + '.css';
         $('#theme').attr('href', cssFileSrc);
     }
 
@@ -622,6 +622,7 @@ var handleLocalStorage = function() {
     if (typeof(Storage) !== 'undefined' && typeof(localStorage) !== 'undefined') {
         var targetPage = window.location.href;
             targetPage = targetPage.split('?');
+            alert(targetPage)
             targetPage = targetPage[0];
         var panelPositionData = localStorage.getItem(targetPage);
 

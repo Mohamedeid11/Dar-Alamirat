@@ -12,7 +12,7 @@ Route::group(['middleware' => 'admin'], function () {
 
 Route::group(['as' => 'auth.'], function () {
     Route::get('/login', [AuthController::class , 'showLoginForm' ])->name('login');
-    Route::post('/login', [AuthController::class , 'login' ])->name('login');
+    Route::post('/login', [AuthController::class , 'login' ])->name('postLogin');
     Route::get('/register', [AuthController::class , 'register' ])->name('register');
 });
 

@@ -39,7 +39,7 @@
 
         <!-- end brand -->
         <div class="login-content">
-            <form action="{{route('dashboard.auth.login')}}" method="POST" class="margin-bottom-0">
+            <form action="{{route('dashboard.auth.postLogin')}}" method="POST" class="margin-bottom-0">
                 @csrf
                 <div class="form-group m-b-20">
                     <input type="text" name="userName" class="form-control input-lg" value="{{ old('userName') }}" placeholder="User Name" />

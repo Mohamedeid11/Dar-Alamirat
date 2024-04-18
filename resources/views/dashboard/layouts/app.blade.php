@@ -28,7 +28,7 @@
 
     @yield('content')
 
-    @include('dashboard.layouts.them-panel')
+{{--    @include('dashboard.layouts.them-panel')--}}
 
     <!-- begin scroll to top btn -->
     <a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
