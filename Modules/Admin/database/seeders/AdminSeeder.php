@@ -12,7 +12,7 @@ class AdminSeeder extends Seeder
      */
     public function run(): void
     {
-        $admin = Admin::updateOrCreate([
+        Admin::updateOrCreate([
             'id'        => 1,
             'userName'  => 'admin',
             'name'      => 'Admin',
@@ -22,6 +22,5 @@ class AdminSeeder extends Seeder
             'password'  => '123456789',
         ]);
 
-        $admin->assignRole('admin');
     }
 }

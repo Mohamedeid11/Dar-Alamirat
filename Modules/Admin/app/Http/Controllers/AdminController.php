@@ -2,13 +2,19 @@
 
 namespace Modules\Admin\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use Illuminate\Routing\Controller; // Extend this class
 
 class AdminController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:admins.read', ['only' => ['index']]);
+        $this->middleware('permission:admins.create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:admins.edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:admins.delete', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      */

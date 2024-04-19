@@ -2,11 +2,11 @@
 
 namespace Modules\Roles\database\seeders;
 
-use Modules\Admin\Models\Admin;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+use Modules\Admin\app\Models\Admin;
 
 class PermissionSeeder extends Seeder
 {
@@ -49,10 +49,12 @@ class PermissionSeeder extends Seeder
         foreach ($adminPermissions as $permission) {
             Permission::firstOrCreate(['guard_name' => 'admin','module' => 'Admin' ,'name' => $permission]);
         }
+
         $adminRole->givePermissionTo($adminPermissions);
-//        $admin = Admin::find(1);
-//        if($admin){
-//            $admin->assignRole('admin');
-//        }
+
+        $admin = Admin::find(1);
+        if($admin){
+            $admin->assignRole('admin');
+        }
     }
 }

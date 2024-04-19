@@ -2,18 +2,29 @@
 
 namespace Modules\Roles\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+//use App\Http\Controllers\Controller;
+use App\ViewModels\RoleViewModel;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use Illuminate\Routing\Controller; // Extend this class
+use Spatie\Permission\Models\Role;
 
 class RolesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:roles.read', ['only' => ['index']]);
+        $this->middleware('permission:roles.create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:roles.edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:roles.delete', ['only' => ['destroy']]);
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
+        $roles = Role::paginate();
         return view('roles::index');
     }
 
@@ -22,7 +33,7 @@ class RolesController extends Controller
      */
     public function create()
     {
-        return view('roles::create');
+        return view('roles::roles' , new RoleViewModel());
     }
 
     /**
