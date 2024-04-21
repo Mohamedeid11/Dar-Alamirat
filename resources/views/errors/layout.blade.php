@@ -414,7 +414,7 @@
         <div class="error__title">@yield('code')</div>
         <div class="error__subtitle">Hmmm...</div>
         <div class="error__description"> @yield('message') </div>
-         <button class="error__button error__button--active">LOGIN</button>
+         <button class="error__button error__button--active"><a href="{{route('dashboard.auth.login')}}">{{__('dashboard.login')}}</a> </button>
         <button class="error__button"><a href="{{ route('dashboard.index') }}">Home</a></button>
     </div>
 

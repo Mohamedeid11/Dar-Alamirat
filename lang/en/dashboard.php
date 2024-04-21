@@ -14,6 +14,7 @@ return [
     */
 
     'login_page' => 'Login Page',
+    'login' => 'Login',
     'here' => 'here',
     'general' => 'General',
     'register' => 'Register.',
