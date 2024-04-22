@@ -1,12 +1,4 @@
-@if(session('success'))
-    <script>
-        Swal.fire({
-            icon: 'success',
-            title: 'Success!',
-            text: '{{ session('success') }}',
-        });
-    </script>
-@endif
+
 
 @if(session('error'))
     <div class="alert alert-danger fade in m-b-15">
@@ -24,13 +16,5 @@
     </div>
 @endif
 
-@if(session('warning'))
-    <script>
-        Swal.fire({
-            icon: 'warning',
-            title: 'Warning!',
-            text: '{{ session('warning') }}',
-        });
-    </script>
-@endif
+
 

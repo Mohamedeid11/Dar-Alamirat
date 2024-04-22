@@ -7,6 +7,7 @@
 
     <!-- BEGIN #content -->
     <div id="content" class="app-content">
+        @include('dashboard.layouts.alerts')
         <!-- BEGIN breadcrumb -->
         <ol class="breadcrumb float-xl-end">
             <li class="breadcrumb-item"><a href="{{route('dashboard.index')}}">{{__('dashboard.home')}}</a></li>
@@ -15,6 +16,7 @@
         <!-- END breadcrumb -->
         <!-- BEGIN page-header -->
         <h1 class="page-header"> {{__('dashboard.roles')}} </h1>
+
         <!-- END page-header -->
         <!-- BEGIN row -->
         <div class="row">
@@ -23,6 +25,7 @@
                 <div class="panel panel-inverse">
                     <!-- BEGIN panel-heading -->
                     <div class="panel-heading">
+
                         <h4 class="panel-title">{{__('dashboard.roles') . ' - '  .__('dashboard.table')}}</h4>
                         <div class="panel-heading-btn">
                             <a href="javascript:;" class="btn btn-xs btn-icon btn-default" data-toggle="panel-expand"><i class="fa fa-expand"></i></a>
@@ -34,7 +37,7 @@
                     <!-- END panel-heading -->
                     <!-- BEGIN panel-body -->
                     <div class="panel-body">
-{{--                        @dd($roles)--}}
+                        <a href="{{route('roles.create')}}" class="btn btn-primary btn-lg m-2" > Add Role</a>
                         <table id="data-table-combine" class="table table-striped table-bordered align-middle">
                             <thead class="text-center">
                                 <tr>
@@ -53,8 +56,20 @@
                                         <td>{{$role->guard_name}}</td>
                                         <td>{{$role->created_at}}</td>
                                         <td class="text-center">
-                                            <a href="{{route('roles.edit' , $role->id)}}" class="btn btn-primary mx-2">Edit</a>
-                                            <a href="{{route('roles.destroy' , $role->id)}}" class="btn btn-primary mx-2">Delete</a>
+
+                                            <div class="btn-group me-1 mb-1">
+                                                <a href="javascript:;" class="btn btn-default">Actions</a>
+                                                <a href="#" data-bs-toggle="dropdown" class="btn btn-default dropdown-toggle"><i class="fa fa-caret-down"></i></a>
+                                                <div class="dropdown-menu dropdown-menu-end">
+                                                    <a href="{{route('roles.edit' , $role->id)}}" class="dropdown-item">Edit</a>
+                                                    <div class="dropdown-divider"></div>
+                                                    <form action="{{route('roles.destroy' , $role->id) }}" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button class="dropdown-item " style="background-color:transparent;border:none;">Delete</button>
+                                                    </form>
+                                                </div>
+                                            </div>
                                         </td>
                                     </tr>
                                 @endforeach
