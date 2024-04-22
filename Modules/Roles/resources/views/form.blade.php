@@ -13,13 +13,19 @@
 
         <!-- BEGIN breadcrumb -->
         <ol class="breadcrumb float-xl-end">
-            <li class="breadcrumb-item"><a href="javascript:;">Dashboard</a></li>
-            <li class="breadcrumb-item"><a href="{{route('roles.index')}}">Roles</a></li>
-            <li class="breadcrumb-item active">Edit</li>
+            <li class="breadcrumb-item"><a href="javascript:;">{{__('dashboard.dashboard')}}</a></li>
+            <li class="breadcrumb-item"><a href="{{route('roles.index')}}">{{__('dashboard.roles')}}</a></li>
+            <li class="breadcrumb-item active">
+                @if($method == 'PUT')
+                    {{__('dashboard.role.edit')}}
+                @else
+                    {{__('dashboard.role.add')}}
+                @endif
+            </li>
         </ol>
         <!-- END breadcrumb -->
         <!-- BEGIN page-header -->
-        <h1 class="page-header">Dashboard v2 <small>header small text goes here...</small></h1>
+        <h1 class="page-header">{{__('dashboard.roles')}}</h1>
         <!-- END page-header -->
         <!-- BEGIN row -->
         <form action="{{ $action }}" method="POST" enctype="multipart/form-data">
@@ -33,7 +39,7 @@
                 <div class="row">
 
                     <div class="col-6 mb-5">
-                        <label class="fs-5 fw-bold form-label mb-5">Role Name :</label>
+                        <label class="fs-5 fw-bold form-label mb-5">{{__('dashboard.role.role')}} {{__('dashboard.role.name')}} :</label>
                         <!--end::Label-->
                         <!--begin::Input-->
                         <input type="text" class="form-control form-control-solid" value="{{ old('name') ?? $role->name}}" placeholder="name" name="name" />
@@ -47,7 +53,7 @@
                     <div class="col-6 my-auto mx-auto text-center">
                         {{-- <label class="fs-5 fw-bold form-label">.</label> --}}
                         <input type="checkbox" id="all_checked" class="form-check-input" onclick="checkAllPermission()">
-                        all permission
+                        {{__('dashboard.permission.all')}}
                     </div>
 
                     @foreach($permissions as $key => $permission)
@@ -80,7 +86,7 @@
             <!--begin::Actions-->
             <div class="text-center mt-4">
                 <button type="submit" class="btn btn-primary">
-                    <span class="indicator-label">Save</span>
+                    <span class="indicator-label">{{__('dashboard.save')}}</span>
                 </button>
             </div>
             <!--end::Actions-->

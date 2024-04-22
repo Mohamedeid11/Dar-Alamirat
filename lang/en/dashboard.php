@@ -13,11 +13,33 @@ return [
     |
     */
 
+    'dashboard' => 'Dashboard',
     'login_page' => 'Login Page',
     'login' => 'Login',
     'home' => 'Home',
     'roles' => 'Roles',
+    'role' => [
+      'role' => 'Role',
+      'name' => 'Name',
+      'guard_name' => 'Guard Name',
+      'add' => 'Add Role',
+      'edit' => 'Edit Role',
+      'delete' => 'Delete Role',
+    ],
+    'permission' => [
+      'all' => 'All Permissions',
+      'name' => 'Name',
+      'guard_name' => 'Guard Name',
+      'add' => 'Add Role',
+      'edit' => 'Edit Role',
+      'delete' => 'Delete Role',
+    ],
+    'admins' => 'Admins',
+    'administrator' => 'Administrator',
+    'save' => 'Save',
     'here' => 'here',
+    'action' => 'Action',
+    'created_at' => 'Created At',
     'table' => 'Table',
     'general' => 'General',
     'register' => 'Register.',

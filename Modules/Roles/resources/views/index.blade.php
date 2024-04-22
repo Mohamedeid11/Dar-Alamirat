@@ -37,15 +37,15 @@
                     <!-- END panel-heading -->
                     <!-- BEGIN panel-body -->
                     <div class="panel-body">
-                        <a href="{{route('roles.create')}}" class="btn btn-primary btn-lg m-2" > Add Role</a>
+                        <a href="{{route('roles.create')}}" class="btn btn-primary btn-lg m-2" > {{__('dashboard.role.add')}}</a>
                         <table id="data-table-combine" class="table table-striped table-bordered align-middle">
                             <thead class="text-center">
                                 <tr>
                                     <th width="1%">#</th>
-                                    <th width="1%">Name</th>
-                                    <th class="text-nowrap">Guard Name</th>
-                                    <th class="text-nowrap">Created At</th>
-                                    <th class="text-nowrap">Action</th>
+                                    <th width="1%">{{__('dashboard.role.name')}}</th>
+                                    <th class="text-nowrap">{{__('dashboard.role.guard_name')}}</th>
+                                    <th class="text-nowrap">{{__('dashboard.created_at')}}</th>
+                                    <th class="text-nowrap">{{__('dashboard.action')}}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -54,19 +54,19 @@
                                         <td width="1%" class="fw-bold text-dark">1</td>
                                         <td>{{strtoupper($role->name)}}</td>
                                         <td>{{$role->guard_name}}</td>
-                                        <td>{{$role->created_at}}</td>
+                                        <td>{{$role->created_at->format('Y-m-d')}}</td>
                                         <td class="text-center">
 
                                             <div class="btn-group me-1 mb-1">
-                                                <a href="javascript:;" class="btn btn-default">Actions</a>
+                                                <a href="javascript:;" class="btn btn-default">{{__('dashboard.action')}}</a>
                                                 <a href="#" data-bs-toggle="dropdown" class="btn btn-default dropdown-toggle"><i class="fa fa-caret-down"></i></a>
                                                 <div class="dropdown-menu dropdown-menu-end">
-                                                    <a href="{{route('roles.edit' , $role->id)}}" class="dropdown-item">Edit</a>
+                                                    <a href="{{route('roles.edit' , $role->id)}}" class="dropdown-item">{{__('dashboard.role.edit')}}</a>
                                                     <div class="dropdown-divider"></div>
                                                     <form action="{{route('roles.destroy' , $role->id) }}" method="POST">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button class="dropdown-item " style="background-color:transparent;border:none;">Delete</button>
+                                                        <button class="dropdown-item " style="background-color:transparent;border:none;">{{__('dashboard.role.delete')}}</button>
                                                     </form>
                                                 </div>
                                             </div>

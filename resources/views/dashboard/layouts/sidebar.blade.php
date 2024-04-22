@@ -44,7 +44,7 @@
             </div>
             <div class="menu-header">Navigation</div>
             <!-- item -->
-            <div class="menu-item active">
+            <div class="menu-item {{ activeSingleLink('dashboard.index') }}">
                 <a href="/dashboard" class="menu-link">
                     <div class="menu-icon">
                         <i class="fa-solid fa-house"></i>
@@ -52,6 +52,31 @@
                     <div class="menu-text">Statistics</div>
                 </a>
             </div>
+            <!-- ./item -->
+
+            <!-- item -->
+            <div class="menu-item has-sub {{ activeLink('roles') }}">
+                <a href="javascript:;" class="menu-link">
+                    <div class="menu-icon">
+                        <i class="fa-solid fa-users"></i>
+                    </div>
+                    <div class="menu-text">{{__('dashboard.administrator')}}</div>
+                    <div class="menu-caret"></div>
+                </a>
+                <div class="menu-submenu">
+                    <div class="menu-item">
+                        <a href="ui_general.html" class="menu-link">
+                            <div class="menu-text">{{__('dashboard.admins')}}</div>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a href="{{route('roles.index')}}" class="menu-link">
+                            <div class="menu-text">{{__('dashboard.roles')}}</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
             <!-- ./item -->
 
             <!-- item -->
