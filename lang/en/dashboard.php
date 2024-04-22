@@ -15,7 +15,10 @@ return [
 
     'login_page' => 'Login Page',
     'login' => 'Login',
+    'home' => 'Home',
+    'roles' => 'Roles',
     'here' => 'here',
+    'table' => 'Table',
     'general' => 'General',
     'register' => 'Register.',
     'to' => 'to ',

@@ -24,8 +24,8 @@ class RolesController extends Controller
      */
     public function index()
     {
-        $roles = Role::paginate();
-        return view('roles::index');
+        $roles = Role::all();
+        return view('roles::index', compact('roles'));
     }
 
     /**
@@ -55,15 +55,16 @@ class RolesController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($id)
+    public function edit(Role $role)
     {
+        dd($role);
         return view('roles::edit');
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id): RedirectResponse
+    public function update(Request $request, Role $role): RedirectResponse
     {
         //
     }
@@ -71,7 +72,7 @@ class RolesController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy(Role $role)
     {
         //
     }
