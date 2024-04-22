@@ -217,3 +217,11 @@ if(!function_exists('getActiveUserName'))
         return $data ;
     }
 }
+
+if(!function_exists('storage_asset'))
+{
+    function storage_asset($file)
+    {
+        return asset('storage/' . $file) ;
+    }
+}

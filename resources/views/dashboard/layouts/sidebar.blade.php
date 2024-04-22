@@ -65,7 +65,7 @@
                 </a>
                 <div class="menu-submenu">
                     <div class="menu-item">
-                        <a href="ui_general.html" class="menu-link">
+                        <a href="{{route('admin.index')}}" class="menu-link">
                             <div class="menu-text">{{__('dashboard.admins')}}</div>
                         </a>
                     </div>

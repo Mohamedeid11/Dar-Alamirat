@@ -16,7 +16,7 @@ class Admin extends Authenticatable
     /**
      * The attributes that are mass assignable.
      */
-    protected $fillable = ['userName' , 'name' ,'email' , 'phone' , 'image', 'phone', 'status'];
+    protected $fillable = ['userName' , 'name' ,'email' ,'image', 'password', 'phone' , 'image', 'status'];
     protected $guard_name  = 'admin';
 
     /**
