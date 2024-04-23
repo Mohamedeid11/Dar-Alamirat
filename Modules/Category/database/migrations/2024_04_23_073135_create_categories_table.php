@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->json('name');
             $table->string('slug')->unique();
             $table->string('icon')->nullable();
             $table->integer('position')->nullable();
             $table->integer('priority')->nullable();
             $table->boolean('status')->default(1)->comment('0 = hidden | 1 = available');
 
-            $table->foreignId('parent_id')->nullable()->constrained('categories')->onDelete('set null');
+            $table->foreignId('parent_id')->nullable()->constrained('categories')->onDelete('cascade');
 
             $table->timestamps();
         });
