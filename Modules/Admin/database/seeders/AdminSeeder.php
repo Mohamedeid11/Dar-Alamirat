@@ -20,6 +20,7 @@ class AdminSeeder extends Seeder
             'phone'     => '0123456789',
             'image'     => 'dashboard/assets/images/admin.png',
             'password'  => '123456789',
+            'system'    => 1,
         ]);
 
     }

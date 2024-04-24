@@ -89,7 +89,7 @@
                                             <img alt="" class="mw-100 mh-100" src="../assets/img/product/product-6.jpg" />
                                         </div>
                                         <div class="ms-3">
-                                            <a href="extra_product_details.html" class="text-dark text-decoration-none">Force Majeure White T Shirt</a>
+                                            <a href="product_details.html" class="text-dark text-decoration-none">Force Majeure White T Shirt</a>
                                         </div>
                                     </div>
                                 </td>
@@ -110,7 +110,7 @@
                                             <img alt="" class="mw-100 mh-100" src="../assets/img/product/product-7.jpg" />
                                         </div>
                                         <div class="ms-3">
-                                            <a href="extra_product_details.html" class="text-dark text-decoration-none">Eco-friendly fashion, organic cotton, slow fashion polo shirts</a>
+                                            <a href="product_details.html" class="text-dark text-decoration-none">Eco-friendly fashion, organic cotton, slow fashion polo shirts</a>
                                         </div>
                                     </div>
                                 </td>
@@ -131,7 +131,7 @@
                                             <img alt="" class="mw-100 mh-100" src="../assets/img/product/product-8.jpg" />
                                         </div>
                                         <div class="ms-3">
-                                            <a href="extra_product_details.html" class="text-dark text-decoration-none">Nike Shoes (Red Color)</a>
+                                            <a href="product_details.html" class="text-dark text-decoration-none">Nike Shoes (Red Color)</a>
                                         </div>
                                     </div>
                                 </td>
@@ -152,7 +152,7 @@
                                             <img alt="" class="mw-100 mh-100" src="../assets/img/product/product-9.jpg" />
                                         </div>
                                         <div class="ms-3">
-                                            <a href="extra_product_details.html" class="text-dark text-decoration-none">Nike Air Max (Blue Color)</a>
+                                            <a href="product_details.html" class="text-dark text-decoration-none">Nike Air Max (Blue Color)</a>
                                         </div>
                                     </div>
                                 </td>
@@ -173,7 +173,7 @@
                                             <img alt="" class="mw-100 mh-100" src="../assets/img/product/product-10.jpg" />
                                         </div>
                                         <div class="ms-3">
-                                            <a href="extra_product_details.html" class="text-dark text-decoration-none">Skate Sneaker (Orange Color)</a>
+                                            <a href="product_details.html" class="text-dark text-decoration-none">Skate Sneaker (Orange Color)</a>
                                         </div>
                                     </div>
                                 </td>
@@ -194,7 +194,7 @@
                                             <img alt="" class="mw-100 mh-100" src="../assets/img/product/product-11.jpg" />
                                         </div>
                                         <div class="ms-3">
-                                            <a href="extra_product_details.html" class="text-dark text-decoration-none">Teen Fashion T-shirt (Black)</a>
+                                            <a href="product_details.html" class="text-dark text-decoration-none">Teen Fashion T-shirt (Black)</a>
                                         </div>
                                     </div>
                                 </td>
@@ -215,7 +215,7 @@
                                             <img alt="" class="mw-100 mh-100" src="../assets/img/product/product-12.jpg" />
                                         </div>
                                         <div class="ms-3">
-                                            <a href="extra_product_details.html" class="text-dark text-decoration-none">Levis Blue Jeans</a>
+                                            <a href="product_details.html" class="text-dark text-decoration-none">Levis Blue Jeans</a>
                                         </div>
                                     </div>
                                 </td>
@@ -236,7 +236,7 @@
                                             <img alt="" class="mw-100 mh-100" src="../assets/img/product/product-13.jpg" />
                                         </div>
                                         <div class="ms-3">
-                                            <a href="extra_product_details.html" class="text-dark text-decoration-none">Boots (White Color)</a>
+                                            <a href="product_details.html" class="text-dark text-decoration-none">Boots (White Color)</a>
                                         </div>
                                     </div>
                                 </td>
@@ -257,7 +257,7 @@
                                             <img alt="" class="mw-100 mh-100" src="../assets/img/product/product-14.jpg" />
                                         </div>
                                         <div class="ms-3">
-                                            <a href="extra_product_details.html" class="text-dark text-decoration-none">Hiking Boots</a>
+                                            <a href="product_details.html" class="text-dark text-decoration-none">Hiking Boots</a>
                                         </div>
                                     </div>
                                 </td>
@@ -278,7 +278,7 @@
                                             <img alt="" class="mw-100 mh-100" src="../assets/img/product/product-15.jpg" />
                                         </div>
                                         <div class="ms-3">
-                                            <a href="extra_product_details.html" class="text-dark text-decoration-none">Dress (Pink)</a>
+                                            <a href="product_details.html" class="text-dark text-decoration-none">Dress (Pink)</a>
                                         </div>
                                     </div>
                                 </td>

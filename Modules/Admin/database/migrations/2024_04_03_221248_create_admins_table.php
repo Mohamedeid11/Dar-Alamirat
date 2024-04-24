@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('phone');
             $table->string('image')->nullable();
             $table->boolean('status')->default(1);
+            $table->boolean('system')->default(0);
             $table->rememberToken();
             $table->timestamps();
         });
