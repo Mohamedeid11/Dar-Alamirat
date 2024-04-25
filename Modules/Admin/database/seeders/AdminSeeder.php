@@ -18,7 +18,6 @@ class AdminSeeder extends Seeder
             'name'      => 'Admin',
             'email'     => 'admin@admin.com',
             'phone'     => '0123456789',
-            'image'     => 'dashboard/assets/images/admin.png',
             'password'  => '123456789',
             'system'    => 1,
         ]);

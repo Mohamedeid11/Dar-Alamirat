@@ -13,6 +13,9 @@ return [
     |
     */
 
+    'website_full_name' => 'Dar Alamirat',
+    'website_first_name' => 'Dar ',
+    'website_last_name' => 'Alamirat',
     'dashboard' => 'Dashboard',
     'login_page' => 'Login Page',
     'login' => 'Login',

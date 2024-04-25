@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Storage;
 use Laravel\Passport\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
@@ -28,6 +29,15 @@ class Admin extends Authenticatable
         'password',
         'remember_token',
     ];
+
+    public function getImageAttribute()
+    {
+        if ($this->attributes['image'] && Storage::disk('public')->exists($this->attributes['image'])){
+            return storage_asset($this->attributes['image']);
+        }else{
+            return asset('assets/images/admin.png');
+        }
+    }
 
     /**
      * Get the attributes that should be cast.

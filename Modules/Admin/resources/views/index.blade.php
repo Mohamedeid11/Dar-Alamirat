@@ -70,7 +70,7 @@
                                             @endforeach
                                         </td>
                                         <td>
-                                            <img src="{{storage_asset($admin->image)}}" alt="" class="mw-100 w-70px rounded">
+                                            <img src="{{$admin->image}}" alt="" class="mw-100 w-70px rounded">
                                         </td>
                                         <td>{{$admin->created_at->format('Y-m-d')}}</td>
                                         <td class="text-center">

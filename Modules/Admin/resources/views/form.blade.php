@@ -126,7 +126,7 @@
                         @enderror
                     </div>
                     @if($admin->image != null)
-                        <img src="{{ storage_asset($admin->image) }}" class="col-3 mt-5" alt="brand" width="200" height="200">
+                        <img src="{{ $admin->image }}" class="col-3 mt-5" alt="brand" width="200" height="200">
                     @endif
                 </div>
             </div>

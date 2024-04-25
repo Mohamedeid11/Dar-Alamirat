@@ -8,16 +8,16 @@
                 <a href="javascript:;" class="menu-profile-link" data-toggle="app-sidebar-profile" data-target="#appSidebarProfileMenu">
                     <div class="menu-profile-cover with-shadow"></div>
                     <div class="menu-profile-image">
-                        <img src="{{ asset('admin-panel/assets/img/user/user-13.jpg') }}" alt="" />
+                        <img src="{{ auth('admin')->user()->image}}" alt="" />
                     </div>
                     <div class="menu-profile-info">
                         <div class="d-flex align-items-center">
                             <div class="flex-grow-1">
-                                Sean Ngu
+                                {{auth('admin')->user()->name}}
                             </div>
                             <div class="menu-caret ms-auto"></div>
                         </div>
-                        <small>Frontend developer</small>
+                        <small>{{auth('admin')->user()->roles()->first()->name}}</small>
                     </div>
                 </a>
             </div>

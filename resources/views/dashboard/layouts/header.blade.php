@@ -3,7 +3,7 @@
 <div id="header" class="app-header">
     <!-- BEGIN navbar-header -->
     <div class="navbar-header">
-        <a href="index.html" class="navbar-brand"><span class="navbar-logo"></span> <b>Color</b> Admin</a>
+        <a href="index.html" class="navbar-brand"><span class="navbar-logo"></span> <b>{{__('dashboard.website_first_name')}}</b> {{__('dashboard.website_last_name')}}</a>
         <button type="button" class="navbar-mobile-toggler" data-toggle="app-sidebar-mobile">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
@@ -86,11 +86,11 @@
 
         <div class="navbar-item navbar-user dropdown">
             <a href="#" class="navbar-link dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown">
-                <img src="{{ asset('admin-panel/assets/img/user/user-13.jpg') }}" alt="" />
+                <img src="{{ auth('admin')->user()->image }}" alt="" />
                 <span>
-							<span class="d-none d-md-inline">Adam Schwartz</span>
-							<b class="caret"></b>
-						</span>
+                    <span class="d-none d-md-inline">{{auth('admin')->user()->name}}</span>
+                    <b class="caret"></b>
+                </span>
             </a>
             <div class="dropdown-menu dropdown-menu-end me-1">
                 <a href="extra_profile.html" class="dropdown-item">Edit Profile</a>
