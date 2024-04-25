@@ -55,7 +55,7 @@
             <!-- ./item -->
 
             <!-- item -->
-            <div class="menu-item has-sub {{ activeLink('roles') }}">
+            <div class="menu-item has-sub {{ activeLink('roles') }} {{ activeLink('admin') }}">
                 <a href="javascript:;" class="menu-link">
                     <div class="menu-icon">
                         <i class="fa-solid fa-users"></i>
@@ -64,12 +64,12 @@
                     <div class="menu-caret"></div>
                 </a>
                 <div class="menu-submenu">
-                    <div class="menu-item">
+                    <div class="menu-item {{ activeLink('admin') }}">
                         <a href="{{route('admin.index')}}" class="menu-link">
                             <div class="menu-text">{{__('dashboard.admins')}}</div>
                         </a>
                     </div>
-                    <div class="menu-item">
+                    <div class="menu-item {{ activeLink('roles') }}">
                         <a href="{{route('roles.index')}}" class="menu-link">
                             <div class="menu-text">{{__('dashboard.roles')}}</div>
                         </a>

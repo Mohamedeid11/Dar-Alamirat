@@ -1,5 +1,13 @@
 @extends('dashboard.layouts.app')
 
+@section('meta')
+    <meta charset="utf-8" />
+    <title> {{__('dashboard.admins')}} </title>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+@endsection
+
 @section('content')
     <div class="app-sidebar-bg"></div>
     <div class="app-sidebar-mobile-backdrop"><a href="#" data-dismiss="app-sidebar-mobile" class="stretched-link"></a></div>
