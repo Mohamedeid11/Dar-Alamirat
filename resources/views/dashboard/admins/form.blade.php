@@ -48,7 +48,7 @@
                         </span>
                         @enderror
                     </div>
-
+                    @if($admin->system == 0)
                     <div class="col-6 mt-5">
                         <label class="fs-5 fw-bold form-label mb-5">User Name :</label>
                         <!--end::Label-->
@@ -60,7 +60,7 @@
                         </span>
                         @enderror
                     </div>
-
+                    @endif
                     <div class="col-6 mt-5">
                         <label class="fs-5 fw-bold form-label mb-5">Email :</label>
                         <!--end::Label-->
@@ -85,6 +85,7 @@
                         @enderror
                     </div>
 
+                    @if($admin->system == 0)
                     <div class="col-6 mt-5">
                         <label class="fs-5 fw-bold form-label mb-5">Password :</label>
                         <!--end::Label-->
@@ -113,6 +114,7 @@
                         </span>
                         @enderror
                     </div>
+                    @endif
 
                     <div class="col-6 mt-5">
                         <label class="fs-5 fw-bold form-label mb-5">Photo :</label>

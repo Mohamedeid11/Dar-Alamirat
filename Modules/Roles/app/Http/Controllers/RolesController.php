@@ -28,7 +28,7 @@ class RolesController extends Controller
     public function index()
     {
         $roles = Role::all();
-        return view('roles::index', compact('roles'));
+        return view('dashboard.roles.index', compact('roles'));
     }
 
     /**
@@ -36,7 +36,7 @@ class RolesController extends Controller
      */
     public function create()
     {
-        return view('roles::form' , new RoleViewModel());
+        return view('dashboard.roles.form' , new RoleViewModel());
     }
 
     /**
@@ -60,7 +60,7 @@ class RolesController extends Controller
      */
     public function edit(Role $role)
     {
-        return view('roles::form', new RoleViewModel($role));
+        return view('dashboard.roles.form', new RoleViewModel($role));
     }
 
     /**

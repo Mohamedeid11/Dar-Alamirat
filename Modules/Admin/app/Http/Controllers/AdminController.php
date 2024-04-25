@@ -30,7 +30,7 @@ class AdminController extends Controller
     public function index()
     {
         $admins = Admin::all();
-        return view('admin::index', compact('admins'));
+        return view('dashboard.admins.index', compact('admins'));
     }
 
     /**
@@ -38,7 +38,7 @@ class AdminController extends Controller
      */
     public function create()
     {
-        return view('admin::form' , new AdminViewModel());
+        return view('dashboard.admins.form' , new AdminViewModel());
     }
 
     /**
@@ -69,7 +69,7 @@ class AdminController extends Controller
      */
     public function show($id)
     {
-        return view('admin::show');
+        return view('dashboard.admins.show');
     }
 
     /**
@@ -77,7 +77,7 @@ class AdminController extends Controller
      */
     public function edit(Admin $admin)
     {
-        return view('admin::form' , new AdminViewModel($admin));
+        return view('dashboard.admins.form' , new AdminViewModel($admin));
     }
 
     /**

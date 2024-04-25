@@ -79,13 +79,19 @@
                                                 <a href="javascript:;" class="btn btn-default">{{__('dashboard.action')}}</a>
                                                 <a href="#" data-bs-toggle="dropdown" class="btn btn-default dropdown-toggle"><i class="fa fa-caret-down"></i></a>
                                                 <div class="dropdown-menu dropdown-menu-end">
+                                                    @adminCan('admins.edit')
                                                     <a href="{{route('admin.edit' , $admin->id)}}" class="dropdown-item">{{__('dashboard.admin.edit')}}</a>
+                                                    @endadminCan
+                                                    @if($admin->system == 0)
+                                                    @adminCan('admins.delete')
                                                     <div class="dropdown-divider"></div>
                                                     <form action="{{route('admin.destroy' , $admin->id) }}" method="POST">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button class="dropdown-item " style="background-color:transparent;border:none;">{{__('dashboard.admin.delete')}}</button>
                                                     </form>
+                                                    @endadminCan
+                                                    @endif
                                                 </div>
                                             </div>
                                         </td>

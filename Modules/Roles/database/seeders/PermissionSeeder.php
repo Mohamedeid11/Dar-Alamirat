@@ -52,6 +52,16 @@ class PermissionSeeder extends Seeder
 
         $adminRole->givePermissionTo($adminPermissions);
 
+        Admin::updateOrCreate([
+            'id'        => 1,
+            'userName'  => 'admin',
+            'name'      => 'Admin',
+            'email'     => 'admin@admin.com',
+            'phone'     => '0123456789',
+            'password'  => '123456789',
+            'system'    => 1,
+        ]);
+
         $admin = Admin::find(1);
         if($admin){
             $admin->assignRole('admin');
