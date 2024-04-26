@@ -12,16 +12,17 @@ class StoreCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required',
-            'icon' => 'required',
+            'name.*'=>'required',
+            'icon' => 'sometimes',
+            'priority' => 'sometimes',
         ];
     }
 
     public function messages()
     {
         return [
-            'name.required' => 'A name is required for this item.',
-            'icon.required' => 'Please provide an icon for this item.',
+            'name.en.required'  => __('validation.name_en_required'),
+            'icon.required'     => __('validation.icon_required'),
         ];
     }
 
@@ -30,6 +31,6 @@ class StoreCategoryRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return auth('admin')->check();
     }
 }

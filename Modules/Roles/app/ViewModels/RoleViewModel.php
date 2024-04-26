@@ -1,6 +1,6 @@
 <?php
 
-namespace App\ViewModels;
+namespace Modules\Roles\app\ViewModels;
 
 use Illuminate\Support\Collection;
 use Modules\Roles\app\Models\Permission;

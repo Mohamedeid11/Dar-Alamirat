@@ -16,7 +16,7 @@ class AdminUpdateRequest extends FormRequest
             'email'     => 'required|email|unique:admins,email,'.$this->admin->id,
             'userName'  => 'required|string|unique:admins,userName,'.$this->admin->id,
             'password'  => 'nullable|min:6|max:30',
-            'image'     => 'required|image|max:4048', // 4MB Max
+//            'image'     => 'required|image|max:4048', // 4MB Max
             'phone'     => 'nullable|max:11',
         ];
     }

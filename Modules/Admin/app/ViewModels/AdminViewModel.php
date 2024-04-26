@@ -1,6 +1,6 @@
 <?php
 
-namespace App\ViewModels;
+namespace Modules\Admin\app\ViewModels;
 
 use Modules\Admin\app\Models\Admin;
 use Spatie\Permission\Models\Role;

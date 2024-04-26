@@ -12,7 +12,17 @@ class UpdateCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name.*'    =>'required',
+            'icon'      => 'sometimes',
+            'priority'  => 'sometimes',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'name.en.required'  => __('validation.name_en_required'),
+            'icon.required'     => __('validation.icon_required'),
         ];
     }
 
@@ -21,6 +31,6 @@ class UpdateCategoryRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return auth('admin')->check();
     }
 }

@@ -100,14 +100,13 @@
                 </a>
             </div>
             <!-- ./item -->
-
             <!-- item -->
-            <div class="menu-item">
-                <a href="/dashboard/categories" class="menu-link">
+            <div class="menu-item {{ activeLink('category') }}">
+                <a href="{{route('category.index')}}" class="menu-link">
                     <div class="menu-icon">
                         <i class="fa-solid fa-sitemap"></i>
                     </div>
-                    <div class="menu-text">Categories</div>
+                    <div class="menu-text">{{__('dashboard.categories')}}</div>
                 </a>
             </div>
             <!-- ./item -->

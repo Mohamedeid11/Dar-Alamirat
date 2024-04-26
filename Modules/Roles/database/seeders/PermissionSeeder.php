@@ -25,7 +25,7 @@ class PermissionSeeder extends Seeder
 
         $adminPermissions = [
 
-            // users
+            // admins
             'admins.read',
             'admins.create',
             'admins.edit',
@@ -43,28 +43,28 @@ class PermissionSeeder extends Seeder
             'users.edit',
             'users.delete',
 
+            //categories
+            'categories.read',
+            'categories.create',
+            'categories.edit',
+            'categories.delete',
+
+            //products
+            'products.read',
+            'products.create',
+            'products.edit',
+            'products.delete',
 
         ];
 
         foreach ($adminPermissions as $permission) {
             Permission::firstOrCreate(['guard_name' => 'admin','module' => 'Admin' ,'name' => $permission]);
         }
-
         $adminRole->givePermissionTo($adminPermissions);
-
-        Admin::updateOrCreate([
-            'id'        => 1,
-            'userName'  => 'admin',
-            'name'      => 'Admin',
-            'email'     => 'admin@admin.com',
-            'phone'     => '0123456789',
-            'password'  => '123456789',
-            'system'    => 1,
-        ]);
-
         $admin = Admin::find(1);
         if($admin){
             $admin->assignRole('admin');
         }
+
     }
 }

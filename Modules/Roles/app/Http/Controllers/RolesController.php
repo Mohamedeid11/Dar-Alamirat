@@ -3,10 +3,10 @@
 namespace Modules\Roles\Http\Controllers;
 
 //use App\Http\Controllers\Controller;
-use App\ViewModels\RoleViewModel;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller; // Extend this class
+use Modules\Roles\app\ViewModels\RoleViewModel;
 use Modules\Roles\Http\Requests\RoleStoreRequest;
 use Modules\Roles\Http\Requests\RoleUpdateRequest;
 use Spatie\Permission\Models\Permission;

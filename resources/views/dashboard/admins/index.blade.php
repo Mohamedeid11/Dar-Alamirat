@@ -15,7 +15,6 @@
 
     <!-- BEGIN #content -->
     <div id="content" class="app-content">
-        @include('dashboard.layouts.alerts')
         <!-- BEGIN breadcrumb -->
         <ol class="breadcrumb float-xl-end">
             <li class="breadcrumb-item"><a href="{{route('dashboard.index')}}">{{__('dashboard.home')}}</a></li>
@@ -24,8 +23,8 @@
         <!-- END breadcrumb -->
         <!-- BEGIN page-header -->
         <h1 class="page-header"> {{__('dashboard.admins')}} </h1>
-
         <!-- END page-header -->
+        @include('dashboard.layouts.alerts')
         <!-- BEGIN row -->
         <div class="row">
             <!-- BEGIN col-10 -->
@@ -33,7 +32,6 @@
                 <div class="panel panel-inverse">
                     <!-- BEGIN panel-heading -->
                     <div class="panel-heading">
-
                         <h4 class="panel-title">{{__('dashboard.admins') . ' - '  .__('dashboard.table')}}</h4>
                         <div class="panel-heading-btn">
                             <a href="javascript:;" class="btn btn-xs btn-icon btn-default" data-toggle="panel-expand"><i class="fa fa-expand"></i></a>
@@ -74,7 +72,7 @@
                                         </td>
                                         <td>{{$admin->created_at->format('Y-m-d')}}</td>
                                         <td class="text-center">
-
+                                            @if($admin->system == 0)
                                             <div class="btn-group me-1 mb-1">
                                                 <a href="javascript:;" class="btn btn-default">{{__('dashboard.action')}}</a>
                                                 <a href="#" data-bs-toggle="dropdown" class="btn btn-default dropdown-toggle"><i class="fa fa-caret-down"></i></a>
@@ -82,18 +80,17 @@
                                                     @adminCan('admins.edit')
                                                     <a href="{{route('admin.edit' , $admin->id)}}" class="dropdown-item">{{__('dashboard.admin.edit')}}</a>
                                                     @endadminCan
-                                                    @if($admin->system == 0)
                                                     @adminCan('admins.delete')
                                                     <div class="dropdown-divider"></div>
-                                                    <form action="{{route('admin.destroy' , $admin->id) }}" method="POST">
+                                                    <form id="deleteForm{{$admin->id}}" action="{{ route('admin.destroy', $admin->id) }}" method="POST">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button class="dropdown-item " style="background-color:transparent;border:none;">{{__('dashboard.admin.delete')}}</button>
+                                                        <button class="dropdown-item delete-btn" style="background-color: transparent; border: none;" data-id="{{$admin->id}}">{{__('dashboard.admin.delete')}}</button>
                                                     </form>
                                                     @endadminCan
-                                                    @endif
                                                 </div>
                                             </div>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach

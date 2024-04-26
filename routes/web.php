@@ -6,17 +6,17 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/category', function () {
-    return view('dashboard.categories.categories');
-})->name('category.index');
+//Route::get('/category', function () {
+//    return view('dashboard.categories.categories');
+//})->name('category.index');
 
-Route::get('/category/create', function () {
-    return view('dashboard.categories.create_category');
-})->name('category.create');
-
-Route::get('/category/edit', function () {
-    return view('dashboard.categories.edit_category');
-})->name('category.edit');
+//Route::get('/category/create', function () {
+//    return view('dashboard.categories.create_category');
+//})->name('category.create');
+//
+//Route::get('/category/edit', function () {
+//    return view('dashboard.categories.edit_category');
+//})->name('category.edit');
 
 /************************************ clients ****************************/
 

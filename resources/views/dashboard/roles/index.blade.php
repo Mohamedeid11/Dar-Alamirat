@@ -15,7 +15,6 @@
 
     <!-- BEGIN #content -->
     <div id="content" class="app-content">
-        @include('dashboard.layouts.alerts')
         <!-- BEGIN breadcrumb -->
         <ol class="breadcrumb float-xl-end">
             <li class="breadcrumb-item"><a href="{{route('dashboard.index')}}">{{__('dashboard.home')}}</a></li>
@@ -24,8 +23,8 @@
         <!-- END breadcrumb -->
         <!-- BEGIN page-header -->
         <h1 class="page-header"> {{__('dashboard.roles')}} </h1>
-
         <!-- END page-header -->
+        @include('dashboard.layouts.alerts')
         <!-- BEGIN row -->
         <div class="row">
             <!-- BEGIN col-10 -->
@@ -71,10 +70,10 @@
                                                 <div class="dropdown-menu dropdown-menu-end">
                                                     <a href="{{route('roles.edit' , $role->id)}}" class="dropdown-item">{{__('dashboard.role.edit')}}</a>
                                                     <div class="dropdown-divider"></div>
-                                                    <form action="{{route('roles.destroy' , $role->id) }}" method="POST">
+                                                    <form id="deleteForm{{$role->id}}" action="{{ route('roles.destroy', $role->id) }}" method="POST">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button class="dropdown-item " style="background-color:transparent;border:none;">{{__('dashboard.role.delete')}}</button>
+                                                        <button class="dropdown-item delete-btn" style="background-color: transparent; border: none;" data-id="{{$role->id}}">{{__('dashboard.role.delete')}}</button>
                                                     </form>
                                                 </div>
                                             </div>

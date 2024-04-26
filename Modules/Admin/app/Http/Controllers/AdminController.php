@@ -2,11 +2,11 @@
 
 namespace Modules\Admin\Http\Controllers;
 
-use App\ViewModels\AdminViewModel;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Admin\app\Models\Admin;
+use Modules\Admin\app\ViewModels\AdminViewModel;
 use Modules\Admin\Http\Requests\AdminStoreRequest;
 use Modules\Admin\Http\Requests\AdminUpdateRequest;
 use Spatie\Permission\Models\Role;

@@ -17,7 +17,7 @@ class Admin extends Authenticatable
     /**
      * The attributes that are mass assignable.
      */
-    protected $fillable = ['userName' , 'name' ,'email' ,'image', 'password', 'phone' , 'image', 'status'];
+    protected $fillable = ['userName' , 'name' ,'email' ,'image', 'password', 'phone' , 'image', 'status' ,'system'];
     protected $guard_name  = 'admin';
 
     /**
@@ -32,7 +32,7 @@ class Admin extends Authenticatable
 
     public function getImageAttribute()
     {
-        if ($this->attributes['image'] && Storage::disk('public')->exists($this->attributes['image'])){
+        if (isset($this->attributes['image']) && Storage::disk('public')->exists($this->attributes['image'])){
             return storage_asset($this->attributes['image']);
         }else{
             return asset('assets/images/admin.png');

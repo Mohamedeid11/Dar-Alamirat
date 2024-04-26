@@ -53,4 +53,32 @@
     </script>
 @endif
 
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var deleteButtons = document.querySelectorAll('.delete-btn');
+
+        deleteButtons.forEach(function(button) {
+            button.addEventListener('click', function(event) {
+                event.preventDefault();
+                var categoryId = this.getAttribute('data-id');
+
+                // Use SweetAlert for confirmation
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        document.getElementById('deleteForm' + categoryId).submit();
+                    }
+                });
+            });
+        });
+    });
+</script>
+
 @yield('scripts')

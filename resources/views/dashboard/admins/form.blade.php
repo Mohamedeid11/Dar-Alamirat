@@ -30,9 +30,7 @@
         <!-- BEGIN row -->
         <form action="{{ $action }}" method="POST" enctype="multipart/form-data">
             @csrf
-            @if($method == 'PUT')
-                @method('PUT')
-            @endif
+            @method($method)
             <!--begin::Input group-->
             <div class="fv-row mb-10">
                 <div class="row">
