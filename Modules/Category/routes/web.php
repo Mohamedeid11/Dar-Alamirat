@@ -14,6 +14,6 @@ use Modules\Category\Http\Controllers\CategoryController;
 |
 */
 
-Route::group([], function () {
+Route::group(['middleware' => 'admin'], function () {
     Route::resource('category', CategoryController::class)->names('category');
 });

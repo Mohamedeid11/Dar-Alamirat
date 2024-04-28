@@ -22,7 +22,6 @@ class StoreCategoryRequest extends FormRequest
     {
         return [
             'name.en.required'  => __('validation.name_en_required'),
-            'icon.required'     => __('validation.icon_required'),
         ];
     }
 

@@ -14,6 +14,6 @@ use Modules\Admin\Http\Controllers\AdminController;
 |
 */
 
-Route::group([], function () {
+Route::group(['middleware' => 'admin'], function () {
     Route::resource('admin', AdminController::class)->names('admin');
 });

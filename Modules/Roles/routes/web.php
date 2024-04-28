@@ -14,6 +14,6 @@ use Modules\Roles\Http\Controllers\RolesController;
 |
 */
 
-Route::group([], function () {
+Route::group(['middleware' => 'admin'], function () {
     Route::resource('roles', RolesController::class)->names('roles');
 });
