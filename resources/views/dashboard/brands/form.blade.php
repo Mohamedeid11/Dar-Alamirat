@@ -91,7 +91,7 @@
         </ol>
         <!-- END breadcrumb -->
         <!-- BEGIN page-header -->
-        <h1 class="page-header">{{__('dashboard.categories')}}</h1>
+        <h1 class="page-header">{{__('dashboard.brands')}}</h1>
         <!-- END page-header -->
         <!-- BEGIN row -->
         <form action="{{ $action }}" method="POST" enctype="multipart/form-data">

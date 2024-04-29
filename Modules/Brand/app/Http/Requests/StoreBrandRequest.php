@@ -3,6 +3,7 @@
 namespace Modules\Brand\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Modules\Brand\Models\Brand;
 
 class StoreBrandRequest extends FormRequest
 {
@@ -12,7 +13,19 @@ class StoreBrandRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name.*'=>'required',
+            'name.en' => [
+                'required',
+                'string',
+                function ($attribute, $value, $fail) {
+                    // Retrieve all existing brand names in English
+                    $existingNames = Brand::pluck('name')->toArray();
+
+                    // Check if the current name is unique
+                    if (in_array($value, $existingNames)) {
+                        $fail("The English name must be unique.");
+                    }
+                },
+            ],
             'image' => 'sometimes',
         ];
     }
