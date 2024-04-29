@@ -110,6 +110,16 @@
                 </a>
             </div>
             <!-- ./item -->
+            <!-- item -->
+            <div class="menu-item {{ activeLink('brand') }}">
+                <a href="{{route('brand.index')}}" class="menu-link">
+                    <div class="menu-icon">
+                        <i class="fa-solid fa-sitemap"></i>
+                    </div>
+                    <div class="menu-text">{{__('dashboard.brands')}}</div>
+                </a>
+            </div>
+            <!-- ./item -->
 
             <!-- item -->
             <div class="menu-item">

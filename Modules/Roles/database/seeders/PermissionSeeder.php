@@ -49,6 +49,12 @@ class PermissionSeeder extends Seeder
             'categories.edit',
             'categories.delete',
 
+            //categories
+            'brands.read',
+            'brands.create',
+            'brands.edit',
+            'brands.delete',
+
             //products
             'products.read',
             'products.create',

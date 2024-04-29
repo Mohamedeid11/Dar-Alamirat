@@ -45,8 +45,8 @@
                         <input type="text" class="form-control form-control-solid" value="{{ old('name') ?? $role->name}}" placeholder="name" name="name" />
                         @error('name')
                         <span class="text-danger" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
+                            <strong>{{ $message }}</strong>
+                        </span>
                         @enderror
                     </div>
 
@@ -60,8 +60,8 @@
                         <div class="col-2">
                             <input type="checkbox" id="{{ $key }}" class="form-check-input all_checked" onclick="sendNameOfPermission('{{ $key }}')">
                             <span>
-                                            <h4 class="d-inline-block"> {{ $key }} </h4>
-                                        </span>
+                                <h4 class="d-inline-block"> {{ $key }} </h4>
+                            </span>
                         </div>
                         <div class="col-10">
                             <div class="row">
