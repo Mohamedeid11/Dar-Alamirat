@@ -2,5 +2,6 @@
     "Admin": true,
     "Roles": true,
     "Category": true,
-    "Brand": true
+    "Brand": true,
+    "Product": true
 }
