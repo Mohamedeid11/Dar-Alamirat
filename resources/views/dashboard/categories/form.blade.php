@@ -80,7 +80,7 @@
         <!-- BEGIN breadcrumb -->
         <ol class="breadcrumb float-xl-end">
             <li class="breadcrumb-item"><a href="javascript:;">{{__('dashboard.dashboard')}}</a></li>
-            <li class="breadcrumb-item"><a href="{{route('category.index')}}">{{__('dashboard.categorys')}}</a></li>
+            <li class="breadcrumb-item"><a href="{{route('category.index')}}">{{__('dashboard.categories')}}</a></li>
             <li class="breadcrumb-item active">
                 @if($method == 'PUT')
                     {{__('dashboard.category.edit')}}

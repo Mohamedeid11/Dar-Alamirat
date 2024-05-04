@@ -18,9 +18,11 @@ return new class extends Migration
             $table->json('instructions')->nullable();
             $table->string('thumbnail')->nullable();
             $table->string('slug');
+            $table->boolean('active')->default(1);
             $table->foreignId('category_id')->constrained('categories')->cascadeOnDelete();
             $table->foreignId('brand_id')->constrained('brands')->cascadeOnDelete();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
