@@ -2,16 +2,28 @@
 
 namespace Modules\Product\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use Illuminate\Routing\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Modules\Product\app\Services\ProductService;
 use Modules\Product\app\ViewModels\ProductViewModel;
+use Modules\Product\Http\Requests\StoreProductRequest;
 use Modules\Product\Models\Product;
 use Modules\Product\Models\Variant;
 
 class ProductController extends Controller
 {
+    protected $productService;
+
+    public function __construct(ProductService $productService)
+    {
+        $this->productService = $productService;
+        $this->middleware('permission:products.read,admin', ['only' => ['index']]);
+        $this->middleware('permission:products.create,admin', ['only' => ['create', 'store']]);
+        $this->middleware('permission:products.edit,admin', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:products.delete,admin', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      */
@@ -31,53 +43,19 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request): RedirectResponse
+    public function store(StoreProductRequest $request): RedirectResponse
     {
-        $validator = Validator::make($request->all(), [
-            'title.en' => 'required|string',
-            'description.en' => 'required|string',
-            'instructions.en' => 'string',
-            'category_id' => 'required|exists:categories,id',
-            'brand_id' => 'required|exists:brands,id',
-            'variant.*.price' => 'required|numeric',
-            'variant.*.quantity' => 'required|integer',
-            // Add other fields and rules as necessary
-        ]);
 
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
-
-        $product = new Product();
-        $product->fill($request->only(['title', 'description', 'instructions']));
-        $product->category_id = $request->category_id;
-        $product->brand_id = $request->brand_id;
-        $product->save();
-        dd($product);
-
-        // Handle variants
-        foreach ($request->variant as $variantData) {
-            if ($variantData['enabled'] === 'on') {
-                $variant = new Variant([
-                    'product_id' => $product->id,
-                    'size' => $variantData['size'] ?? null,
-                    'color' => $variantData['color'] ?? null,
-                    'price' => $variantData['price'],
-                    'quantity' => $variantData['quantity']
-                ]);
-                $variant->save();
-            }
-        }
+        $product = $this->productService->storeData($request->all());
 
         // Handle image uploads
         if ($request->hasFile('images')) {
             foreach ($request->images as $image) {
                 $path = $image->store('public/products');
-                $product->images()->create(['path' => $path]);
+                $product->media()->create(['file' => $path]);
             }
         }
-
-        return redirect()->route('products.index')->with('success', 'Product created successfully!');
+        return redirect()->route('product.index')->with('success', 'Product created successfully!');
     }
 
     /**

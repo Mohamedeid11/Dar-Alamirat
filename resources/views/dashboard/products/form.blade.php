@@ -17,7 +17,7 @@
 				<div>
 					<ol class="breadcrumb">
 						<li class="breadcrumb-item"><a href="{{route('dashboard.index')}}">{{__('dashboard.home')}}</a></li>
-						<li class="breadcrumb-item"><a href="{{route('dashboard.index')}}">{{__('dashboard.products')}}</a></li>
+						<li class="breadcrumb-item"><a href="{{route('product.index')}}">{{__('dashboard.products')}}</a></li>
 						<li class="breadcrumb-item active"><i class="fa fa-arrow-back"></i>
                             @if($method == 'PUT')
                                 {{__('dashboard.product.edit')}}
@@ -88,7 +88,7 @@
                                         <select class="default-select2 form-control" name="category_id">
                                             <option selected>Select Category</option>
                                             @foreach($categories as $category)
-                                                <option value="{{$category->id}}">{{$category->name}}</option>
+                                                <option value="{{$category->id}}" @if($category->id == $product->category_id) selected @endif>{{$category->name}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -106,7 +106,7 @@
                                         <select class="default-select2 form-control" name="brand_id">
                                             <option selected>Select Brand</option>
                                             @foreach($brands as $brand)
-                                                <option value="{{$brand->id}}">{{$brand->name}}</option>
+                                                <option value="{{$brand->id}}" @if($brand->id == $product->brand_id) selected @endif>{{$brand->name}}</option>
                                             @endforeach
                                         </select>
                                     </div>

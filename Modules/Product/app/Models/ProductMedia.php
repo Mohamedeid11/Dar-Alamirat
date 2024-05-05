@@ -13,7 +13,7 @@ class ProductMedia extends Model
     /**
      * The attributes that are mass assignable.
      */
-    protected $fillable = ['product_id', 'file_path'];
+    protected $fillable = ['product_id', 'file'];
 
     /**
      * Get the product that owns the media.
