@@ -29,6 +29,8 @@
 <script src="{{asset('admin-panel/assets/plugins/jszip/dist/jszip.min.js')}}"></script>
 <script src="{{asset('admin-panel/assets/plugins/@highlightjs/cdn-assets/highlight.min.js')}}"></script>
 <script src="{{asset('admin-panel/assets/js/demo/render.highlight.js')}}"></script>
+<script src="{{asset('admin-panel/assets/plugins/select2/dist/js/select2.min.js')}}"></script>
+
 <!-- ================== END page-js ================== -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -52,7 +54,10 @@
         });
     </script>
 @endif
+<script>
+    $(".default-select2").select2();
 
+</script>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         var deleteButtons = document.querySelectorAll('.delete-btn');

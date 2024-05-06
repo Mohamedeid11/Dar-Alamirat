@@ -80,8 +80,8 @@
             <!-- ./item -->
 
             <!-- item -->
-            <div class="menu-item">
-                <a href="/dashboard/products" class="menu-link">
+            <div class="menu-item {{ activeLink('product') }}">
+                <a href="{{route('product.index')}}" class="menu-link">
                     <div class="menu-icon">
                         <i class="fa-solid fa-store"></i>
                     </div>
