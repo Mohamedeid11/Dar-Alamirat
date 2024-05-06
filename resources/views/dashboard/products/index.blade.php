@@ -71,53 +71,53 @@
                                 <th class="pt-0 pb-2">Product</th>
                                 <th class="pt-0 pb-2">Inventory</th>
                                 <th class="pt-0 pb-2">action</th>
-{{--                                <th class="pt-0 pb-2">Vendor</th>--}}
+                                {{--                                <th class="pt-0 pb-2">Vendor</th>--}}
                             </tr>
                             </thead>
                             <tbody>
 
                             @foreach($products as $product)
                                 <tr>
-                                <td class="w-10px align-middle">
-                                    <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="{{$product->id}}">
-                                        <label class="form-check-label" for="product1"></label>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <div class="w-50px h-50px bg-light d-flex align-items-center justify-content-center">
-                                            <img alt="" class="mw-100 mh-100" src="{{ $product->thumbnail }}" />
+                                    <td class="w-10px align-middle">
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input" id="{{$product->id}}">
+                                            <label class="form-check-label" for="product1"></label>
                                         </div>
-                                        <div class="ms-3">
-                                            <a href="{{route('product.show' , $product->id)}}" class="text-dark text-decoration-none">{{$product->title}}</a>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <div class="w-50px h-50px bg-light d-flex align-items-center justify-content-center">
+                                                <img alt="" class="mw-100 mh-100" src="{{ $product->thumbnail }}" />
+                                            </div>
+                                            <div class="ms-3">
+                                                <a href="{{route('product.show' , $product->id)}}" class="text-dark text-decoration-none">{{$product->title}}</a>
+                                            </div>
                                         </div>
-                                    </div>
-                                </td>
-                                <td class="align-middle">{{$product->inventory->count()}} in stock for {{$product->variants->count()}} variants</td>
-                                <td class="text-center">
-                                    <div class="btn-group me-1 mb-1">
-                                        <a href="javascript:;" class="btn btn-default">{{__('dashboard.action')}}</a>
-                                        <a href="#" data-bs-toggle="dropdown" class="btn btn-default dropdown-toggle"><i class="fa fa-caret-down"></i></a>
-                                        <div class="dropdown-menu dropdown-menu-end">
-                                            @adminCan('categories.edit')
-                                            <a href="{{route('product.edit' , $product->id)}}" class="dropdown-item">{{__('dashboard.product.edit')}}</a>
-                                            @endadminCan
-                                            @adminCan('categories.delete')
-                                            <div class="dropdown-divider"></div>
-                                            <form id="deleteForm{{$product->id}}" action="{{ route('product.destroy', $product->id) }}" method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button class="dropdown-item delete-btn" style="background-color: transparent; border: none;" data-id="{{$product->id}}">{{__('dashboard.product.delete')}}</button>
-                                            </form>
-                                            @endadminCan
+                                    </td>
+                                    <td class="align-middle">{{$product->inventory->count()}} in stock for {{$product->variants->count()}} variants</td>
+                                    <td class="text-center">
+                                        <div class="btn-group me-1 mb-1">
+                                            <a href="javascript:;" class="btn btn-default">{{__('dashboard.action')}}</a>
+                                            <a href="#" data-bs-toggle="dropdown" class="btn btn-default dropdown-toggle"><i class="fa fa-caret-down"></i></a>
+                                            <div class="dropdown-menu dropdown-menu-end">
+                                                @adminCan('categories.edit')
+                                                <a href="{{route('product.edit' , $product->id)}}" class="dropdown-item">{{__('dashboard.product.edit')}}</a>
+                                                @endadminCan
+                                                @adminCan('categories.delete')
+                                                <div class="dropdown-divider"></div>
+                                                <form id="deleteForm{{$product->id}}" action="{{ route('product.destroy', $product->id) }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button class="dropdown-item delete-btn" style="background-color: transparent; border: none;" data-id="{{$product->id}}">{{__('dashboard.product.delete')}}</button>
+                                                </form>
+                                                @endadminCan
+                                            </div>
                                         </div>
-                                    </div>
-                                </td>
-{{--                                <td class="align-middle">Cotton</td>--}}
-{{--                                <td class="align-middle">Force Majeure</td>--}}
+                                    </td>
+                                    {{--                                <td class="align-middle">Cotton</td>--}}
+                                    {{--                                <td class="align-middle">Force Majeure</td>--}}
 
-                            </tr>
+                                </tr>
                             @endforeach
                             </tbody>
                         </table>

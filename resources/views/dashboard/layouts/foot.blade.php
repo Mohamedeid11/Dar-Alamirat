@@ -56,8 +56,8 @@
 @endif
 <script>
     $(".default-select2").select2();
-
 </script>
+
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         var deleteButtons = document.querySelectorAll('.delete-btn');

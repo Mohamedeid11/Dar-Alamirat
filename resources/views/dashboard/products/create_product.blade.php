@@ -41,6 +41,12 @@
 									<textarea class="textarea form-control" id="wysihtml5" placeholder="Enter text ..." rows="12"></textarea>
 								</div>
 							</div>
+                            <div class="mt-4">
+								<label class="form-label">How to use Product</label>
+								<div class="form-control p-0 overflow-hidden">
+									<textarea class="textarea form-control" id="wysihtml56" placeholder="Enter text ..." rows="12"></textarea>
+								</div>
+							</div>
 						</div>
 					</div>
 					<div class="card border-0 mb-4">
@@ -437,4 +443,7 @@
 	<script src="{{ asset('admin-panel/assets/js/demo/product-details.demo.js') }}"></script>
 	<!-- ================== END page-js ================== -->
 
+    <script>
+        $('#wysihtml56').wysihtml5();
+    </script>
 @endsection
