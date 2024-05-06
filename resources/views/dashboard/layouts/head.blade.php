@@ -13,9 +13,6 @@
     <link href="{{asset('admin-panel/assets/plugins/datatables.net-keytable-bs5/css/keyTable.bootstrap5.min.css')}}" rel="stylesheet" />
     <link href="{{asset('admin-panel/assets/plugins/datatables.net-rowreorder-bs5/css/rowReorder.bootstrap5.min.css')}}" rel="stylesheet" />
     <link href="{{asset('admin-panel/assets/plugins/datatables.net-select-bs5/css/select.bootstrap5.min.css')}}" rel="stylesheet" />
-    <link href="{{asset('admin-panel/assets/plugins/select2/dist/css/select2.min.css')}}" rel="stylesheet" />
     <!-- ================== END page-css ================== -->
-
-
     @yield('customcss')
 </head>

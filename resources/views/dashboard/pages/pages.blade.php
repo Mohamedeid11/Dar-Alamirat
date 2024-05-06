@@ -17,10 +17,14 @@
             <li class="breadcrumb-item"><a href="javascript:;">Tables</a></li>
             <li class="breadcrumb-item active">Managed Tables</li>
         </ol>
+
         <!-- END breadcrumb -->
         <!-- BEGIN page-header -->
         <h1 class="page-header">Managed Tables <small>header small text goes here...</small></h1>
         <!-- END page-header -->
+        <div class="ms-auto">
+            <a href="{{route('pages.create')  }}" class="btn btn-success btn-rounded px-4 rounded-pill"><i class="fa fa-plus fa-lg me-2 ms-n2 text-success-900"></i> Create Pages</a>
+        </div>
         <!-- BEGIN panel -->
         <div class="panel panel-inverse">
             <!-- BEGIN panel-heading -->

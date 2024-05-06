@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
 use Modules\Brand\Models\Brand;
 use Modules\Category\Models\Category;
-use Modules\Product\Database\factories\ProductFactory;
+use Modules\Order\Models\Order;
 use Spatie\Translatable\HasTranslations;
 
 class Product extends Model
@@ -76,6 +76,10 @@ class Product extends Model
         return $this->hasManyThrough(Inventory::class, Variant::class);
     }
 
+    public function orders()
+    {
+        return $this->belongsToMany(Order::class);
+    }
 
     public function getThumbnailAttribute()
     {

@@ -92,7 +92,7 @@
 
             <!-- item -->
             <div class="menu-item">
-                <a href="/dashboard/orders" class="menu-link">
+                <a href="{{ route('order.index') }}" class="menu-link">
                     <div class="menu-icon">
                         <i class="fa-solid fa-cart-arrow-down"></i>
                     </div>
@@ -145,7 +145,7 @@
 
             <!-- item -->
             <div class="menu-item">
-                <a href="i/dashboard/pages" class="menu-link">
+                <a href="{{ route('pages.index') }}" class="menu-link">
                     <div class="menu-icon">
                         <i class="fa-regular fa-newspaper"></i>
                     </div>

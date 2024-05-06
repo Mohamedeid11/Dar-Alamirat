@@ -37,23 +37,23 @@ Route::get('/clients/edit', function () {
 
 /************************************ Orders ****************************/
 
-Route::get('/orders', function () {
-    return view('dashboard.orders.orders');
-})->name('order.index');
+// Route::get('/orders', function () {
+//     return view('dashboard.orders.orders');
+// })->name('order.index');
 
-Route::get('/orders/create', function () {
-    return view('dashboard.orders.create_order');
-})->name('order.create');
-
-
-Route::get('/orders/edit', function () {
-    return view('dashboard.orders.edit_order');
-})->name('order.edit');
+// Route::get('/orders/create', function () {
+//     return view('dashboard.orders.create_order');
+// })->name('order.create');
 
 
-Route::get('/orders/details', function () {
-    return view('dashboard.orders.order_details');
-})->name('order.details');
+// Route::get('/orders/edit', function () {
+//     return view('dashboard.orders.edit_order');
+// })->name('order.edit');
+
+
+// Route::get('/orders/details', function () {
+//     return view('dashboard.orders.order_details');
+// })->name('order.details');
 
 /************************************ pages ****************************/
 

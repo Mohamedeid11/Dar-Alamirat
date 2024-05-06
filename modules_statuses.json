@@ -3,5 +3,6 @@
     "Roles": true,
     "Category": true,
     "Brand": true,
-    "Product": true
+    "Product": true,
+    "Order": true
 }

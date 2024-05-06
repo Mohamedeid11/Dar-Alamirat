@@ -14,7 +14,7 @@
                 <h1 class="page-header mb-0">Orders</h1>
             </div>
             <div class="ms-auto">
-                <a href="#" class="btn btn-success btn-rounded px-4 rounded-pill"><i class="fa fa-plus fa-lg me-2 ms-n2 text-success-900"></i> Create Orders</a>
+                <a href="{{route('order.create')  }}" class="btn btn-success btn-rounded px-4 rounded-pill"><i class="fa fa-plus fa-lg me-2 ms-n2 text-success-900"></i> Create Orders</a>
             </div>
         </div>
 
