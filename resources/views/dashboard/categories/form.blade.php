@@ -113,22 +113,22 @@
                             @enderror
                         </div>
                     @endforeach
-                        <div class="col-6 mt-5">
-                            <label class="fs-5 fw-bold form-label mb-5">priority :</label>
-                            <!--end::Label-->
-                            <!--begin::Input-->
-                            <select class="form-control" name="priority" id="" required>
-                                <option disabled selected>Select Priority</option>
-                                @for ($i = 0; $i <= 10; $i++)
-                                    <option value="{{$i}}" @if($category->priority == $i) selected @endif>{{$i}}</option>
-                                @endfor
-                            </select>
-                            @error('priority')
-                            <span class="text-danger" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
+                    <div class="col-6 mt-5">
+                        <label class="fs-5 fw-bold form-label mb-5">priority :</label>
+                        <!--end::Label-->
+                        <!--begin::Input-->
+                        <select class="form-control" name="priority" id="" required>
+                            <option disabled selected>Select Priority</option>
+                            @for ($i = 0; $i <= 10; $i++)
+                                <option value="{{$i}}" @if($category->priority == $i) selected @endif>{{$i}}</option>
+                            @endfor
+                        </select>
+                        @error('priority')
+                        <span class="text-danger" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
                     <div class="col-12">
                         <div class="col-6 mt-5">
                             <div class="custom-file-upload">

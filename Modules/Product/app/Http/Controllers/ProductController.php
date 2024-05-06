@@ -9,6 +9,7 @@ use Illuminate\Http\Response;
 use Modules\Product\app\Services\ProductService;
 use Modules\Product\app\ViewModels\ProductViewModel;
 use Modules\Product\Http\Requests\StoreProductRequest;
+use Modules\Product\Http\Requests\UpdateProductRequest;
 use Modules\Product\Models\Product;
 use Modules\Product\Models\Variant;
 
@@ -29,7 +30,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('dashboard.products.index');
+        $products = $this->productService->getPaginatedData([],2);
+
+        return view('dashboard.products.index', compact('products'));
     }
 
     /**
@@ -51,7 +54,7 @@ class ProductController extends Controller
         // Handle image uploads
         if ($request->hasFile('images')) {
             foreach ($request->images as $image) {
-                $path = $image->store('public/products');
+                $path = $image->store('public/products/images');
                 $product->media()->create(['file' => $path]);
             }
         }
@@ -61,32 +64,34 @@ class ProductController extends Controller
     /**
      * Show the specified resource.
      */
-    public function show($id)
+    public function show(Product $product)
     {
+        dd($product);
         return view('product::show');
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($id)
+    public function edit(Product $product)
     {
-        return view('product::edit');
+        return view('dashboard.products.form' ,new ProductViewModel($product));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id): RedirectResponse
+    public function update(UpdateProductRequest $request, Product $product): RedirectResponse
     {
-        //
+
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy(Product $product)
     {
-        //
+        $product->delete();
+        return redirect()->route('product.index')->with('success', 'Product deleted successfully!');
     }
 }

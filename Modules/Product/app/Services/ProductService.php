@@ -5,7 +5,6 @@ namespace Modules\Product\app\Services;
 use App\Models\User;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
-use Modules\Category\Models\Category;
 use Modules\Product\Models\Inventory;
 use Modules\Product\Models\Product;
 
@@ -13,12 +12,12 @@ class ProductService {
 
     public function getAllData()
     {
-        return Category::orderByRaw('ISNULL(priority), priority ASC')->get();
+        return Product::orderByRaw('ISNULL(priority), priority ASC')->get();
     }
 
-    public function getPaginatedData(array $data ,int $paginate = 15 )
+    public function getPaginatedData(array $data = [] ,int $paginate = 20 )
     {
-        return  Category::paginate($paginate);
+        return  Product::paginate($paginate);
     }
 
     public function storeData(array $data)

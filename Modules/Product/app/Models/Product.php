@@ -5,6 +5,7 @@ namespace Modules\Product\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Storage;
 use Modules\Brand\Models\Brand;
 use Modules\Category\Models\Category;
 use Modules\Product\Database\factories\ProductFactory;
@@ -69,4 +70,21 @@ class Product extends Model
     {
         return $this->hasMany(ProductMedia::class);
     }
+
+    public function inventory()
+    {
+        return $this->hasManyThrough(Inventory::class, Variant::class);
+    }
+
+
+    public function getThumbnailAttribute()
+    {
+        if (isset($this->attributes['thumbnail']) && Storage::disk('public/products/thumbnail')->exists($this->attributes['thumbnail'])){
+            return storage_asset($this->attributes['thumbnail']);
+        }else{
+            return asset('assets/images/image.png');
+        }
+    }
+
+
 }
