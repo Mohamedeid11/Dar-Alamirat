@@ -16,6 +16,6 @@ class Shipping extends Model
     /**
      * The attributes that are mass assignable.
      */
-    protected $fillable = ['title' , 'price' , 'duration' , 'status' ];
+    protected $fillable = ['name' , 'price' , 'duration' , 'status' ];
 
 }

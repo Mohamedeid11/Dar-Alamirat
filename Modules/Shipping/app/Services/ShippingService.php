@@ -23,8 +23,6 @@ class ShippingService
 
     public function storeData(array $data)
     {
-        $data['slug'] = Str::slug($data['name']['en']);
-
         $shipping = Shipping::create($data);
 
         return  $shipping;
@@ -32,8 +30,6 @@ class ShippingService
 
     public function updateData(array $data , $shipping)
     {
-
-        $data['slug'] = Str::slug($data['name']['en']);
 
         $shipping->update($data);
 

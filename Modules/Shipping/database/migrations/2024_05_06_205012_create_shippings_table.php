@@ -16,7 +16,7 @@ return new class extends Migration
             $table->json('name');
             $table->integer('price');
             $table->string('duration');
-            $table->boolean('status');
+            $table->boolean('status')->default(1);
             $table->timestamps();
         });
     }

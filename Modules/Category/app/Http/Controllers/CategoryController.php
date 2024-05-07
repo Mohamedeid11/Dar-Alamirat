@@ -55,11 +55,11 @@ class CategoryController extends Controller
         }
 
         $category =$this->categoryService->storeData($validatedData);
+
         if ($category){
             Session()->flash('success', 'Category Created Successfully');
         }else{
             Session()->flash('error', 'Category didn\'t Created');
-
         }
 
         return redirect()->route('category.index');

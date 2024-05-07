@@ -6,6 +6,8 @@ use Illuminate\Routing\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Modules\Shipping\app\ViewModels\ShippingViewModel;
+use Modules\Shipping\Http\Requests\StoreShippingRequest;
 use Modules\Shipping\Models\Shipping;
 use Modules\Shipping\Services\ShippingService;
 
@@ -16,10 +18,10 @@ class ShippingController extends Controller
     public function __construct(ShippingService $shippingService)
     {
         $this->shippingService = $shippingService;
-        $this->middleware('permission:shippings.read,admin', ['only' => ['index']]);
-        $this->middleware('permission:shippings.create,admin', ['only' => ['create', 'store']]);
-        $this->middleware('permission:shippings.edit,admin', ['only' => ['edit', 'update']]);
-        $this->middleware('permission:shippings.delete,admin', ['only' => ['destroy']]);
+//        $this->middleware('permission:shippings.read,admin', ['only' => ['index']]);
+//        $this->middleware('permission:shippings.create,admin', ['only' => ['create', 'store']]);
+//        $this->middleware('permission:shippings.edit,admin', ['only' => ['edit', 'update']]);
+//        $this->middleware('permission:shippings.delete,admin', ['only' => ['destroy']]);
     }
     /**
      * Display a listing of the resource.
@@ -35,15 +37,23 @@ class ShippingController extends Controller
      */
     public function create()
     {
-        return view('shipping::create');
+        return view('dashboard.shippings.form', new ShippingViewModel());
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request): RedirectResponse
+    public function store(StoreShippingRequest $request)
     {
-        //
+        $shipping = $this->shippingService->storeData($request->validated());
+
+        if ($shipping){
+            Session()->flash('success', 'Shipping Created Successfully');
+        }else{
+            Session()->flash('error', 'Shipping didn\'t Created');
+        }
+
+        return redirect()->route('shipping.index');
     }
 
     /**

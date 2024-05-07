@@ -78,20 +78,20 @@
                                     <td>{{$shipping->price}}</td>
                                     <td>{{$shipping->duration}}</td>
                                     <td>
-                                        <input type="checkbox" class="switch-status" data-url="{{ route('shipping.status') }}" @if($shipping->status) checked @endif/>
+                                        <input type="checkbox" class="switch-status" data-url="{{ route('shipping.status' , $shipping->id) }}" @if($shipping->status) checked @endif/>
                                     </td>
                                     <td>{{$shipping->created_at->format('Y-m-d')}}</td>
                                     <td nowrap="">
                                         @adminCan('categories.edit')
-                                        <a href="{{route('category.edit' , $shipping->id)}}" class="btn btn-sm btn-primary"> <i class="fa-regular fa-pen-to-square"></i> {{__('dashboard.category.edit')}}</a>
+                                        <a href="{{route('shipping.edit' , $shipping->id)}}" class="btn btn-sm btn-primary"> <i class="fa-regular fa-pen-to-square"></i> {{__('dashboard.shipping.edit')}}</a>
                                         @endadminCan
                                     </td>
                                     <td nowrap="">
                                         @adminCan('categories.delete')
-                                        <form id="deleteForm{{$shipping->id}}" action="{{ route('category.destroy', $shipping->id) }}" method="POST">
+                                        <form id="deleteForm{{$shipping->id}}" action="{{ route('shipping.destroy', $shipping->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
-                                            <a class="btn delete-btn btn-danger" data-id="{{$shipping->id}}"><i class="fa-solid fa-trash-can"></i> {{__('dashboard.category.delete')}}</a>
+                                            <a class="btn delete-btn btn-danger" data-id="{{$shipping->id}}"><i class="fa-solid fa-trash-can"></i> {{__('dashboard.shipping.delete')}}</a>
                                         </form>
                                         @endadminCan
                                     </td>

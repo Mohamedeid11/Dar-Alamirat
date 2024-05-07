@@ -2,7 +2,7 @@
 
 @section('meta')
     <meta charset="utf-8" />
-    <title>{{__('dashboard.category.edit')}}</title>
+    <title>{{__('dashboard.shipping.edit')}}</title>
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
     <meta content="" name="description" />
     <meta content="" name="author" />
@@ -80,12 +80,12 @@
         <!-- BEGIN breadcrumb -->
         <ol class="breadcrumb float-xl-end">
             <li class="breadcrumb-item"><a href="javascript:;">{{__('dashboard.dashboard')}}</a></li>
-            <li class="breadcrumb-item"><a href="{{route('category.index')}}">{{__('dashboard.categories')}}</a></li>
+            <li class="breadcrumb-item"><a href="{{route('shipping.index')}}">{{__('dashboard.categories')}}</a></li>
             <li class="breadcrumb-item active">
                 @if($method == 'PUT')
-                    {{__('dashboard.category.edit')}}
+                    {{__('dashboard.shipping.edit')}}
                 @else
-                    {{__('dashboard.category.add')}}
+                    {{__('dashboard.shipping.add')}}
                 @endif
             </li>
         </ol>
@@ -102,10 +102,10 @@
                 <div class="row">
                     @foreach (Config('language') as $key => $lang)
                         <div class="col-6 mt-5">
-                            <label class="fs-5 fw-bold form-label mb-5">Name In {{ $lang }} :</label>
+                            <label class="fs-5 fw-bold form-label">Name In {{ $lang }} :</label>
                             <!--end::Label-->
                             <!--begin::Input-->
-                            <input type="text" class="form-control form-control-solid" value="{{ old('name.'.$key) ?? $category->getTranslation('name',$key)}}" placeholder="{{ 'name-'.$lang }}" name="name[{{ $key}}]" />
+                            <input type="text" class="form-control form-control-solid" value="{{ old('name.'.$key) ?? $shipping->getTranslation('name',$key)}}" placeholder="{{ 'name-'.$lang }}" name="name[{{ $key}}]" />
                             @error('name.'.$key)
                             <span class="text-danger" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -113,42 +113,24 @@
                             @enderror
                         </div>
                     @endforeach
+
                     <div class="col-6 mt-5">
-                        <label class="fs-5 fw-bold form-label mb-5">priority :</label>
-                        <!--end::Label-->
-                        <!--begin::Input-->
-                        <select class="form-control" name="priority" id="" required>
-                            <option disabled selected>Select Priority</option>
-                            @for ($i = 0; $i <= 10; $i++)
-                                <option value="{{$i}}" @if($category->priority == $i) selected @endif>{{$i}}</option>
-                            @endfor
-                        </select>
-                        @error('priority')
+                        <label class="fs-5 fw-bold form-label ">Duration of shipping </label>
+                        <input type="text" class="form-control form-control-solid" value="{{ old('duration') ?? $shipping->duration}}" placeholder="Insert the duration of the shipping" name="duration" />
+                        @error('duration')
                         <span class="text-danger" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
                         @enderror
                     </div>
-                    <div class="col-12">
-                        <div class="col-6 mt-5">
-                            <div class="custom-file-upload">
-                                <label for="formFile" class="upload-area">
-                                    <div class="icon-upload"> <span class="p-1">Upload Image </span></div>
-                                    <input class="file-input" name="icon" type="file" id="formFile" accept=".png, .jpg, .jpeg ,.svg ,.webp" onchange="previewImage();" />
-                                </label>
-                            </div>
-                            @error('icon')
-                            <span class="text-danger" role="alert">
-                                 <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-                        <div class="col-3 mt-5">
-                            <div class="preview-area">
-                                <img id="imagePreview" src="{{  storage_asset($category->icon) ?? ''}}" alt="Image preview" style="display: {{isset($category->icon) ?'block' : 'none'}};" width="200" height="200">
-                                <div class="clear-image" onclick="clearImage();" style="display: none;">&times;</div>
-                            </div>
-                        </div>
+                    <div class="col-6 mt-5">
+                        <label class="fs-5 fw-bold form-label">Shipping Price</label>
+                        <input type="number" class="form-control form-control-solid" value="{{ old('price') ?? $shipping->price}}" placeholder="Insert the duration of the shipping" name="price" />
+                        @error('price')
+                        <span class="text-danger" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
                 </div>
             </div>
