@@ -30,6 +30,7 @@
 <script src="{{asset('admin-panel/assets/plugins/@highlightjs/cdn-assets/highlight.min.js')}}"></script>
 <script src="{{asset('admin-panel/assets/js/demo/render.highlight.js')}}"></script>
 <script src="{{asset('admin-panel/assets/plugins/select2/dist/js/select2.min.js')}}"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 <!-- ================== END page-js ================== -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

@@ -61,6 +61,12 @@ class PermissionSeeder extends Seeder
             'products.edit',
             'products.delete',
 
+            //products
+            'shippings.read',
+            'shippings.create',
+            'shippings.edit',
+            'shippings.delete',
+
         ];
 
         foreach ($adminPermissions as $permission) {

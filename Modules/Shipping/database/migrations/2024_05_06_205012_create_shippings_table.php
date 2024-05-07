@@ -13,7 +13,10 @@ return new class extends Migration
     {
         Schema::create('shippings', function (Blueprint $table) {
             $table->id();
-            
+            $table->json('name');
+            $table->integer('price');
+            $table->string('duration');
+            $table->boolean('status');
             $table->timestamps();
         });
     }

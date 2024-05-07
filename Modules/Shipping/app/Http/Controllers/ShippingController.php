@@ -2,19 +2,32 @@
 
 namespace Modules\Shipping\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use Illuminate\Routing\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Modules\Shipping\Models\Shipping;
+use Modules\Shipping\Services\ShippingService;
 
 class ShippingController extends Controller
 {
+    protected $shippingService;
+
+    public function __construct(ShippingService $shippingService)
+    {
+        $this->shippingService = $shippingService;
+        $this->middleware('permission:shippings.read,admin', ['only' => ['index']]);
+        $this->middleware('permission:shippings.create,admin', ['only' => ['create', 'store']]);
+        $this->middleware('permission:shippings.edit,admin', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:shippings.delete,admin', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('shipping::index');
+        $shippings = $this->shippingService->getPaginatedData();
+        return view('dashboard.shippings.index', compact('shippings'));
     }
 
     /**
@@ -52,7 +65,7 @@ class ShippingController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id): RedirectResponse
+    public function update(Request $request, $id)
     {
         //
     }
@@ -63,5 +76,10 @@ class ShippingController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function changeStatus(Shipping $shipping)
+    {
+        dd($shipping);
     }
 }

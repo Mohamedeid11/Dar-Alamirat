@@ -91,6 +91,17 @@
             <!-- ./item -->
 
             <!-- item -->
+            <div class="menu-item {{ activeLink('shipping') }}">
+                <a href="{{route('shipping.index')}}" class="menu-link">
+                    <div class="menu-icon">
+                        <i class="fa-solid fa-store"></i>
+                    </div>
+                    <div class="menu-text">Shippings</div>
+                </a>
+            </div>
+            <!-- ./item -->
+
+            <!-- item -->
             <div class="menu-item">
                 <a href="{{ route('order.index') }}" class="menu-link">
                     <div class="menu-icon">
