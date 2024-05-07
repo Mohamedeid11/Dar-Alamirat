@@ -177,10 +177,48 @@
                     <!--end::Actions-->
                 </div>
             </div>
+
+            <!-- #modal-dialog -->
+            <div class="modal fade" id="modalVariant">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Modal Dialog</h4>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+                        </div>
+                        <div class="modal-body">
+                            ...
+                        </div>
+                        <div class="modal-footer">
+                            <a href="javascript:;" class="btn btn-white" data-bs-dismiss="modal">Close</a>
+                            <a href="javascript:;" class="btn btn-success">Action</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </form>
     </div>
     <!-- END #content -->
-
+    <!-- #modal-dialog -->
+    <div class="modal fade" id="modal-dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Modal Dialog</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <a href="javascript:;" class="btn btn-white" data-bs-dismiss="modal">Close</a>
+                    <a href="javascript:;" class="btn btn-success">Action</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- #modal-dialog -->
 @endsection
 
 @section('scripts')
@@ -229,6 +267,7 @@
                 </td>
                 <td><input type="text" class="form-control" name="variant[${newIndex}][price]" placeholder="0.00" /></td>
                 <td><input type="text" class="form-control" name="variant[${newIndex}][quantity]" placeholder="0" /></td>
+                <td><a href="#modal-dialog" class="btn btn-primary" data-bs-toggle="modal">Modal</a></td>
             `;
                     document.getElementById('newSize').value = '';
                     document.getElementById('newColor').value = '';
@@ -241,3 +280,4 @@
         });
     </script>
 @endsection
+<!-- toggler -->

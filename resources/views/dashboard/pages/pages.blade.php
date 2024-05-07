@@ -1,577 +1,108 @@
 @extends('dashboard.layouts.app')
 
 @section('customcss')
-
-    <link href="{{ asset('admin-panel/assets/plugins/datatables.net-bs5/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet" />
-    <link href="{{ asset('admin-panel/assets/plugins/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css') }}" rel="stylesheet" />
-
+    <link href="{{ asset('admin-panel/assets/plugins/switchery/dist/switchery.min.css') }}" rel="stylesheet" />
 @endsection
 
 @section('content')
 
     <!-- BEGIN #content -->
     <div id="content" class="app-content">
-        <!-- BEGIN breadcrumb -->
-        <ol class="breadcrumb float-xl-end">
-            <li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
-            <li class="breadcrumb-item"><a href="javascript:;">Tables</a></li>
-            <li class="breadcrumb-item active">Managed Tables</li>
-        </ol>
+        <div class="d-flex align-items-center mb-3">
+            <div>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{route('dashboard.index')}}">{{__('dashboard.home')}}</a></li>
+                    <li class="breadcrumb-item"><a href="{{route('brand.index')}}">{{__('dashboard.pages')}}</a></li>
+                </ul>
+                <h1 class="page-header mb-0">{{__('dashboard.pages')}}</h1>
+            </div>
+            <div class="ms-auto">
+                <a href="{{route('page.create')}}" class="btn btn-success btn-rounded px-4 rounded-pill"><i class="fa fa-plus fa-lg me-2 ms-n2 text-success-900"></i> {{__('dashboard.page.add')}}</a>
+            </div>
+        </div>
 
-        <!-- END breadcrumb -->
-        <!-- BEGIN page-header -->
-        <h1 class="page-header">Managed Tables <small>header small text goes here...</small></h1>
-        <!-- END page-header -->
-        <div class="ms-auto">
-            <a href="{{route('pages.create')  }}" class="btn btn-success btn-rounded px-4 rounded-pill"><i class="fa fa-plus fa-lg me-2 ms-n2 text-success-900"></i> Create Pages</a>
-        </div>
-        <!-- BEGIN panel -->
-        <div class="panel panel-inverse">
-            <!-- BEGIN panel-heading -->
-            <div class="panel-heading">
-                <h4 class="panel-title">Data Table - Default</h4>
-                <div class="panel-heading-btn">
-                    <a href="javascript:;" class="btn btn-xs btn-icon btn-default" data-toggle="panel-expand"><i class="fa fa-expand"></i></a>
-                    <a href="javascript:;" class="btn btn-xs btn-icon btn-success" data-toggle="panel-reload"><i class="fa fa-redo"></i></a>
-                    <a href="javascript:;" class="btn btn-xs btn-icon btn-warning" data-toggle="panel-collapse"><i class="fa fa-minus"></i></a>
-                    <a href="javascript:;" class="btn btn-xs btn-icon btn-danger" data-toggle="panel-remove"><i class="fa fa-times"></i></a>
+    @include('dashboard.layouts.alerts')
+
+    <!-- start card -->
+        <div class="card border-0">
+            <!-- content -->
+            <div class="tab-content p-3">
+                <!-- tab pane -->
+                <div class="tab-pane fade show active" id="allTab">
+
+                    <!-- BEGIN input-group -->
+                    <div class="input-group mb-3">
+                        <p class="btn btn-white dropdown-toggle"><span class="d-none d-md-inline">Filter By Page Name</span></p>
+                        <div class="flex-fill position-relative">
+                            <div class="input-group">
+                                <div class="input-group-text position-absolute top-0 bottom-0 bg-none border-0 start-0" style="z-index: 1;">
+                                    <i class="fa fa-search opacity-5"></i>
+                                </div>
+                                <input type="text" id="searchForPage" onkeyup="searchPagesName()" class="form-control px-35px bg-light" placeholder="Search For Page..." />
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END input-group -->
+
+                    <!-- table -->
+                    <div class="table-responsive mb-3">
+                        <table id="pagesTableList" class="table table-hover table-panel text-nowrap align-middle mb-0">
+                            <thead>
+                            <tr>
+                                <th width="1%"></th>
+                                <th class="text-nowrap" width="40%">Name</th>
+                                <th class="text-nowrap" width="5%">status</th>
+                                <th class="text-nowrap" width="20%">created At</th>
+                                <th class="text-nowrap" width="5%">Edit</th>
+                                <th class="text-nowrap" width="5%">Delete</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="odd gradeX">
+                                    <td width="1%" class="fw-bold text-dark">1</td>
+                                    <td>About us</td>
+                                    <td>
+                                        <input type="checkbox" class="switch-status" checked />
+                                    </td>
+                                    <td>23-12-2024</td>
+                                    <td nowrap="">
+                                        <a href="#" class="btn btn-sm btn-primary"> <i class="fa-regular fa-pen-to-square"></i> Edit</a>
+                                    </td>
+                                    <td nowrap="">
+                                        <form id="" action="#" method="POST">
+                                            <a class="btn delete-btn btn-danger" data-id=""><i class="fa-solid fa-trash-can"></i> Delete</a>
+                                        </form>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- ./table -->
+
+                    <!-- pagination -->
+                    <div class="d-md-flex align-items-center">
+                        <div class="me-md-auto text-md-left text-center mb-2 mb-md-0">
+                            Showing 1 to 10 of 57 entries
+                        </div>
+                        <ul class="pagination mb-0 justify-content-center">
+                            <li class="page-item disabled"><a class="page-link">Previous</a></li>
+                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item active"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item"><a class="page-link" href="#">4</a></li>
+                            <li class="page-item"><a class="page-link" href="#">5</a></li>
+                            <li class="page-item"><a class="page-link" href="#">6</a></li>
+                            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                        </ul>
+                    </div>
+                    <!-- ./pagination -->
+
                 </div>
+                <!-- ./tab pane -->
             </div>
-            <!-- END panel-heading -->
-            <!-- BEGIN panel-body -->
-            <div class="panel-body">
-                <table id="data-table-default" class="table table-striped table-bordered align-middle">
-                    <thead>
-                    <tr>
-                        <th width="1%"></th>
-                        <th width="1%" data-orderable="false"></th>
-                        <th class="text-nowrap">Rendering engine</th>
-                        <th class="text-nowrap">Browser</th>
-                        <th class="text-nowrap">Platform(s)</th>
-                        <th class="text-nowrap">Engine version</th>
-                        <th class="text-nowrap">CSS grade</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr class="odd gradeX">
-                        <td width="1%" class="fw-bold text-dark">1</td>
-                        <td width="1%" class="with-img"><img src="../assets/img/user/user-1.jpg" class="rounded h-30px my-n1 mx-n1" /></td>
-                        <td>Trident</td>
-                        <td>Internet Explorer 4.0</td>
-                        <td>Win 95+</td>
-                        <td>4</td>
-                        <td>X</td>
-                    </tr>
-                    <tr class="even gradeC">
-                        <td class="fw-bold text-dark">2</td>
-                        <td class="with-img"><img src="../assets/img/user/user-2.jpg" class="rounded h-30px my-n1 mx-n1" /></td>
-                        <td>Trident</td>
-                        <td>Internet Explorer 5.0</td>
-                        <td>Win 95+</td>
-                        <td>5</td>
-                        <td>C</td>
-                    </tr>
-                    <tr class="odd gradeA">
-                        <td class="fw-bold text-dark">3</td>
-                        <td class="with-img"><img src="../assets/img/user/user-3.jpg" class="rounded h-30px my-n1 mx-n1" /></td>
-                        <td>Trident</td>
-                        <td>Internet Explorer 5.5</td>
-                        <td>Win 95+</td>
-                        <td>5.5</td>
-                        <td>A</td>
-                    </tr>
-                    <tr class="even gradeA">
-                        <td class="fw-bold text-dark">4</td>
-                        <td class="with-img"><img src="../assets/img/user/user-4.jpg" class="rounded h-30px my-n1 mx-n1" /></td>
-                        <td>Trident</td>
-                        <td>Internet Explorer 6</td>
-                        <td>Win 98+</td>
-                        <td>6</td>
-                        <td>A</td>
-                    </tr>
-                    <tr class="odd gradeA">
-                        <td class="fw-bold text-dark">5</td>
-                        <td class="with-img"><img src="../assets/img/user/user-5.jpg" class="rounded h-30px my-n1 mx-n1" /></td>
-                        <td>Trident</td>
-                        <td>Internet Explorer 7</td>
-                        <td>Win XP SP2+</td>
-                        <td>7</td>
-                        <td>A</td>
-                    </tr>
-                    <tr class="even gradeA">
-                        <td class="fw-bold text-dark">6</td>
-                        <td class="with-img"><img src="../assets/img/user/user-6.jpg" class="rounded h-30px my-n1 mx-n1" /></td>
-                        <td>Trident</td>
-                        <td>AOL browser (AOL desktop)</td>
-                        <td>Win XP</td>
-                        <td>6</td>
-                        <td>A</td>
-                    </tr>
-                    <tr class="gradeA">
-                        <td class="fw-bold text-dark">7</td>
-                        <td class="with-img"><img src="../assets/img/user/user-7.jpg" class="rounded h-30px my-n1 mx-n1" /></td>
-                        <td>Gecko</td>
-                        <td>Firefox 1.0</td>
-                        <td>Win 98+ / OSX.2+</td>
-                        <td>1.7</td>
-                        <td>A</td>
-                    </tr>
-                    <tr class="gradeA">
-                        <td class="fw-bold text-dark">8</td>
-                        <td class="with-img"><img src="../assets/img/user/user-8.jpg" class="rounded h-30px my-n1 mx-n1" /></td>
-                        <td>Gecko</td>
-                        <td>Firefox 1.5</td>
-                        <td>Win 98+ / OSX.2+</td>
-                        <td>1.8</td>
-                        <td>A</td>
-                    </tr>
-                    <tr class="gradeA">
-                        <td class="fw-bold text-dark">9</td>
-                        <td class="with-img"><img src="../assets/img/user/user-9.jpg" class="rounded h-30px my-n1 mx-n1" /></td>
-                        <td>Gecko</td>
-                        <td>Firefox 2.0</td>
-                        <td>Win 98+ / OSX.2+</td>
-                        <td>1.8</td>
-                        <td>A</td>
-                    </tr>
-                    <tr class="gradeA">
-                        <td class="fw-bold text-dark">10</td>
-                        <td class="with-img"><img src="../assets/img/user/user-10.jpg" class="rounded h-30px my-n1 mx-n1" /></td>
-                        <td>Gecko</td>
-                        <td>Firefox 3.0</td>
-                        <td>Win 2k+ / OSX.3+</td>
-                        <td>1.9</td>
-                        <td>A</td>
-                    </tr>
-                    <tr class="gradeA">
-                        <td class="fw-bold text-dark">11</td>
-                        <td class="with-img"><img src="../assets/img/user/user-11.jpg" class="rounded h-30px my-n1 mx-n1" /></td>
-                        <td>Gecko</td>
-                        <td>Camino 1.0</td>
-                        <td>OSX.2+</td>
-                        <td>1.8</td>
-                        <td>A</td>
-                    </tr>
-                    <tr class="gradeA">
-                        <td class="fw-bold text-dark">12</td>
-                        <td class="with-img"><img src="../assets/img/user/user-12.jpg" class="rounded h-30px my-n1 mx-n1" /></td>
-                        <td>Gecko</td>
-                        <td>Camino 1.5</td>
-                        <td>OSX.3+</td>
-                        <td>1.8</td>
-                        <td>A</td>
-                    </tr>
-                    <tr class="gradeA">
-                        <td class="fw-bold text-dark">13</td>
-                        <td class="with-img"><img src="../assets/img/user/user-13.jpg" class="rounded h-30px my-n1 mx-n1" /></td>
-                        <td>Gecko</td>
-                        <td>Netscape 7.2</td>
-                        <td>Win 95+ / Mac OS 8.6-9.2</td>
-                        <td>1.7</td>
-                        <td>A</td>
-                    </tr>
-                    <tr class="gradeA">
-                        <td class="fw-bold text-dark">14</td>
-                        <td class="with-img"><img src="../assets/img/user/user-14.jpg" class="rounded h-30px my-n1 mx-n1" /></td>
-                        <td>Gecko</td>
-                        <td>Netscape Browser 8</td>
-                        <td>Win 98SE+</td>
-                        <td>1.7</td>
-                        <td>A</td>
-                    </tr>
-                    <tr class="gradeA">
-                        <td class="fw-bold text-dark">15</td>
-                        <td class="with-img"><img src="../assets/img/user/user-1.jpg" class="rounded h-30px my-n1 mx-n1" /></td>
-                        <td>Gecko</td>
-                        <td>Netscape Navigator 9</td>
-                        <td>Win 98+ / OSX.2+</td>
-                        <td>1.8</td>
-                        <td>A</td>
-                    </tr>
-                    <tr class="gradeA">
-                        <td class="fw-bold text-dark">16</td>
-                        <td class="with-img"><img src="../assets/img/user/user-2.jpg" class="rounded h-30px my-n1 mx-n1" /></td>
-                        <td>Gecko</td>
-                        <td>Mozilla 1.0</td>
-                        <td>Win 95+ / OSX.1+</td>
-                        <td>1</td>
-                        <td>A</td>
-                    </tr>
-                    <tr class="gradeA">
-                        <td class="fw-bold text-dark">17</td>
-                        <td class="with-img"><img src="../assets/img/user/user-3.jpg" class="rounded h-30px my-n1 mx-n1" /></td>
-                        <td>Gecko</td>
-                        <td>Mozilla 1.1</td>
-                        <td>Win 95+ / OSX.1+</td>
-                        <td>1.1</td>
-                        <td>A</td>
-                    </tr>
-                    <tr class="gradeA">
-                        <td class="fw-bold text-dark">18</td>
-                        <td class="with-img"><img src="../assets/img/user/user-4.jpg" class="rounded h-30px my-n1 mx-n1" /></td>
-                        <td>Gecko</td>
-                        <td>Mozilla 1.2</td>
-                        <td>Win 95+ / OSX.1+</td>
-                        <td>1.2</td>
-                        <td>A</td>
-                    </tr>
-                    <tr class="gradeA">
-                        <td class="fw-bold text-dark">19</td>
-                        <td class="with-img"><img src="../assets/img/user/user-5.jpg" class="rounded h-30px my-n1 mx-n1" /></td>
-                        <td>Gecko</td>
-                        <td>Mozilla 1.3</td>
-                        <td>Win 95+ / OSX.1+</td>
-                        <td>1.3</td>
-                        <td>A</td>
-                    </tr>
-                    <tr class="gradeA">
-                        <td class="fw-bold text-dark">20</td>
-                        <td class="with-img"><img src="../assets/img/user/user-6.jpg" class="rounded h-30px my-n1 mx-n1" /></td>
-                        <td>Gecko</td>
-                        <td>Mozilla 1.4</td>
-                        <td>Win 95+ / OSX.1+</td>
-                        <td>1.4</td>
-                        <td>A</td>
-                    </tr>
-                    <tr class="gradeA">
-                        <td class="fw-bold text-dark">21</td>
-                        <td class="with-img"><img src="../assets/img/user/user-7.jpg" class="rounded h-30px my-n1 mx-n1" /></td>
-                        <td>Gecko</td>
-                        <td>Mozilla 1.5</td>
-                        <td>Win 95+ / OSX.1+</td>
-                        <td>1.5</td>
-                        <td>A</td>
-                    </tr>
-                    <tr class="gradeA">
-                        <td class="fw-bold text-dark">22</td>
-                        <td class="with-img"><img src="../assets/img/user/user-8.jpg" class="rounded h-30px my-n1 mx-n1" /></td>
-                        <td>Gecko</td>
-                        <td>Mozilla 1.6</td>
-                        <td>Win 95+ / OSX.1+</td>
-                        <td>1.6</td>
-                        <td>A</td>
-                    </tr>
-                    <tr class="gradeA">
-                        <td class="fw-bold text-dark">23</td>
-                        <td class="with-img"><img src="../assets/img/user/user-9.jpg" class="rounded h-30px my-n1 mx-n1" /></td>
-                        <td>Gecko</td>
-                        <td>Mozilla 1.7</td>
-                        <td>Win 98+ / OSX.1+</td>
-                        <td>1.7</td>
-                        <td>A</td>
-                    </tr>
-                    <tr class="gradeA">
-                        <td class="fw-bold text-dark">24</td>
-                        <td class="with-img"><img src="../assets/img/user/user-10.jpg" class="rounded h-30px my-n1 mx-n1" /></td>
-                        <td>Gecko</td>
-                        <td>Mozilla 1.8</td>
-                        <td>Win 98+ / OSX.1+</td>
-                        <td>1.8</td>
-                        <td>A</td>
-                    </tr>
-                    <tr class="gradeA">
-                        <td class="fw-bold text-dark">25</td>
-                        <td class="with-img"><img src="../assets/img/user/user-11.jpg" class="rounded h-30px my-n1 mx-n1" /></td>
-                        <td>Gecko</td>
-                        <td>Seamonkey 1.1</td>
-                        <td>Win 98+ / OSX.2+</td>
-                        <td>1.8</td>
-                        <td>A</td>
-                    </tr>
-                    <tr class="gradeA">
-                        <td class="fw-bold text-dark">26</td>
-                        <td class="with-img"><img src="../assets/img/user/user-12.jpg" class="rounded h-30px my-n1 mx-n1" /></td>
-                        <td>Gecko</td>
-                        <td>Epiphany 2.20</td>
-                        <td>Gnome</td>
-                        <td>1.8</td>
-                        <td>A</td>
-                    </tr>
-                    <tr class="gradeA">
-                        <td class="fw-bold text-dark">27</td>
-                        <td class="with-img"><img src="../assets/img/user/user-13.jpg" class="rounded h-30px my-n1 mx-n1" /></td>
-                        <td>Webkit</td>
-                        <td>Safari 1.2</td>
-                        <td>OSX.3</td>
-                        <td>125.5</td>
-                        <td>A</td>
-                    </tr>
-                    <tr class="gradeA">
-                        <td class="fw-bold text-dark">28</td>
-                        <td class="with-img"><img src="../assets/img/user/user-14.jpg" class="rounded h-30px my-n1 mx-n1" /></td>
-                        <td>Webkit</td>
-                        <td>Safari 1.3</td>
-                        <td>OSX.3</td>
-                        <td>312.8</td>
-                        <td>A</td>
-                    </tr>
-                    <tr class="gradeA">
-                        <td class="fw-bold text-dark">29</td>
-                        <td class="with-img"><img src="../assets/img/user/user-1.jpg" class="rounded h-30px my-n1 mx-n1" /></td>
-                        <td>Webkit</td>
-                        <td>Safari 2.0</td>
-                        <td>OSX.4+</td>
-                        <td>419.3</td>
-                        <td>A</td>
-                    </tr>
-                    <tr class="gradeA">
-                        <td class="fw-bold text-dark">30</td>
-                        <td class="with-img"><img src="../assets/img/user/user-2.jpg" class="rounded h-30px my-n1 mx-n1" /></td>
-                        <td>Webkit</td>
-                        <td>Safari 3.0</td>
-                        <td>OSX.4+</td>
-                        <td>522.1</td>
-                        <td>A</td>
-                    </tr>
-                    <tr class="gradeA">
-                        <td class="fw-bold text-dark">31</td>
-                        <td class="with-img"><img src="../assets/img/user/user-3.jpg" class="rounded h-30px my-n1 mx-n1" /></td>
-                        <td>Webkit</td>
-                        <td>OmniWeb 5.5</td>
-                        <td>OSX.4+</td>
-                        <td>420</td>
-                        <td>A</td>
-                    </tr>
-                    <tr class="gradeA">
-                        <td class="fw-bold text-dark">32</td>
-                        <td class="with-img"><img src="../assets/img/user/user-4.jpg" class="rounded h-30px my-n1 mx-n1" /></td>
-                        <td>Webkit</td>
-                        <td>iPod Touch / iPhone</td>
-                        <td>iPod</td>
-                        <td>420.1</td>
-                        <td>A</td>
-                    </tr>
-                    <tr class="gradeA">
-                        <td class="fw-bold text-dark">33</td>
-                        <td class="with-img"><img src="../assets/img/user/user-5.jpg" class="rounded h-30px my-n1 mx-n1" /></td>
-                        <td>Webkit</td>
-                        <td>S60</td>
-                        <td>S60</td>
-                        <td>413</td>
-                        <td>A</td>
-                    </tr>
-                    <tr class="gradeA">
-                        <td class="fw-bold text-dark">34</td>
-                        <td class="with-img"><img src="../assets/img/user/user-6.jpg" class="rounded h-30px my-n1 mx-n1" /></td>
-                        <td>Presto</td>
-                        <td>Opera 7.0</td>
-                        <td>Win 95+ / OSX.1+</td>
-                        <td>-</td>
-                        <td>A</td>
-                    </tr>
-                    <tr class="gradeA">
-                        <td class="fw-bold text-dark">35</td>
-                        <td class="with-img"><img src="../assets/img/user/user-7.jpg" class="rounded h-30px my-n1 mx-n1" /></td>
-                        <td>Presto</td>
-                        <td>Opera 7.5</td>
-                        <td>Win 95+ / OSX.2+</td>
-                        <td>-</td>
-                        <td>A</td>
-                    </tr>
-                    <tr class="gradeA">
-                        <td class="fw-bold text-dark">36</td>
-                        <td class="with-img"><img src="../assets/img/user/user-8.jpg" class="rounded h-30px my-n1 mx-n1" /></td>
-                        <td>Presto</td>
-                        <td>Opera 8.0</td>
-                        <td>Win 95+ / OSX.2+</td>
-                        <td>-</td>
-                        <td>A</td>
-                    </tr>
-                    <tr class="gradeA">
-                        <td class="fw-bold text-dark">37</td>
-                        <td class="with-img"><img src="../assets/img/user/user-9.jpg" class="rounded h-30px my-n1 mx-n1" /></td>
-                        <td>Presto</td>
-                        <td>Opera 8.5</td>
-                        <td>Win 95+ / OSX.2+</td>
-                        <td>-</td>
-                        <td>A</td>
-                    </tr>
-                    <tr class="gradeA">
-                        <td class="fw-bold text-dark">38</td>
-                        <td class="with-img"><img src="../assets/img/user/user-10.jpg" class="rounded h-30px my-n1 mx-n1" /></td>
-                        <td>Presto</td>
-                        <td>Opera 9.0</td>
-                        <td>Win 95+ / OSX.3+</td>
-                        <td>-</td>
-                        <td>A</td>
-                    </tr>
-                    <tr class="gradeA">
-                        <td class="fw-bold text-dark">39</td>
-                        <td class="with-img"><img src="../assets/img/user/user-11.jpg" class="rounded h-30px my-n1 mx-n1" /></td>
-                        <td>Presto</td>
-                        <td>Opera 9.2</td>
-                        <td>Win 88+ / OSX.3+</td>
-                        <td>-</td>
-                        <td>A</td>
-                    </tr>
-                    <tr class="gradeA">
-                        <td class="fw-bold text-dark">40</td>
-                        <td class="with-img"><img src="../assets/img/user/user-12.jpg" class="rounded h-30px my-n1 mx-n1" /></td>
-                        <td>Presto</td>
-                        <td>Opera 9.5</td>
-                        <td>Win 88+ / OSX.3+</td>
-                        <td>-</td>
-                        <td>A</td>
-                    </tr>
-                    <tr class="gradeA">
-                        <td class="fw-bold text-dark">41</td>
-                        <td class="with-img"><img src="../assets/img/user/user-13.jpg" class="rounded h-30px my-n1 mx-n1" /></td>
-                        <td>Presto</td>
-                        <td>Opera for Wii</td>
-                        <td>Wii</td>
-                        <td>-</td>
-                        <td>A</td>
-                    </tr>
-                    <tr class="gradeA">
-                        <td class="fw-bold text-dark">42</td>
-                        <td class="with-img"><img src="../assets/img/user/user-14.jpg" class="rounded h-30px my-n1 mx-n1" /></td>
-                        <td>Presto</td>
-                        <td>Nokia N800</td>
-                        <td>N800</td>
-                        <td>-</td>
-                        <td>A</td>
-                    </tr>
-                    <tr class="gradeA">
-                        <td class="fw-bold text-dark">43</td>
-                        <td class="with-img"><img src="../assets/img/user/user-1.jpg" class="rounded h-30px my-n1 mx-n1" /></td>
-                        <td>Presto</td>
-                        <td>Nintendo DS browser</td>
-                        <td>Nintendo DS</td>
-                        <td>8.5</td>
-                        <td>C/A<sup>1</sup></td>
-                    </tr>
-                    <tr class="gradeC">
-                        <td class="fw-bold text-dark">44</td>
-                        <td class="with-img"><img src="../assets/img/user/user-2.jpg" class="rounded h-30px my-n1 mx-n1" /></td>
-                        <td>KHTML</td>
-                        <td>Konqureror 3.1</td>
-                        <td>KDE 3.1</td>
-                        <td>3.1</td>
-                        <td>C</td>
-                    </tr>
-                    <tr class="gradeA">
-                        <td class="fw-bold text-dark">45</td>
-                        <td class="with-img"><img src="../assets/img/user/user-3.jpg" class="rounded h-30px my-n1 mx-n1" /></td>
-                        <td>KHTML</td>
-                        <td>Konqureror 3.3</td>
-                        <td>KDE 3.3</td>
-                        <td>3.3</td>
-                        <td>A</td>
-                    </tr>
-                    <tr class="gradeA">
-                        <td class="fw-bold text-dark">46</td>
-                        <td class="with-img"><img src="../assets/img/user/user-4.jpg" class="rounded h-30px my-n1 mx-n1" /></td>
-                        <td>KHTML</td>
-                        <td>Konqureror 3.5</td>
-                        <td>KDE 3.5</td>
-                        <td>3.5</td>
-                        <td>A</td>
-                    </tr>
-                    <tr class="gradeX">
-                        <td class="fw-bold text-dark">47</td>
-                        <td class="with-img"><img src="../assets/img/user/user-5.jpg" class="rounded h-30px my-n1 mx-n1" /></td>
-                        <td>Tasman</td>
-                        <td>Internet Explorer 4.5</td>
-                        <td>Mac OS 8-9</td>
-                        <td>-</td>
-                        <td>X</td>
-                    </tr>
-                    <tr class="gradeC">
-                        <td class="fw-bold text-dark">48</td>
-                        <td class="with-img"><img src="../assets/img/user/user-6.jpg" class="rounded h-30px my-n1 mx-n1" /></td>
-                        <td>Tasman</td>
-                        <td>Internet Explorer 5.1</td>
-                        <td>Mac OS 7.6-9</td>
-                        <td>1</td>
-                        <td>C</td>
-                    </tr>
-                    <tr class="gradeC">
-                        <td class="fw-bold text-dark">49</td>
-                        <td class="with-img"><img src="../assets/img/user/user-7.jpg" class="rounded h-30px my-n1 mx-n1" /></td>
-                        <td>Tasman</td>
-                        <td>Internet Explorer 5.2</td>
-                        <td>Mac OS 8-X</td>
-                        <td>1</td>
-                        <td>C</td>
-                    </tr>
-                    <tr class="gradeA">
-                        <td class="fw-bold text-dark">50</td>
-                        <td class="with-img"><img src="../assets/img/user/user-8.jpg" class="rounded h-30px my-n1 mx-n1" /></td>
-                        <td>Misc</td>
-                        <td>NetFront 3.1</td>
-                        <td>Embedded devices</td>
-                        <td>-</td>
-                        <td>C</td>
-                    </tr>
-                    <tr class="gradeA">
-                        <td class="fw-bold text-dark">51</td>
-                        <td class="with-img"><img src="../assets/img/user/user-9.jpg" class="rounded h-30px my-n1 mx-n1" /></td>
-                        <td>Misc</td>
-                        <td>NetFront 3.4</td>
-                        <td>Embedded devices</td>
-                        <td>-</td>
-                        <td>A</td>
-                    </tr>
-                    <tr class="gradeX">
-                        <td class="fw-bold text-dark">52</td>
-                        <td class="with-img"><img src="../assets/img/user/user-10.jpg" class="rounded h-30px my-n1 mx-n1" /></td>
-                        <td>Misc</td>
-                        <td>Dillo 0.8</td>
-                        <td>Embedded devices</td>
-                        <td>-</td>
-                        <td>X</td>
-                    </tr>
-                    <tr class="gradeX">
-                        <td class="fw-bold text-dark">53</td>
-                        <td class="with-img"><img src="../assets/img/user/user-11.jpg" class="rounded h-30px my-n1 mx-n1" /></td>
-                        <td>Misc</td>
-                        <td>Links</td>
-                        <td>Text only</td>
-                        <td>-</td>
-                        <td>X</td>
-                    </tr>
-                    <tr class="gradeX">
-                        <td class="fw-bold text-dark">54</td>
-                        <td class="with-img"><img src="../assets/img/user/user-12.jpg" class="rounded h-30px my-n1 mx-n1" /></td>
-                        <td>Misc</td>
-                        <td>Lynx</td>
-                        <td>Text only</td>
-                        <td>-</td>
-                        <td>X</td>
-                    </tr>
-                    <tr class="gradeC">
-                        <td class="fw-bold text-dark">55</td>
-                        <td class="with-img"><img src="../assets/img/user/user-13.jpg" class="rounded h-30px my-n1 mx-n1" /></td>
-                        <td>Misc</td>
-                        <td>IE Mobile</td>
-                        <td>Windows Mobile 6</td>
-                        <td>-</td>
-                        <td>C</td>
-                    </tr>
-                    <tr class="gradeC">
-                        <td class="fw-bold text-dark">57</td>
-                        <td class="with-img"><img src="../assets/img/user/user-14.jpg" class="rounded h-30px my-n1 mx-n1" /></td>
-                        <td>Misc</td>
-                        <td>PSP browser</td>
-                        <td>PSP</td>
-                        <td>-</td>
-                        <td>C</td>
-                    </tr>
-                    <tr class="gradeU">
-                        <td class="fw-bold text-dark">58</td>
-                        <td class="with-img"><img src="../assets/img/user/user-1.jpg" class="rounded h-30px my-n1 mx-n1" /></td>
-                        <td>Other browsers</td>
-                        <td>All others</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>U</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-            <!-- END panel-body -->
+            <!-- ./content -->
         </div>
-        <!-- END panel -->
+        <!-- ./end card -->
     </div>
     <!-- END #content -->
 
@@ -579,16 +110,43 @@
 
 
 @section('scripts')
-
-    <script src="{{ asset('admin-panel/assets/plugins/datatables.net/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('admin-panel/assets/plugins/datatables.net-bs5/js/dataTables.bootstrap5.min.js') }}"></script>
-    <script src="{{ asset('admin-panel/assets/plugins/datatables.net-responsive/js/dataTables.responsive.min.js') }}"></script>
-    <script src="{{ asset('admin-panel/assets/plugins/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js') }}"></script>
+    <script src="{{ asset('admin-panel/assets/plugins/switchery/dist/switchery.min.js') }}"></script>
 
     <script>
         $('#data-table-default').DataTable({
             responsive: true
+        })
+
+        var elems = Array.prototype.slice.call(document.querySelectorAll('.switch-status'));
+        elems.forEach(function(html) {
+            var switchery = new Switchery(html, {
+                color: '#00acac'
+            });
         });
+    </script>
+
+    <script>
+        function searchPagesName() {
+            // Declare variables
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("searchForPage");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("pagesTableList");
+            tr = table.getElementsByTagName("tr");
+
+            // Loop through all table rows, and hide those who don't match the search query
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[1];
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
     </script>
 
 @endsection

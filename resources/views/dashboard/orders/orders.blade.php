@@ -18,19 +18,8 @@
             </div>
         </div>
 
-        <div class="mb-3 d-md-flex fw-bold">
-            <div class="mt-md-0 mt-2"><a href="#" class="text-dark text-decoration-none"><i class="fa fa-download fa-fw me-1 text-dark text-opacity-50"></i> Export</a></div>
-            <div class="ms-md-4 mt-md-0 mt-2 dropdown-toggle">
-                <a href="#" data-bs-toggle="dropdown" class="text-dark text-decoration-none">More Actions <b class="caret"></b></a>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                    <div role="separator" class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Separated link</a>
-                </div>
-            </div>
-        </div>
+        @include('dashboard.layouts.alerts')
+
 
         <div class="card border-0">
             <ul class="nav nav-tabs nav-tabs-v2 px-3">
@@ -45,20 +34,13 @@
                 <div class="tab-pane fade show active" id="allTab">
                     <!-- BEGIN input-group -->
                     <div class="input-group mb-3">
-                        <button class="btn btn-white dropdown-toggle" type="button" data-bs-toggle="dropdown"><span class="d-none d-md-inline">Filter orders</span><span class="d-inline d-md-none"><i class="fa fa-credit-card"></i></span> <b class="caret"></b></button>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                            <div role="separator" class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Separated link</a>
-                        </div>
+                        <p class="btn btn-white dropdown-toggle"><span class="d-none d-md-inline">Filter By order Number</span></p>
                         <div class="flex-fill position-relative">
                             <div class="input-group">
                                 <div class="input-group-text position-absolute top-0 bottom-0 bg-none border-0 start-0" style="z-index: 1;">
                                     <i class="fa fa-search opacity-5"></i>
                                 </div>
-                                <input type="text" class="form-control px-35px bg-light" placeholder="Search orders..." />
+                                <input type="text" id="searchForOrder" onkeyup="searchOrderNumber()" class="form-control px-35px bg-light" placeholder="Search order Number..." />
                             </div>
                         </div>
                     </div>
@@ -66,7 +48,7 @@
 
                     <!-- BEGIN table -->
                     <div class="table-responsive mb-3">
-                        <table class="table table-hover table-panel text-nowrap align-middle mb-0">
+                        <table id="ordersTableList" class="table table-hover table-panel text-nowrap align-middle mb-0">
                             <thead>
                             <tr>
                                 <th></th>
@@ -245,6 +227,8 @@
                         </table>
                     </div>
                     <!-- END table -->
+
+                    <!-- pagination -->
                     <div class="d-md-flex align-items-center">
                         <div class="me-md-auto text-md-left text-center mb-2 mb-md-0">
                             Showing 1 to 10 of 57 entries
@@ -260,6 +244,7 @@
                             <li class="page-item"><a class="page-link" href="#">Next</a></li>
                         </ul>
                     </div>
+                    <!-- ./pagination -->
                 </div>
             </div>
         </div>
@@ -268,3 +253,31 @@
 
 @endsection
 
+
+@section('scripts')
+
+    <script>
+        function searchOrderNumber() {
+            // Declare variables
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("searchForOrder");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("ordersTableList");
+            tr = table.getElementsByTagName("tr");
+
+            // Loop through all table rows, and hide those who don't match the search query
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[1];
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
+
+@endsection

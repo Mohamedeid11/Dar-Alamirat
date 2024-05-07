@@ -145,7 +145,7 @@
 
             <!-- item -->
             <div class="menu-item">
-                <a href="{{ route('pages.index') }}" class="menu-link">
+                <a href="{{ route('page.index') }}" class="menu-link">
                     <div class="menu-icon">
                         <i class="fa-regular fa-newspaper"></i>
                     </div>

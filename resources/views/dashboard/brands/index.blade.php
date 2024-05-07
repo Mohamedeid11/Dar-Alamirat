@@ -11,6 +11,7 @@
 
     <link href="{{ asset('admin-panel/assets/plugins/datatables.net-bs5/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('admin-panel/assets/plugins/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('admin-panel/assets/plugins/switchery/dist/switchery.min.css') }}" rel="stylesheet" />
 
 @endsection
 
@@ -18,80 +19,114 @@
 
     <!-- BEGIN #content -->
     <div id="content" class="app-content">
-        <!-- BEGIN breadcrumb -->
-        <ol class="breadcrumb float-xl-end">
-            <li class="breadcrumb-item"><a href="{{route('dashboard.index')}}">{{__('dashboard.home')}}</a></li>
-            <li class="breadcrumb-item"><a href="{{route('brand.index')}}">{{__('dashboard.brands')}}</a></li>
-        </ol>
-        <!-- END breadcrumb -->
-        <!-- BEGIN page-header -->
-        <h1 class="page-header"> {{__('dashboard.brands')}} </h1>
-        <!-- END page-header -->
-        @include('dashboard.layouts.alerts')
-        <!-- BEGIN panel -->
-        <div class="panel panel-inverse">
-            <!-- BEGIN panel-heading -->
-            <div class="panel-heading">
-                <h4 class="panel-title">{{__('dashboard.brands') . ' - '  .__('dashboard.table')}}</h4>
-                <div class="panel-heading-btn">
-                    <a href="javascript:;" class="btn btn-xs btn-icon btn-default" data-toggle="panel-expand"><i class="fa fa-expand"></i></a>
-                    <a href="javascript:;" class="btn btn-xs btn-icon btn-success" data-toggle="panel-reload"><i class="fa fa-redo"></i></a>
-                    <a href="javascript:;" class="btn btn-xs btn-icon btn-warning" data-tطoggle="panel-collapse"><i class="fa fa-minus"></i></a>
-                    <a href="javascript:;" class="btn btn-xs btn-icon btn-danger" data-toggle="panel-remove"><i class="fa fa-times"></i></a>
-                </div>
+        <div class="d-flex align-items-center mb-3">
+            <div>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{route('dashboard.index')}}">{{__('dashboard.home')}}</a></li>
+                    <li class="breadcrumb-item"><a href="{{route('brand.index')}}">{{__('dashboard.brands')}}</a></li>
+                </ul>
+                <h1 class="page-header mb-0">{{__('dashboard.brands')}}</h1>
             </div>
-            <!-- END panel-heading -->
-            <!-- BEGIN panel-body -->
-            <div class="panel-body">
-                <a href="{{route('brand.create')}}" class="btn btn-primary btn-lg m-2" > {{__('dashboard.brand.add')}}</a>
-                <table id="data-table-default" class="table table-striped table-bordered align-middle">
-                    <thead>
-                    <tr>
-                        <th width="1%"></th>
-                        <th class="text-nowrap">Name</th>
-                        <th class="text-nowrap">Image</th>
-                        <th class="text-nowrap">status</th>
-                        <th class="text-nowrap">created At</th>
-                        <th class="text-nowrap">Action</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach($brands as $brand)
-                        <tr class="odd gradeX">
-                            <td width="1%" class="fw-bold text-dark">{{ $loop->iteration }}</td>
-                            <td>{{$brand->name}}</td>
-                            <td width="1%" class="with-img">
-                                <img src="{{storage_asset($brand->image)}}" class="rounded h-30px my-n1 mx-n1" />
-                            </td>
-                            <td>{{$brand->status}}</td>
-                            <td>{{$brand->created_at->format('Y-m-d')}}</td>
-                            <td class="text-center">
-                                <div class="btn-group me-1 mb-1">
-                                    <a href="javascript:;" class="btn btn-default">{{__('dashboard.action')}}</a>
-                                    <a href="#" data-bs-toggle="dropdown" class="btn btn-default dropdown-toggle"><i class="fa fa-caret-down"></i></a>
-                                    <div class="dropdown-menu dropdown-menu-end">
+            <div class="ms-auto">
+                <a href="{{route('brand.create')}}" class="btn btn-success btn-rounded px-4 rounded-pill"><i class="fa fa-plus fa-lg me-2 ms-n2 text-success-900"></i> {{__('dashboard.brand.add')}}</a>
+            </div>
+        </div>
+
+        @include('dashboard.layouts.alerts')
+
+    <!-- start card -->
+        <div class="card border-0">
+            <!-- content -->
+            <div class="tab-content p-3">
+                <!-- tab pane -->
+                <div class="tab-pane fade show active" id="allTab">
+
+                    <!-- BEGIN input-group -->
+                    <div class="input-group mb-3">
+                        <p class="btn btn-white dropdown-toggle"><span class="d-none d-md-inline">Filter By Brand Name</span></p>
+                        <div class="flex-fill position-relative">
+                            <div class="input-group">
+                                <div class="input-group-text position-absolute top-0 bottom-0 bg-none border-0 start-0" style="z-index: 1;">
+                                    <i class="fa fa-search opacity-5"></i>
+                                </div>
+                                <input type="text" id="searchForBrand" onkeyup="searchBrandName()" class="form-control px-35px bg-light" placeholder="Search order Number..." />
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END input-group -->
+
+                    <!-- table -->
+                    <div class="table-responsive mb-3">
+                        <table id="brandTableList" class="table table-hover table-panel text-nowrap align-middle mb-0">
+                            <thead>
+                                <tr>
+                                    <th width="1%"></th>
+                                    <th class="text-nowrap" width="5%">Image</th>
+                                    <th class="text-nowrap" width="40%">Name</th>
+                                    <th class="text-nowrap" width="5%">status</th>
+                                    <th class="text-nowrap" width="10%">created At</th>
+                                    <th class="text-nowrap" width="5%">Edit</th>
+                                    <th class="text-nowrap" width="5%">Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($brands as $brand)
+                                    <tr class="odd gradeX">
+                                    <td width="1%" class="fw-bold text-dark">{{ $loop->iteration }}</td>
+                                    <td width="1%" class="with-img">
+                                        <img src="{{storage_asset($brand->image)}}" class="rounded h-30px my-n1 mx-n1" />
+                                    </td>
+                                    <td>{{$brand->name}}</td>
+                                    {{--<td>{{$brand->status}}</td>--}}
+                                    <td>
+                                        <input type="checkbox" class="switch-status" checked />
+                                    </td>
+                                    <td>{{$brand->created_at->format('Y-m-d')}}</td>
+                                    <td nowrap="">
                                         @adminCan('brands.edit')
-                                        <a href="{{route('brand.edit' , $brand->id)}}" class="dropdown-item">{{__('dashboard.brand.edit')}}</a>
+                                        <a href="{{route('brand.edit' , $brand->id)}}" class="btn btn-sm btn-primary"> <i class="fa-regular fa-pen-to-square"></i> {{__('dashboard.brand.edit')}}</a>
                                         @endadminCan
+                                    </td>
+                                    <td nowrap="">
                                         @adminCan('brands.delete')
-                                        <div class="dropdown-divider"></div>
                                         <form id="deleteForm{{$brand->id}}" action="{{ route('brand.destroy', $brand->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
-                                            <button class="dropdown-item delete-btn" style="background-color: transparent; border: none;" data-id="{{$brand->id}}">{{__('dashboard.brand.delete')}}</button>
+                                            <a class="btn delete-btn btn-danger" data-id="{{$brand->id}}"><i class="fa-solid fa-trash-can"></i> {{__('dashboard.brand.delete')}}</a>
                                         </form>
                                         @endadminCan
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                    @endforeach
-                    </tbody>
-                </table>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- ./table -->
+
+                    <!-- pagination -->
+                    <div class="d-md-flex align-items-center">
+                        <div class="me-md-auto text-md-left text-center mb-2 mb-md-0">
+                            Showing 1 to 10 of 57 entries
+                        </div>
+                        <ul class="pagination mb-0 justify-content-center">
+                            <li class="page-item disabled"><a class="page-link">Previous</a></li>
+                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item active"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item"><a class="page-link" href="#">4</a></li>
+                            <li class="page-item"><a class="page-link" href="#">5</a></li>
+                            <li class="page-item"><a class="page-link" href="#">6</a></li>
+                            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                        </ul>
+                    </div>
+                    <!-- ./pagination -->
+
+                </div>
+                <!-- ./tab pane -->
             </div>
-            <!-- END panel-body -->
+            <!-- ./content -->
         </div>
-        <!-- END panel -->
+        <!-- ./end card -->
     </div>
     <!-- END #content -->
 
@@ -104,11 +139,43 @@
     <script src="{{ asset('admin-panel/assets/plugins/datatables.net-bs5/js/dataTables.bootstrap5.min.js') }}"></script>
     <script src="{{ asset('admin-panel/assets/plugins/datatables.net-responsive/js/dataTables.responsive.min.js') }}"></script>
     <script src="{{ asset('admin-panel/assets/plugins/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js') }}"></script>
+    <script src="{{ asset('admin-panel/assets/plugins/switchery/dist/switchery.min.js') }}"></script>
 
     <script>
         $('#data-table-default').DataTable({
             responsive: true
+        })
+
+        var elems = Array.prototype.slice.call(document.querySelectorAll('.switch-status'));
+        elems.forEach(function(html) {
+            var switchery = new Switchery(html, {
+                color: '#00acac'
+            });
         });
+    </script>
+
+    <script>
+        function searchBrandName() {
+            // Declare variables
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("searchForBrand");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("brandTableList");
+            tr = table.getElementsByTagName("tr");
+
+            // Loop through all table rows, and hide those who don't match the search query
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[2];
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
     </script>
 
 @endsection

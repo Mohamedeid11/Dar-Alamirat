@@ -1,5 +1,11 @@
 @extends('dashboard.layouts.app')
 
+
+@section('customcss')
+    <link href="{{ asset('admin-panel/assets/plugins/bootstrap3-wysihtml5-bower/dist/bootstrap3-wysihtml5.min.css') }}" rel="stylesheet" />
+@endsection
+
+
 @section('content')
 
     <!-- BEGIN #content -->
@@ -30,33 +36,65 @@
 
             <!-- panel body -->
             <div class="panel-body p-0">
-                <form action="">
+                <form action="{{ route('page.store') }}" method="POST">
+                    @csrf
                     <div class="row">
-                        <div class="col-4">
+                        <div class="col-6">
                             <div class="m-3">
-                                <label class="form-label">Page Name</label>
-                                <input class="form-control" type="text" />
+                                <label class="form-label mb-3">Page Name</label>
+                                <input class="form-control" type="text" name="name" />
                             </div>
+                            @error('name')
+                            <span class="text-danger" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
                         </div>
-                        <div class="col-4">
+                        <div class="col-6">
+                            <div class="m-3 text-end">
+                                <label class="form-label mb-3">اسم الصفحة</label>
+                                <input class="form-control" type="text" name="name" />
+                            </div>
+                            @error('name')
+                            <span class="text-danger" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                        <div class="col-12">
                             <div class="m-3">
-                                <label class="form-label">Shipping method</label>
-                                <select class="form-select">
-                                    <option>10</option>
-                                    <option>20</option>
-                                    <option>30</option>
-                                    <option>40</option>
-                                    <option>50</option>
-                                    <option>60</option>
-                                    <option>70</option>
-                                    <option>80</option>
-                                    <option>90</option>
-                                    <option>100</option>
+                                <label class="fs-5 fw-bold form-label mb-3">Priority:</label>
+                                <select class="form-control" name="priority" required>
+                                    <option disabled selected>Select Priority</option>
+                                    @for ($i = 0; $i <= 10; $i++)
+                                        <option value="{{$i}}" @if(old('priority') == $i) selected @endif>{{$i}}</option>
+                                    @endfor
                                 </select>
+                                @error('priority')
+                                <span class="text-danger" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-12">
-                            <div class="text-center m-4">
+                            <div class="m-3">
+                                <label class="form-label mb-3">content in English</label>
+                                <div class="form-control p-0 overflow-hidden">
+                                        <textarea class="textarea form-control wysihtml5" name="" placeholder="Enter text ..." rows="12"></textarea>
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="m-3 text-end">
+                                <label class="form-label mb-3">المحتوي بالعربية</label>
+                                <div class="form-control p-0 overflow-hidden">
+                                        <textarea class="textarea form-control wysihtml5" name="" placeholder="Enter text ..." rows="12"></textarea>
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="text-center m-3">
                                 <button type="submit" class="btn btn-primary">
                                     <span class="indicator-label">Save</span>
                                 </button>
@@ -65,6 +103,7 @@
                     </div>
                 </form>
             </div>
+
             <!-- ./panel body -->
         </div>
         <!-- ./panel -->
@@ -72,4 +111,12 @@
     </div>
     <!-- END #content -->
 
+@endsection
+
+@section('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('admin-panel/assets/plugins/bootstrap3-wysihtml5-bower/dist/bootstrap3-wysihtml5.all.min.js') }}"></script>
+    <script>
+        $('.wysihtml5').wysihtml5();
+    </script>
 @endsection

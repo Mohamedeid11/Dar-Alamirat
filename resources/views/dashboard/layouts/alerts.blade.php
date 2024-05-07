@@ -8,10 +8,10 @@
     </div>
 @endif
 
-@if(session('info'))
+@if(session('success'))
     <div class="alert alert-info alert-dismissible fade show">
-        <strong>Error!</strong>
-        {{session('info')}}
+        <strong>success</strong>
+        {{session('success')}}
         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
     </div>
 @endif
