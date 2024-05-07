@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Modules\Shipping\app\ViewModels\ShippingViewModel;
 use Modules\Shipping\Http\Requests\StoreShippingRequest;
+use Modules\Shipping\Http\Requests\UpdateShippingRequest;
 use Modules\Shipping\Models\Shipping;
 use Modules\Shipping\Services\ShippingService;
 
@@ -67,17 +68,25 @@ class ShippingController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($id)
+    public function edit(Shipping $shipping)
     {
-        return view('shipping::edit');
+        return view('dashboard.shippings.form', new ShippingViewModel($shipping));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(UpdateShippingRequest $request, Shipping $shipping)
     {
-        //
+        $shipping = $this->shippingService->updateData($request->validated() , $shipping);
+
+        if ($shipping){
+            Session()->flash('success', 'Shipping Created Successfully');
+        }else{
+            Session()->flash('error', 'Shipping didn\'t Created');
+        }
+
+        return redirect()->route('shipping.index');
     }
 
     /**
@@ -88,8 +97,9 @@ class ShippingController extends Controller
         //
     }
 
-    public function changeStatus(Shipping $shipping)
+    public function changeStatus(Request $request,Shipping $shipping)
     {
-        dd($shipping);
+        $shipping->update(['status' => $request->status]);
+        return response()->json(['message' => 'Status Changed Successfully'], 200);
     }
 }

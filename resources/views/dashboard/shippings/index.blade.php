@@ -1,7 +1,7 @@
 @extends('dashboard.layouts.app')
 @section('meta')
     <meta charset="utf-8" />
-    <title> {{__('dashboard.categories')}} </title>
+    <title> {{__('dashboard.shippings')}} </title>
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
     <meta content="" name="description" />
     <meta content="" name="author" />
@@ -23,9 +23,9 @@
             <div>
                 <ul class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{route('dashboard.index')}}">{{__('dashboard.home')}}</a></li>
-                    <li class="breadcrumb-item"><a href="{{route('shipping.index')}}">{{__('dashboard.categories')}}</a></li>
+                    <li class="breadcrumb-item"><a href="{{route('shipping.index')}}">{{__('dashboard.shippings')}}</a></li>
                 </ul>
-                <h1 class="page-header mb-0">{{__('dashboard.categories')}}</h1>
+                <h1 class="page-header mb-0">{{__('dashboard.shippings')}}</h1>
             </div>
             <div class="ms-auto">
                 <a href="{{ route('shipping.create') }}" class="btn btn-success btn-rounded px-4 rounded-pill"><i class="fa fa-plus fa-lg me-2 ms-n2 text-success-900"></i>{{__('dashboard.shipping.add')}}</a>
@@ -82,12 +82,12 @@
                                     </td>
                                     <td>{{$shipping->created_at->format('Y-m-d')}}</td>
                                     <td nowrap="">
-                                        @adminCan('categories.edit')
+{{--                                        @adminCan('shippings.edit')--}}
                                         <a href="{{route('shipping.edit' , $shipping->id)}}" class="btn btn-sm btn-primary"> <i class="fa-regular fa-pen-to-square"></i> {{__('dashboard.shipping.edit')}}</a>
-                                        @endadminCan
+{{--                                        @endadminCan--}}
                                     </td>
                                     <td nowrap="">
-                                        @adminCan('categories.delete')
+                                        @adminCan('shippings.delete')
                                         <form id="deleteForm{{$shipping->id}}" action="{{ route('shipping.destroy', $shipping->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
@@ -144,8 +144,12 @@
                 axios.post(url, {
                     status: isChecked
                 })
-                    .then(function (response) {
-                        console.log('Success:', response);
+                    .then(response => {
+                        Swal.fire(
+                            'Status',
+                            response.data.message,
+                            'success'
+                        )
                     })
                     .catch(function (error) {
                         console.error('Error:', error);

@@ -12,7 +12,9 @@ class UpdateShippingRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name.*'    =>'required',
+            'duration'  =>'required',
+            'price'     =>'required|integer',
         ];
     }
 
@@ -21,6 +23,6 @@ class UpdateShippingRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return auth('admin')->check();
     }
 }

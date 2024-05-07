@@ -80,7 +80,7 @@
         <!-- BEGIN breadcrumb -->
         <ol class="breadcrumb float-xl-end">
             <li class="breadcrumb-item"><a href="javascript:;">{{__('dashboard.dashboard')}}</a></li>
-            <li class="breadcrumb-item"><a href="{{route('shipping.index')}}">{{__('dashboard.categories')}}</a></li>
+            <li class="breadcrumb-item"><a href="{{route('shipping.index')}}">{{__('dashboard.shippings')}}</a></li>
             <li class="breadcrumb-item active">
                 @if($method == 'PUT')
                     {{__('dashboard.shipping.edit')}}
@@ -91,7 +91,7 @@
         </ol>
         <!-- END breadcrumb -->
         <!-- BEGIN page-header -->
-        <h1 class="page-header">{{__('dashboard.categories')}}</h1>
+        <h1 class="page-header">{{__('dashboard.shippings')}}</h1>
         <!-- END page-header -->
         <!-- BEGIN row -->
         <form action="{{ $action }}" method="POST" enctype="multipart/form-data">
