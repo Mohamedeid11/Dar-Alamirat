@@ -113,11 +113,10 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        // Check if the admin has a photo and delete it from storage
         if ($category->icon && Storage::disk('public')->exists($category->icon)) {
             Storage::disk('public')->delete($category->icon);
         }
-        // Delete the admin record
+
         $category->delete();
         Session()->flash('success', 'Category Deleted Successfully');
         return redirect()->back();

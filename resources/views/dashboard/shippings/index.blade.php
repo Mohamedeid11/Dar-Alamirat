@@ -82,9 +82,9 @@
                                     </td>
                                     <td>{{$shipping->created_at->format('Y-m-d')}}</td>
                                     <td nowrap="">
-{{--                                        @adminCan('shippings.edit')--}}
+                                        @adminCan('shippings.edit')
                                         <a href="{{route('shipping.edit' , $shipping->id)}}" class="btn btn-sm btn-primary"> <i class="fa-regular fa-pen-to-square"></i> {{__('dashboard.shipping.edit')}}</a>
-{{--                                        @endadminCan--}}
+                                        @endadminCan
                                     </td>
                                     <td nowrap="">
                                         @adminCan('shippings.delete')

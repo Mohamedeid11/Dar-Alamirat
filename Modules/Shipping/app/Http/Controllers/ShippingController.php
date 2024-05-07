@@ -92,9 +92,11 @@ class ShippingController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy(Shipping $shipping)
     {
-        //
+        $shipping->delete();
+        Session()->flash('success', 'Category Deleted Successfully');
+        return redirect()->back();
     }
 
     public function changeStatus(Request $request,Shipping $shipping)
