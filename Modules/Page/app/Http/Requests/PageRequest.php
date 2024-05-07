@@ -15,6 +15,7 @@ class PageRequest extends FormRequest
             //
             'name'=>'required|unique:pages,name',
             'priority'=>'required',
+            'content'=>'required',
         ];
     }
 

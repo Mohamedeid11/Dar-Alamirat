@@ -58,22 +58,32 @@
                             </tr>
                             </thead>
                             <tbody>
+                                @forelse ($pages as $page)
                                 <tr class="odd gradeX">
-                                    <td width="1%" class="fw-bold text-dark">1</td>
-                                    <td>About us</td>
+                                    <td width="1%" class="fw-bold text-dark">{{ $page->id }}</td>
+                                    <td>{{ $page->name }}</td>
                                     <td>
-                                        <input type="checkbox" class="switch-status" checked />
+                                        <div class="form-check form-switch">
+                                            <input id="toggleStatusCheckbox{{ $page->id }}"
+                                                class="form-check-input toggle-status-checkbox {{ $page->status ? '1' : '0' }}"
+                                                type="checkbox" {{ $page->status ? 'checked' : '' }}>
+                                        </div>
                                     </td>
-                                    <td>23-12-2024</td>
+                                    <td>{{ $page->created_at->format('Y-m-d') }}</td>
                                     <td nowrap="">
-                                        <a href="#" class="btn btn-sm btn-primary"> <i class="fa-regular fa-pen-to-square"></i> Edit</a>
+                                        <a href="{{route('page.edit' , $page->id)}}" class="btn btn-sm btn-primary"> <i class="fa-regular fa-pen-to-square"></i> Edit</a>
                                     </td>
                                     <td nowrap="">
-                                        <form id="" action="#" method="POST">
-                                            <a class="btn delete-btn btn-danger" data-id=""><i class="fa-solid fa-trash-can"></i> Delete</a>
+                                        <form id="deleteForm{{$page->id}}" action="{{ route('page.destroy', $page->id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <a class="btn delete-btn btn-danger" data-id="{{$page->id}}"><i class="fa-solid fa-trash-can"></i> Delete</a>
                                         </form>
                                     </td>
                                 </tr>
+                                @empty
+                                <p>No Pages Found </p>
+                                @endforelse
                             </tbody>
                         </table>
                     </div>
@@ -147,6 +157,33 @@
                 }
             }
         }
+    </script>
+     <script>
+        $(document).ready(function() {
+
+            $('.toggle-status-checkbox').change(function() {
+                var isActive = $(this).is(':checked');
+                var modelId = $(this).attr('id').replace('toggleStatusCheckbox', '');
+
+                $.ajax({
+                    url: '{{ route('page.toggle-status') }}',
+                    type: 'POST',
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        isActive: isActive,
+                        modelId: modelId
+                    },
+                    success: function(response) {
+                        // Handle success response
+                        console.log(response);
+                    },
+                    error: function(xhr) {
+                        // Handle error response
+                        console.log(xhr.responseText);
+                    }
+                });
+            });
+        });
     </script>
 
 @endsection

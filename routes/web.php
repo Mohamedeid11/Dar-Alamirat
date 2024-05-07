@@ -57,14 +57,14 @@ Route::get('/clients/edit', function () {
 
 /************************************ pages ****************************/
 
-Route::get('/pages', function () {
-    return view('dashboard.pages.pages');
-})->name('pages.index');
+// Route::get('/pages', function () {
+//     return view('dashboard.pages.pages');
+// })->name('pages.index');
 
 
-Route::get('/pages/create', function () {
-    return view('dashboard.pages.create_page');
-})->name('pages.create');
+// Route::get('/pages/create', function () {
+//     return view('dashboard.pages.create_page');
+// })->name('pages.create');
 
 
 Route::get('/pages/edit', function () {
