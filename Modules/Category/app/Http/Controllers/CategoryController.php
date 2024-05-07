@@ -2,6 +2,7 @@
 
 namespace Modules\Category\Http\Controllers;
 
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Storage;
@@ -30,7 +31,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = $this->categoryService->getAllData();
+        $categories = $this->categoryService->getPaginatedData();
         return view('dashboard.categories.index', compact('categories'));
     }
 
@@ -120,5 +121,11 @@ class CategoryController extends Controller
         $category->delete();
         Session()->flash('success', 'Category Deleted Successfully');
         return redirect()->back();
+    }
+
+    public function changeStatus(Request $request,Category $category)
+    {
+        $category->update(['status' => $request->status]);
+        return response()->json(['message' => 'Status Changed Successfully'], 200);
     }
 }

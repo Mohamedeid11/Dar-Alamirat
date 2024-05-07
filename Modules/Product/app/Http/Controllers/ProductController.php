@@ -30,7 +30,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = $this->productService->getPaginatedData([],2);
+        $products = $this->productService->getPaginatedData();
 
         return view('dashboard.products.index', compact('products'));
     }

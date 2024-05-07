@@ -83,7 +83,7 @@
                                     <td>{{$category->priority}}</td>
                                     {{-- <td>{{$category->status}}</td> --}}
                                     <td>
-                                        <input type="checkbox" class="switch-status" checked />
+                                        <input type="checkbox" class="switch-status" data-url="{{ route('category.status' , $category->id) }}" @if($category->status) checked @endif/>
                                     </td>
                                     <td>{{$category->created_at->format('Y-m-d')}}</td>
                                     <td nowrap="">
@@ -110,17 +110,10 @@
                     <!-- pagination -->
                     <div class="d-md-flex align-items-center">
                         <div class="me-md-auto text-md-left text-center mb-2 mb-md-0">
-                            Showing 1 to 10 of 57 entries
+                            Showing {{ $categories->firstItem() }} to {{ $categories->lastItem() }} of {{ $categories->total() }} entries
                         </div>
                         <ul class="pagination mb-0 justify-content-center">
-                            <li class="page-item disabled"><a class="page-link">Previous</a></li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item active"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#">4</a></li>
-                            <li class="page-item"><a class="page-link" href="#">5</a></li>
-                            <li class="page-item"><a class="page-link" href="#">6</a></li>
-                            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                            {{ $categories->links('pagination::bootstrap-4') }}
                         </ul>
                     </div>
                     <!-- ./pagination -->

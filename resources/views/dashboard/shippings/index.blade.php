@@ -134,42 +134,6 @@
     <script src="{{ asset('admin-panel/assets/plugins/switchery/dist/switchery.min.js') }}"></script>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Select all checkboxes with the class 'switch-status'
-            const statusSwitches = document.querySelectorAll('.switch-status');
-
-            statusSwitches.forEach(function(switchElem) {
-                switchElem.addEventListener('change', function() {
-                    const isChecked = this.checked;
-                    const url = this.getAttribute('data-url'); // Get the URL from data attribute
-
-                    axios.post(url, {
-                        status: isChecked
-                    })
-                        .then(function(response) {
-                            // Display a SweetAlert message with the response
-                            Swal.fire({
-                                title: 'Success!',
-                                text: response.data.message,
-                                icon: 'success',
-                                confirmButtonText: 'Ok'
-                            });
-                        })
-                        .catch(function(error) {
-                            // Display an error message if something went wrong
-                            Swal.fire({
-                                title: 'Error!',
-                                text: 'Unable to update status.',
-                                icon: 'error',
-                                confirmButtonText: 'Ok'
-                            });
-                        });
-                });
-            });
-        });
-
-    </script>
-    <script>
         $('#data-table-default').DataTable({
             responsive: true
         });

@@ -16,5 +16,5 @@ use Modules\Shipping\Http\Controllers\ShippingController;
 
 Route::group([], function () {
     Route::resource('shipping', ShippingController::class)->names('shipping');
-    Route::post('status/{shipping}', [ShippingController::class , 'changeStatus'])->name('shipping.status');
+    Route::post('shipping/status/{shipping}', [ShippingController::class , 'changeStatus'])->name('shipping.status');
 });

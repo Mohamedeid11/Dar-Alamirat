@@ -14,9 +14,9 @@ class CategoryService {
         return Category::orderByRaw('ISNULL(priority), priority ASC')->get();
     }
 
-    public function getPaginatedData(array $data ,int $paginate = 15 )
+    public function getPaginatedData(array $data = [],int $paginate = 20 )
     {
-        return  Category::paginate($paginate);
+        return  Category::latest()->paginate($paginate);
     }
 
     public function storeData(array $data)
