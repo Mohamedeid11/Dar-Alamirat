@@ -82,7 +82,7 @@
                                         @endforeach
                                         </ul>
                                     </td>
-                                    <td class="align-middle">{{$product->inventory->count()}} in stock for {{$product->variants->count()}} variants</td>
+                                    <td class="align-middle">{{$product->inventory->sum('quantity')}} in stock for {{$product->variants->count()}} variants</td>
                                     <td class="align-middle">category</td>
                                     <td class="align-middle">brand</td>
                                     <td nowrap="">

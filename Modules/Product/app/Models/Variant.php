@@ -44,7 +44,12 @@ class Variant extends Model
 
     public function getVariantNameAttribute()
     {
-        return "{$this->size} -  {$this->color}";
+        $elements = [
+                $this->size ?? '',
+                $this->color ?? '',
+        ];
+        return implode('-', array_filter($elements));
+//        return "{$this->size} -  {$this->color}";
     }
 
 }

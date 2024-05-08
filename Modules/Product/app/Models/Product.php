@@ -4,7 +4,6 @@ namespace Modules\Product\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
 use Modules\Brand\Models\Brand;
 use Modules\Category\Models\Category;
@@ -13,7 +12,7 @@ use Spatie\Translatable\HasTranslations;
 
 class Product extends Model
 {
-    use HasFactory , HasTranslations ,SoftDeletes;
+    use HasFactory , HasTranslations ;
 
     /**
      * The attributes that are mass assignable.

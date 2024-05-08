@@ -24,7 +24,6 @@ return new class extends Migration
             $table->decimal('discount_value', 8, 2)->nullable();
             $table->enum('discount_type', ['flat', 'percent'])->nullable();
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
