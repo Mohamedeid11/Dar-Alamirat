@@ -67,9 +67,9 @@ Route::get('/clients/edit', function () {
 // })->name('pages.create');
 
 
-Route::get('/pages/edit', function () {
-    return view('dashboard.pages.edit_page');
-})->name('pages.edit');
+// Route::get('/pages/edit', function () {
+//     return view('dashboard.pages.edit_page');
+// })->name('pages.edit');
 
 /************************************ products ****************************/
 

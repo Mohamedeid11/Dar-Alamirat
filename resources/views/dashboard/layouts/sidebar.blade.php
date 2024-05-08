@@ -134,7 +134,7 @@
 
             <!-- item -->
             <div class="menu-item">
-                <a href="/dashboard/clients" class="menu-link">
+                <a href="{{ route('client.index') }}" class="menu-link">
                     <div class="menu-icon">
                         <i class="fa-solid fa-users"></i>
                     </div>

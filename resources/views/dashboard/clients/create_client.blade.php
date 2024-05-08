@@ -22,137 +22,116 @@
         <!-- BEGIN page-header -->
         <h1 class="page-header">Add Clients</h1>
         <!-- END page-header -->
+        <div class="card-body">
+            <form method="POST" action="{{ route('client.store') }}">
+                @csrf
 
-        <form>
-            <!-- BEGIN row -->
-            <div class="row mb-3">
-                <!-- BEGIN col-6 -->
-                <div class="col-xl-6">
+                <div class="form-group row">
+                    <label for="first_name" class="col-md-4 col-form-label text-md-right">{{ __('First Name') }}</label>
 
-                    <!-- BEGIN panel -->
-                    <div class="panel panel-inverse" data-sortable-id="form-stuff-1">
-                        <!-- BEGIN panel-heading -->
-                        <div class="panel-heading">
-                            <h4 class="panel-title">Add Client in English</h4>
-                            <div class="panel-heading-btn">
-                                <a href="javascript:;" class="btn btn-xs btn-icon btn-default" data-toggle="panel-expand"><i class="fa fa-expand"></i></a>
-                                <a href="javascript:;" class="btn btn-xs btn-icon btn-success" data-toggle="panel-reload"><i class="fa fa-redo"></i></a>
-                                <a href="javascript:;" class="btn btn-xs btn-icon btn-warning" data-toggle="panel-collapse"><i class="fa fa-minus"></i></a>
-                                <a href="javascript:;" class="btn btn-xs btn-icon btn-danger" data-toggle="panel-remove"><i class="fa fa-times"></i></a>
-                            </div>
-                        </div>
-                        <!-- END panel-heading -->
+                    <div class="col-md-6">
+                        <input id="first_name" type="text" class="form-control @error('first_name') is-invalid @enderror" name="first_name" value="{{ old('first_name') }}" required autofocus>
 
-                        <!-- BEGIN panel-body -->
-                        <div class="panel-body">
-                                <div class="row mb-15px">
-                                    <label class="form-label col-form-label col-md-3">First Name</label>
-                                    <div class="col-sm-9">
-                                        <input class="form-control" type="text" placeholder="First Name"  />
-                                    </div>
-                                </div>
-
-                                <div class="row mb-15px">
-                                    <label class="form-label col-form-label col-md-3">Last Name</label>
-                                    <div class="col-sm-9">
-                                        <input class="form-control" type="text" placeholder="Last Name"  />
-                                    </div>
-                                </div>
-
-                                <div class="row mb-15px">
-                                    <label class="form-label col-form-label col-md-3">Email</label>
-                                    <div class="col-sm-9">
-                                        <input class="form-control" type="email" placeholder="Email"  />
-                                    </div>
-                                </div>
-
-                                <div class="row mb-15px">
-                                    <label class="form-label col-form-label col-md-3">Phone Number</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="masked-input-phone" placeholder="(999) 999-9999">
-                                    </div>
-                                </div>
-
-                                <div class="row mb-15px">
-                                    <label class="form-label col-form-label col-md-3">Birthday</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="datepicker-autoClose" />
-                                    </div>
-                                </div>
-
-                                <div class="row mb-15px">
-                                    <label class="form-label col-form-label col-md-3">Inline Radios</label>
-                                    <div class="col-md-9 pt-2">
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" id="genderMale" name="gender" />
-                                            <label class="form-check-label" for="genderMale">male</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" id="genderFemale" name="gender" />
-                                            <label class="form-check-label" for="genderFemale">Female</label>
-                                        </div>
-                                    </div>
-                                </div>
-
-                        </div>
-                        <!-- END panel-body -->
-
+                        @error('first_name')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
-                    <!-- END panel -->
-
                 </div>
-                <!-- END col-6 -->
 
-                <!-- BEGIN col-6 -->
-                <div class="col-xl-6">
+                <div class="form-group row">
+                    <label for="last_name" class="col-md-4 col-form-label text-md-right">{{ __('Last Name') }}</label>
 
-                    <div class="panel panel-inverse" data-sortable-id="form-stuff-2">
-                        <!-- BEGIN panel-heading -->
-                        <div class="panel-heading">
-                            <h4 class="panel-title">Add Client in Arabic</h4>
-                            <div class="panel-heading-btn">
-                                <a href="javascript:;" class="btn btn-xs btn-icon btn-default" data-toggle="panel-expand"><i class="fa fa-expand"></i></a>
-                                <a href="javascript:;" class="btn btn-xs btn-icon btn-success" data-toggle="panel-reload"><i class="fa fa-redo"></i></a>
-                                <a href="javascript:;" class="btn btn-xs btn-icon btn-warning" data-toggle="panel-collapse"><i class="fa fa-minus"></i></a>
-                                <a href="javascript:;" class="btn btn-xs btn-icon btn-danger" data-toggle="panel-remove"><i class="fa fa-times"></i></a>
-                            </div>
-                        </div>
-                        <!-- END panel-heading -->
+                    <div class="col-md-6">
+                        <input id="last_name" type="text" class="form-control @error('last_name') is-invalid @enderror" name="last_name" value="{{ old('last_name') }}" required>
 
-                        <!-- BEGIN panel-body -->
-                        <div class="panel-body">
-                            <div class="row mb-15px flex-row-reverse">
-                                <label class="form-label col-form-label col-md-3 text-end">First Name</label>
-                                <div class="col-sm-9">
-                                    <input class="form-control" type="text" placeholder="First Name"  />
-                                </div>
-                            </div>
-
-                            <div class="row mb-15px flex-row-reverse">
-                                <label class="form-label col-form-label col-md-3 text-end">Last Name</label>
-                                <div class="col-sm-9">
-                                    <input class="form-control" type="text" placeholder="Last Name"  />
-                                </div>
-                            </div>
-                        </div>
-                        <!-- END panel-body -->
-
-                        <div class="panel-body">
-                            <div class="row mb-15px">
-                                <div class="col-md-12">
-                                    <button type="submit" class="btn btn-primary d-block w-100"><i class="fa-regular fa-floppy-disk"></i> Save</button>
-                                </div>
-                            </div>
-                        </div>
-
+                        @error('last_name')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
-
                 </div>
-                <!-- END col-6 -->
-            </div>
-            <!-- ./row -->
 
-        </form>
+                <div class="form-group row">
+                    <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Email') }}</label>
+
+                    <div class="col-md-6">
+                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required>
+
+                        @error('email')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="phone_number" class="col-md-4 col-form-label text-md-right">{{ __('Phone Number') }}</label>
+
+                    <div class="col-md-6">
+                        <input id="phone_number" type="text" class="form-control @error('phone_number') is-invalid @enderror" name="phone_number" value="{{ old('phone_number') }}" required>
+
+                        @error('phone_number')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="birthday" class="col-md-4 col-form-label text-md-right">{{ __('Age') }}</label>
+
+                    <div class="col-md-6">
+                        <input id="birthday" type="text" class="form-control @error('birthday') is-invalid @enderror" name="birthday" value="{{ old('birthday') }}" required>
+
+                        @error('birthday')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-md-4 col-form-label text-md-right">{{ __('Gender') }}</label>
+
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="gender" id="male" value="male" {{ old('gender') == 'male' ? 'checked' : '' }}>
+                            <label class="form-check-label" for="male">
+                                {{ __('Male') }}
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="gender" id="female" value="female" {{ old('gender') == 'female' ? 'checked' : '' }}>
+                            <label class="form-check-label" for="female">
+                                {{ __('Female') }}
+                            </label>
+                        </div>
+                        @error('gender')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+
+                <!-- Add other form fields as needed -->
+
+                <div class="form-group row mb-0">
+                    <div class="col-md-6 offset-md-4">
+                        <button type="submit" class="btn btn-primary">
+                            {{ __('Submit') }}
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
 
     </div>
     <!-- END #content -->

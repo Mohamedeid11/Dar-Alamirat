@@ -11,15 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('orders', function (Blueprint $table) {
+        Schema::create('clients', function (Blueprint $table) {
             $table->id();
-            $table->uuid('order_number');
-            $table->foreignId('client_id')->constrained()->onDelete('cascade');
-            $table->unsignedBigInteger('shipping_id');
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->string('email')->unique();
+            $table->string('phone_number');
+            $table->date('birthday');
+            $table->enum('gender', ['male', 'female']);
             $table->timestamps();
-            $table->foreign('shipping_id')->references('id')->on('shippings')->onDelete('cascade');
-
-
         });
     }
 
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('orders');
+        Schema::dropIfExists('clients');
     }
 };

@@ -6,5 +6,6 @@
     "Product": true,
     "Order": true,
     "Shipping": true,
-    "Page": true
+    "Page": true,
+    "Client": true
 }
