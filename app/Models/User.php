@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Carbon\Carbon;
 use Modules\Order\Models\Order;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
@@ -19,8 +20,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'email',
+        'first_name','last_name','email','phone_number','birthday','gender',
         'password',
     ];
 
@@ -50,4 +50,31 @@ class User extends Authenticatable
     {
         return $this->hasMany(Order::class);
     }
+
+
+
+    public function getFullNameAttribute()
+    {
+        return $this->attributes['first_name'] . ' ' . $this->attributes['last_name'];
+    }
+
+
+    public function setFullNameAttribute($value)
+    {
+        $names = explode(' ', $value, 2);
+        $this->attributes['first_name'] = $names[0] ?? '';
+        $this->attributes['last_name'] = $names[1] ?? '';
+    }
+
+    public function getAgeAttribute()
+    {
+        return Carbon::parse($this->attributes['birthday'])->age;
+    }
+
+
+
+
+
+
+
 }

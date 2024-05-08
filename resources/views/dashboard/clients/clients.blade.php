@@ -50,26 +50,40 @@
                             <thead>
                             <tr>
                                 <th width="1%"></th>
-                                <th width="5%">Image</th>
-                                <th class="text-nowrap" width="40%">Name</th>
+                                <th width="5%">Name</th>
+                                <th class="text-nowrap" width="40%">Email</th>
+                                <th class="text-nowrap" width="40%">Phone</th>
+                                <th class="text-nowrap" width="40%">Gender</th>
+                                <th class="text-nowrap" width="40%">Age</th>
                                 <th class="text-nowrap" width="5%">Edit</th>
                                 <th class="text-nowrap" width="5%">Delete</th>
                             </tr>
                             </thead>
                             <tbody>
+                                @forelse ($clients as $client )
+
+
                             <tr class="odd gradeX">
-                                <td width="1%" class="fw-bold text-dark">1</td>
-                                <td>image</td>
-                                <td>Ahmed mohamed</td>
+                                <td width="1%" class="fw-bold text-dark">{{ $client->id }}</td>
+                                <td>{{ $client->full_name }}</td>
+                                <td>{{ $client->email }}</td>
+                                <td>{{ $client->phone_number }}</td>
+                                <td>{{ $client->gender }}</td>
+                                <td>{{ $client->age }}</td>
                                 <td nowrap="">
-                                    <a href="#" class="btn btn-sm btn-primary"> <i class="fa-regular fa-pen-to-square"></i> Edit</a>
+                                    <a href="{{route('client.edit' , $client->id)}}" class="btn btn-sm btn-primary"> <i class="fa-regular fa-pen-to-square"></i> Edit</a>
                                 </td>
                                 <td nowrap="">
-                                    <form id="" action="#" method="POST">
-                                        <a class="btn delete-btn btn-danger" data-id=""><i class="fa-solid fa-trash-can"></i> Delete</a>
+                                    <form id="deleteForm{{$client->id}}" action="{{ route('client.destroy', $client->id) }}" method="POST">
+                                        @csrf
+                                            @method('DELETE')
+                                        <a class="btn delete-btn btn-danger" data-id="{{$client->id}}"><i class="fa-solid fa-trash-can"></i> Delete</a>
                                     </form>
                                 </td>
                             </tr>
+                            @empty
+
+                                @endforelse
                             </tbody>
                         </table>
                     </div>
@@ -78,19 +92,13 @@
                     <!-- pagination -->
                     <div class="d-md-flex align-items-center">
                         <div class="me-md-auto text-md-left text-center mb-2 mb-md-0">
-                            Showing 1 to 10 of 57 entries
+                            Showing {{ $clients->firstItem() }} to {{ $clients->lastItem() }} of {{ $clients->total() }} entries
                         </div>
                         <ul class="pagination mb-0 justify-content-center">
-                            <li class="page-item disabled"><a class="page-link">Previous</a></li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item active"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#">4</a></li>
-                            <li class="page-item"><a class="page-link" href="#">5</a></li>
-                            <li class="page-item"><a class="page-link" href="#">6</a></li>
-                            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                            {{ $clients->links('pagination::bootstrap-4') }}
                         </ul>
                     </div>
+
                     <!-- ./pagination -->
 
                 </div>

@@ -2,6 +2,7 @@
 
 namespace Modules\Client\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Modules\Client\Models\Client;
@@ -15,7 +16,8 @@ class ClientController extends Controller
      */
     public function index()
     {
-        return view('dashboard.clients.clients');
+        $clients = User::paginate(5);
+        return view('dashboard.clients.clients', compact('clients'));
     }
 
     /**
@@ -33,23 +35,24 @@ class ClientController extends Controller
     {
         //
 
-        $validatedData = $request->validate([
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
-            'email' => 'required|email|unique:clients,email',
-            'phone_number' => 'required|string|max:255',
-            'birthday' =>  ['required', 'date', 'before_or_equal:' . now()->subYears(18)->format('Y-m-d')],
-            'gender' => 'required|in:male,female',
+        $validatedData = $request->validate(
+            [
+                'first_name' => 'required|string|max:255',
+                'last_name' => 'required|string|max:255',
+                'email' => 'required|email|unique:users,email',
+                'phone_number' => 'required|string|max:255',
+                'birthday' =>  ['required', 'date', 'before_or_equal:' . now()->subYears(18)->format('Y-m-d')],
+                'gender' => 'required|in:male,female',
+                'password' => 'required|min:8|confirmed',
+
+            ],
+            [
+                'birthday.before_or_equal' => 'You must be at least 18 years old.',
+            ]
+        );
 
 
-        ]
-        , [
-            'birthday.before_or_equal' => 'You must be at least 18 years old.',
-        ]
-    );
-
-
-        $client = new Client();
+        $client = new User();
         $client->fill($validatedData);
 
 
@@ -72,7 +75,8 @@ class ClientController extends Controller
      */
     public function edit($id)
     {
-        return view('client::edit');
+        $client = User::find($id);
+        return view('dashboard.clients.edit_client', compact('client'));
     }
 
     /**
@@ -81,6 +85,23 @@ class ClientController extends Controller
     public function update(Request $request, $id): RedirectResponse
     {
         //
+        $user = User::findOrFail($id); // Assuming $id contains the ID of the user to be edited
+
+        $validatedData = $request->validate([
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,' . $user->id,
+            'phone_number' => 'required|string|max:255',
+            'birthday' => ['required', 'date', 'before_or_equal:' . now()->subYears(18)->format('Y-m-d')],
+            'gender' => 'required|in:male,female',
+          //  'password' => 'nullable|min:8|confirmed',
+        ], [
+            'birthday.before_or_equal' => 'You must be at least 18 years old.',
+        ]);
+
+        $user->update($validatedData);
+
+        return redirect()->route('client.index')->with('success', 'Client updated successfully!');
     }
 
     /**
@@ -89,5 +110,8 @@ class ClientController extends Controller
     public function destroy($id)
     {
         //
+        $client = User::find($id);
+        $client->delete();
+        return redirect()->route('client.index')->with('success', 'Client deleted successfully');
     }
 }

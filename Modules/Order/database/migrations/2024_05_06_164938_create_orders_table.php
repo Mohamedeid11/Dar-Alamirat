@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->uuid('order_number');
-            $table->foreignId('client_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->unsignedBigInteger('shipping_id');
             $table->timestamps();
             $table->foreign('shipping_id')->references('id')->on('shippings')->onDelete('cascade');
