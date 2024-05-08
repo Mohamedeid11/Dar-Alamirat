@@ -26,7 +26,9 @@ class Product extends Model
         'active',
         'slug',
         'category_id',
-        'brand_id'
+        'brand_id',
+        'discount_type',
+        'discount_value',
     ];
 
     public $translatable = ['title', 'description', 'instructions'];
@@ -78,12 +80,12 @@ class Product extends Model
 
     public function orders()
     {
-        return $this->belongsToMany(Order::class);
+        return $this->b€elongsToMany(Order::class);
     }
 
     public function getThumbnailAttribute()
     {
-        if (isset($this->attributes['thumbnail']) && Storage::disk('public/products/thumbnail')->exists($this->attributes['thumbnail'])){
+        if (isset($this->attributes['thumbnail']) && Storage::disk('public')->exists($this->attributes['thumbnail'])){
             return storage_asset($this->attributes['thumbnail']);
         }else{
             return asset('assets/images/image.png');

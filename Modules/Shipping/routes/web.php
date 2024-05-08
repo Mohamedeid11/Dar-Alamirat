@@ -14,7 +14,7 @@ use Modules\Shipping\Http\Controllers\ShippingController;
 |
 */
 
-Route::group([], function () {
+Route::group(['middleware' => 'admin'], function () {
     Route::resource('shipping', ShippingController::class)->names('shipping');
     Route::post('shipping/status/{shipping}', [ShippingController::class , 'changeStatus'])->name('shipping.status');
 });

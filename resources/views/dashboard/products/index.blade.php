@@ -47,7 +47,8 @@
                                 <tr>
                                     <th class="pt-0 pb-2" width="1%"></th>
                                     <th class="pt-0 pb-2" width="1%">Image</th>
-                                    <th class="pt-0 pb-2" width="40%">Title</th>
+                                    <th class="pt-0 pb-2" width="20%">Title</th>
+                                    <th class="pt-0 pb-2" width="20%">Price</th>
                                     <th class="pt-0 pb-2" width="15%">Quantity</th>
                                     <th class="pt-0 pb-2" width="10%">category</th>
                                     <th class="pt-0 pb-2" width="10">brand</th>
@@ -73,6 +74,13 @@
                                     </td>
                                     <td>
                                         <a href="{{route('product.show' , $product->id)}}" class="text-dark text-decoration-none">{{$product->title}}</a>
+                                    </td>
+                                    <td>
+                                        <ul>
+                                        @foreach($product->variants as $variant)
+                                            <li>{{$variant->variant_name}} - {{$variant->price_with_discount}}</li>
+                                        @endforeach
+                                        </ul>
                                     </td>
                                     <td class="align-middle">{{$product->inventory->count()}} in stock for {{$product->variants->count()}} variants</td>
                                     <td class="align-middle">category</td>

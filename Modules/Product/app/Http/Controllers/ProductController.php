@@ -49,15 +49,24 @@ class ProductController extends Controller
     public function store(StoreProductRequest $request): RedirectResponse
     {
 
-        $product = $this->productService->storeData($request->all());
+        $validatedData = $request->validated();
 
-        // Handle image uploads
+        $product = $this->productService->storeData($validatedData);
+
+        // Handle thumbnail
+        if ($request->hasFile('thumbnail') && $request->file('thumbnail')->isValid()) {
+            $thumbnailPath = $request->file('thumbnail')->store("products/{$product->id}/thumbnail", 'public');
+            $product->update(['thumbnail' => $thumbnailPath]);
+        }
+
+        // Handle images
         if ($request->hasFile('images')) {
             foreach ($request->images as $image) {
-                $path = $image->store('public/products/images');
-                $product->media()->create(['file' => $path]);
+                $imagePath = $image->store("products/{$product->id}/images", 'public');
+                $product->media()->create(['file' => $imagePath]);
             }
         }
+
         return redirect()->route('product.index')->with('success', 'Product created successfully!');
     }
 

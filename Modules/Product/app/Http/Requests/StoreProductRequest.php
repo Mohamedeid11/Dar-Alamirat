@@ -17,8 +17,15 @@ class StoreProductRequest extends FormRequest
             'instructions.*' => 'string',
             'category_id' => 'required|exists:categories,id',
             'brand_id' => 'required|exists:brands,id',
-            'variant.*.price' => 'required|numeric',
-            'variant.*.quantity' => 'required|integer',
+            'thumbnail' => 'required|image',
+            'images.*' => 'image',
+            'variant.*.enabled' => 'required|in:on,off',
+            'variant.*.size' => 'nullable|string',
+            'variant.*.color' => 'nullable|string',
+            'variant.*.price' => 'required|numeric|min:0',
+            'variant.*.quantity' => 'required|integer|min:1',
+            'discount_value' => 'required_with:discount_type|numeric|min:0',
+            'discount_type' => 'required_with:discount_value|in:flat,percent',
         ];
     }
 

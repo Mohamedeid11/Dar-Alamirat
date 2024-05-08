@@ -21,4 +21,30 @@ class Variant extends Model
     {
         return $this->belongsTo(Product::class);
     }
+
+    /**
+     * Calculate the price of the variant after applying the product's discount.
+     */
+    public function getPriceWithDiscountAttribute()
+    {
+        $product = $this->product;
+
+        if (!$product || !$product->discount_value || !$product->discount_type) {
+            return $this->price; // Return the original price if no discount is applicable
+        }
+        $price = $this->price;
+        if ($product->discount_type === 'flat') {
+            $price -= $product->discount_value;
+        } elseif ($product->discount_type === 'percent') {
+            $price -= ($this->price * ($product->discount_value / 100));
+        }
+
+        return max($price, 0); // Ensure the price does not go below zero
+    }
+
+    public function getVariantNameAttribute()
+    {
+        return "{$this->size} -  {$this->color}";
+    }
+
 }

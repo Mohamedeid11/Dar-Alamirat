@@ -21,6 +21,8 @@ return new class extends Migration
             $table->boolean('active')->default(1);
             $table->foreignId('category_id')->constrained('categories')->cascadeOnDelete();
             $table->foreignId('brand_id')->constrained('brands')->cascadeOnDelete();
+            $table->decimal('discount_value', 8, 2)->nullable();
+            $table->enum('discount_type', ['flat', 'percent'])->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
