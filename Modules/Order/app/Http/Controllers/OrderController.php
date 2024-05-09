@@ -2,10 +2,14 @@
 
 namespace Modules\Order\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\RedirectResponse;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Modules\Product\Models\Product;
+use Modules\Product\Models\Variant;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\RedirectResponse;
+use Modules\Shipping\Models\Shipping;
 
 class OrderController extends Controller
 {
@@ -22,7 +26,11 @@ class OrderController extends Controller
      */
     public function create()
     {
-        return view('dashboard.orders.create_order');
+        $products=Product::with(['variants','inventoryItems','inventory'])->get();
+        $clients=User::get();
+        $shippingMethods=Shipping::get();
+       // dd($products);
+        return view('dashboard.orders.create_order',compact('products','clients','shippingMethods'));
     }
 
     /**
@@ -65,4 +73,14 @@ class OrderController extends Controller
     {
         //
     }
+
+
+    public function getVariants(Request $request)
+    {
+        $productId = $request->input('product_id');
+        $variants = Variant::where('product_id', $productId)->get();
+
+        return response()->json($variants);
+    }
+
 }

@@ -181,9 +181,10 @@
 @section('scripts')
     <script src="{{ asset('admin-panel/assets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.js') }}"></script>
     <script>
-        $("#datepicker-autoClose").datepicker({
+        $("#birthday").datepicker({
             todayHighlight: true,
-            autoclose: true
+            autoclose: true,
+            format: 'dd, MM, yyyy',
         });
     </script>
 @endsection

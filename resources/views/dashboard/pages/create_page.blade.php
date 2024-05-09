@@ -10,65 +10,81 @@
 
     <!-- BEGIN #content -->
     <div id="content" class="app-content">
-        <div class="d-flex align-items-center mb-3">
-            <div>
-                <ul class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Pages</li>
-                </ul>
-                <h1 class="page-header mb-0">Pages</h1>
-            </div>
-        </div>
+        <!-- BEGIN breadcrumb -->
+        <ol class="breadcrumb float-xl-end">
+            <li class="breadcrumb-item"><a href="javascript:;">Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="{{route('category.index')}}">Pages</a></li>
+            <li class="breadcrumb-item active">
+                Create Page
+            </li>
+        </ol>
+        <!-- END breadcrumb -->
+        <!-- BEGIN page-header -->
+        <h1 class="page-header">Create Page</h1>
+        <!-- END page-header -->
 
-        <!-- panel -->
-        <div class="panel panel-inverse">
-            <!-- panel heading -->
-            <div class="panel-heading ui-sortable-handle">
-                <h4 class="panel-title">Create Page</h4>
-                <div class="panel-heading-btn">
-                    <a href="javascript:;" class="btn btn-xs btn-icon btn-default" data-toggle="panel-expand"><i class="fa fa-expand"></i></a>
-                    <a href="javascript:;" class="btn btn-xs btn-icon btn-success" data-toggle="panel-reload"><i class="fa fa-redo"></i></a>
-                    <a href="javascript:;" class="btn btn-xs btn-icon btn-warning" data-toggle="panel-collapse"><i class="fa fa-minus"></i></a>
-                    <a href="javascript:;" class="btn btn-xs btn-icon btn-danger" data-toggle="panel-remove"><i class="fa fa-times"></i></a>
-                </div>
-            </div>
-            <!-- ./panel heading -->
+        <!-- BEGIN row -->
+        <div class="row mb-3">
 
-            <!-- panel body -->
-            <div class="panel-body p-0">
-                <form action="{{ route('page.store') }}" method="POST">
-                    @csrf
-                    <div class="row">
-                        @foreach(Config('language') as $key => $lang)
-                        <div class="col-6">
+            <!-- BEGIN col-6 -->
+            <div class="col-xl-8">
 
-                            <label class="form-label mb-3">Page Name In {{ $lang }}</label>
-                                <input class="form-control" type="text" name="name[{{$key}}]"/>
-                            @error('name.'.$key)
-                            <span class="text-danger" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                <!-- panel -->
+                <div class="panel panel-inverse" data-sortable-id="form-stuff-1">
+                    <!-- panel heading -->
+                    <div class="panel-heading ui-sortable-handle">
+                        <h4 class="panel-title">Create Page</h4>
+                        <div class="panel-heading-btn">
+                            <a href="javascript:;" class="btn btn-xs btn-icon btn-default" data-toggle="panel-expand"><i class="fa fa-expand"></i></a>
+                            <a href="javascript:;" class="btn btn-xs btn-icon btn-success" data-toggle="panel-reload"><i class="fa fa-redo"></i></a>
+                            <a href="javascript:;" class="btn btn-xs btn-icon btn-warning" data-toggle="panel-collapse"><i class="fa fa-minus"></i></a>
+                            <a href="javascript:;" class="btn btn-xs btn-icon btn-danger" data-toggle="panel-remove"><i class="fa fa-times"></i></a>
                         </div>
-                    @endforeach
-                        @foreach(Config('language') as $key => $lang)
-                                <div class="col-12">
-                                    <div>
-                                    <label class="form-label">Content In {{ $lang }} : </label>
-                                    <div class="form-control p-0 overflow-hidden">
-                                        <textarea class="textarea form-control wysihtml5" name="content[{{$key}}]" placeholder="Enter text ..." rows="12"></textarea>
-                                    </div>
-                                </div>
-                                    @error('content.'.$key)
-                                    <span class="text-danger" role="alert">
+                    </div>
+                    <!-- ./panel heading -->
+
+                    <!-- panel body -->
+                    <div class="panel-body">
+                        <form action="{{ route('page.store') }}" method="POST">
+                            @csrf
+
+                            <!-- item -->
+                            @foreach(Config('language') as $key => $lang)
+                                <div class="row mb-15px">
+                                    <label class="form-label col-form-label col-md-3">Page Name In {{ $lang }}</label>
+                                    <div class="col-md-9">
+                                        <input class="form-control" type="text" name="name[{{$key}}]"/>
+                                        @error('name.'.$key)
+                                        <span class="text-danger" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
-                                    @enderror
+                                        @enderror
+                                    </div>
                                 </div>
                             @endforeach
-                            <div class="col-12">
-                                <div class="m-3">
-                                    <label class="fs-5 fw-bold form-label mb-3">Priority:</label>
+                            <!-- ./item -->
+
+                            <!-- item -->
+                            @foreach(Config('language') as $key => $lang)
+                                <div class="row mb-15px">
+                                    <label class="form-label col-form-label col-md-12">Content In {{ $lang }} : </label>
+                                    <div class="col-md-12">
+                                        <div class="form-control">
+                                            <textarea class="textarea form-control wysihtml5" name="content[{{$key}}]" placeholder="Enter text ..." rows="12"></textarea>
+                                            @error('content.'.$key)
+                                            <span class="text-danger" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                            <!-- ./item -->
+                            <!-- item -->
+                            <div class="row mb-15px">
+                                <label class="form-label col-form-label col-md-3">Priority:</label>
+                                <div class="col-md-9">
                                     <select class="form-control" name="priority" required>
                                         <option disabled selected>Select Priority</option>
                                         @for ($i = 0; $i <= 10; $i++)
@@ -77,26 +93,31 @@
                                     </select>
                                     @error('priority')
                                     <span class="text-danger" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                     @enderror
                                 </div>
                             </div>
+                            <!-- ./item -->
 
-                        <div class="col-12">
-                            <div class="text-center m-3">
-                                <button type="submit" class="btn btn-primary">
-                                    <span class="indicator-label">Save</span>
-                                </button>
+                            <!-- item -->
+                            <div class="row mb-15px">
+                                <div class="col-md-12">
+                                    <button type="submit" class="btn btn-primary d-block w-100"><i class="fa-regular fa-floppy-disk"></i> Save</button>
+                                </div>
                             </div>
-                        </div>
+                            <!-- ./item -->
+                        </form>
                     </div>
-                </form>
-            </div>
 
-            <!-- ./panel body -->
+                    <!-- ./panel body -->
+                </div>
+                <!-- ./panel -->
+
+            </div>
+            <!-- ./End col -->
         </div>
-        <!-- ./panel -->
+        <!-- ./End Row -->
 
     </div>
     <!-- END #content -->

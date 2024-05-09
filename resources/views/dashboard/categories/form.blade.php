@@ -2,7 +2,7 @@
 
 @section('meta')
     <meta charset="utf-8" />
-    <title>{{__('dashboard.category.edit')}}</title>
+    <title>{{__('dashboard.category.add')}}</title>
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
     <meta content="" name="description" />
     <meta content="" name="author" />
@@ -11,12 +11,18 @@
 @section('customcss')
     <style>
         .custom-file-upload {
-            border: solid;
             justify-content: center;
             align-items: center;
             position: relative;
-            padding: 10px;
             cursor: pointer;
+            border: 1px dashed #495057;
+        }
+        .custom-file-upload .form-control {
+            border:0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            grid-gap: 10px;
         }
 
         .upload-area {
@@ -47,29 +53,36 @@
             display: block;
             justify-content: center;
             align-items: center;
-            width: 200px; /* Width of the preview area */
-            height: 200px; /* Height of the preview area */
+            max-width: 100px;
+            max-height: 100px;
+            /*width: 200px;  Width of the preview area */
+            /*height: 200px;  Height of the preview area */
             overflow: inherit; /* Hide the overflow to maintain the area size */
         }
 
         #imagePreview {
-            max-width: 100%;
-            max-height: 100%;
+            max-width: 100px;
+            max-height: 100px;
+            border-radius: 10px;
+            margin-top: 15px;
             display: none; /* Hide until an image is selected */
         }
 
         .clear-image {
             position: absolute;
-            right: 10px;
-            top: 10px;
-            font-size: 24px;
-            color: #999;
+            right: -10px;
+            top: -10px;
+            font-size: 16px;
+            color: #fff;
             cursor: pointer;
-        }
-
-        /* Styling when user hovers over the upload area */
-        .custom-file-upload:hover .icon-upload::before {
-            color: #333;
+            width: 20px;
+            height: 20px;
+            background: red;
+            border-radius: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
         }
 
     </style>
@@ -93,77 +106,102 @@
         <!-- BEGIN page-header -->
         <h1 class="page-header">{{__('dashboard.categories')}}</h1>
         <!-- END page-header -->
+
         <!-- BEGIN row -->
-        <form action="{{ $action }}" method="POST" enctype="multipart/form-data">
-            @csrf
-            @method($method)
-            <!--begin::Input group-->
-            <div class="fv-row mb-10">
-                <div class="row">
-                    @foreach (Config('language') as $key => $lang)
-                        <div class="col-6 mt-5">
-                            <label class="fs-5 fw-bold form-label mb-5">Name In {{ $lang }} :</label>
-                            <!--end::Label-->
-                            <!--begin::Input-->
-                            <input type="text" class="form-control form-control-solid" value="{{ old('name.'.$key) ?? $category->getTranslation('name',$key)}}" placeholder="{{ 'name-'.$lang }}" name="name[{{ $key}}]" />
-                            @error('name.'.$key)
-                            <span class="text-danger" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-                    @endforeach
-                    <div class="col-6 mt-5">
-                        <label class="fs-5 fw-bold form-label mb-5">priority :</label>
-                        <!--end::Label-->
-                        <!--begin::Input-->
-                        <select class="form-control" name="priority" id="" required>
-                            <option disabled selected>Select Priority</option>
-                            @for ($i = 0; $i <= 10; $i++)
-                                <option value="{{$i}}" @if($category->priority == $i) selected @endif>{{$i}}</option>
-                            @endfor
-                        </select>
-                        @error('priority')
-                        <span class="text-danger" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
-                    <div class="col-12">
-                        <div class="col-6 mt-5">
-                            <div class="custom-file-upload">
-                                <label for="formFile" class="upload-area">
-                                    <div class="icon-upload"> <span class="p-1">Upload Image </span></div>
-                                    <input class="file-input" name="icon" type="file" id="formFile" accept=".png, .jpg, .jpeg ,.svg ,.webp" onchange="previewImage();" />
-                                </label>
-                            </div>
-                            @error('icon')
-                            <span class="text-danger" role="alert">
-                                 <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-                        <div class="col-3 mt-5">
-                            <div class="preview-area">
-                                <img id="imagePreview" src="{{  storage_asset($category->icon) ?? ''}}" alt="Image preview" style="display: {{isset($category->icon) ?'block' : 'none'}};" width="200" height="200">
-                                <div class="clear-image" onclick="clearImage();" style="display: none;">&times;</div>
+        <div class="row mb-3">
+
+            <!-- BEGIN col-6 -->
+            <div class="col-xl-6">
+
+
+                    <!-- BEGIN panel -->
+                    <div class="panel panel-inverse" data-sortable-id="form-stuff-1">
+                        <!-- BEGIN panel-heading -->
+                        <div class="panel-heading">
+                            <h4 class="panel-title">Maintenance Mode</h4>
+                            <div class="panel-heading-btn">
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-default" data-toggle="panel-expand"><i class="fa fa-expand"></i></a>
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-success" data-toggle="panel-reload"><i class="fa fa-redo"></i></a>
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-warning" data-toggle="panel-collapse"><i class="fa fa-minus"></i></a>
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-danger" data-toggle="panel-remove"><i class="fa fa-times"></i></a>
                             </div>
                         </div>
+                        <!-- END panel-heading -->
+
+                        <!-- BEGIN panel-body -->
+                        <div class="panel-body">
+                            <form action="{{ $action }}" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                @method($method)
+                                    <div class="row mb-15px">
+                                        @foreach (Config('language') as $key => $lang)
+                                            <label class="form-label col-form-label col-md-3">Name In {{ $lang }} :</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control form-control-solid" value="{{ old('name.'.$key) ?? $category->getTranslation('name',$key)}}" placeholder="{{ 'name-'.$lang }}" name="name[{{ $key }}]" />
+                                                @error('name.'.$key)
+                                                <span class="text-danger" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                                @enderror
+                                            </div>
+                                        @endforeach
+                                    </div>
+
+                                    <div class="row mb-15px">
+                                        <label class="form-label col-form-label col-md-3">priority :</label>
+                                        <div class="col-sm-9">
+                                            <select class="form-control" name="priority" id="" required>
+                                                <option disabled selected>Select Priority</option>
+                                                @for ($i = 0; $i <= 10; $i++)
+                                                    <option value="{{$i}}" @if($category->priority == $i) selected @endif>{{$i}}</option>
+                                                @endfor
+                                            </select>
+                                            @error('priority')
+                                            <span class="text-danger" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-15px">
+                                        <label class="form-label col-form-label col-md-3">Category image :</label>
+                                        <div class="col-md-9">
+                                            <div class="custom-file-upload">
+                                                <label for="formFile" class="upload-area">
+                                                    <div class="icon-upload form-control"> <span class="p-1">Upload Image </span></div>
+                                                    <input class="file-input" name="icon" type="file" id="formFile" accept=".png, .jpg, .jpeg ,.svg ,.webp" onchange="previewImage();" />
+                                                </label>
+                                            </div>
+                                            @error('icon')
+                                            <span class="text-danger" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
+
+                                            <div class="preview-area">
+                                                <img id="imagePreview" src="{{  storage_asset($category->icon) ?? ''}}" alt="Image preview" style="display: {{isset($category->icon) ?'block' : 'none'}};" width="200" height="200">
+                                                <div class="clear-image" onclick="clearImage();" style="display: none;">&times;</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-15px">
+                                        <div class="col-md-12">
+                                            <button type="submit" class="btn btn-primary d-block w-100"><i class="fa-regular fa-floppy-disk"></i> Save</button>
+                                        </div>
+                                    </div>
+                            </form>
+                        </div>
+                        <!-- END panel-body -->
+
                     </div>
-                </div>
+                    <!-- END panel -->
             </div>
-            <!--end::Input group-->
+            <!-- END col-6 -->
+        </div>
+        <!-- ./row -->
 
-            <!--begin::Actions-->
-            <div class="text-center mt-4">
-                <button type="submit" class="btn btn-primary">
-                    <span class="indicator-label">Save</span>
-                </button>
-            </div>
-            <!--end::Actions-->
-        </form>
-
-        <!-- END row -->
 
     </div>
 
@@ -181,7 +219,7 @@
                 var clearBtn = document.querySelector('.clear-image');
                 imgElement.src = e.target.result;
                 imgElement.style.display = 'block';
-                clearBtn.style.display = 'block';
+                clearBtn.style.display = 'flex';
             };
             reader.readAsDataURL(file);
         }

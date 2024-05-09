@@ -3,6 +3,7 @@
 namespace Modules\Brand\database\seeders;
 
 use Illuminate\Database\Seeder;
+use Modules\Brand\Models\Brand;
 
 class BrandDatabaseSeeder extends Seeder
 {
@@ -11,6 +12,6 @@ class BrandDatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // $this->call([]);
+        Brand::factory()->count(10)->create();
     }
 }

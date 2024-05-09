@@ -6,17 +6,23 @@
     <link href="{{ asset('admin-panel/assets/plugins/bootstrap3-wysihtml5-bower/dist/bootstrap3-wysihtml5.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('admin-panel/assets/plugins/dropzone/dist/min/dropzone.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('admin-panel/assets/plugins/tag-it/css/jquery.tagit.css') }}" rel="stylesheet" />
-    <link href="{{asset('assets/plugins/select2/dist/css/select2.min.css')}}" rel="stylesheet" />
+    <link href="{{ asset('admin-panel/assets/plugins/select2/dist/css/select2.min.css') }}" rel="stylesheet" />
 
     <!-- ================== END page-css ================== -->
     <style>
         .custom-file-upload {
-            border: solid;
             justify-content: center;
             align-items: center;
             position: relative;
-            padding: 10px;
             cursor: pointer;
+            border: 1px dashed #495057;
+        }
+        .custom-file-upload .form-control {
+            border:0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            grid-gap: 10px;
         }
 
         .upload-area {
@@ -47,29 +53,36 @@
             display: block;
             justify-content: center;
             align-items: center;
-            width: 200px; /* Width of the preview area */
-            height: 200px; /* Height of the preview area */
+            max-width: 100px;
+            max-height: 100px;
+            /*width: 200px;  Width of the preview area */
+            /*height: 200px;  Height of the preview area */
             overflow: inherit; /* Hide the overflow to maintain the area size */
         }
 
         #imagePreview {
-            max-width: 100%;
-            max-height: 100%;
+            max-width: 100px;
+            max-height: 100px;
+            border-radius: 10px;
+            margin-top: 15px;
             display: none; /* Hide until an image is selected */
         }
 
         .clear-image {
             position: absolute;
-            right: 10px;
-            top: 10px;
-            font-size: 24px;
-            color: #999;
+            right: -10px;
+            top: -10px;
+            font-size: 16px;
+            color: #fff;
             cursor: pointer;
-        }
-
-        /* Styling when user hovers over the upload area */
-        .custom-file-upload:hover .icon-upload::before {
-            color: #333;
+            width: 20px;
+            height: 20px;
+            background: red;
+            border-radius: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
         }
 
     </style>
@@ -96,9 +109,11 @@
                 </ol>
             </div>
         </div>
-        <form action="{{ $action }}" method="POST" enctype="multipart/form-data">
+
+        <form action="{{ $action }}" method="POST" enctype="multipart/form-data" id="product-dropzone">
             @csrf
             @method($method)
+
             <div class="row">
                 <div class="col-lg-8">
                     <div class="card border-0 mb-4">
@@ -194,7 +209,7 @@
                             <div class="col-6 mt-5">
                                 <div class="custom-file-upload">
                                     <label for="formFile" class="upload-area">
-                                        <div class="icon-upload"> <span class="p-1">Upload Thumbnail </span></div>
+                                        <div class="icon-upload form-control"> <span class="p-1">Upload Thumbnail </span></div>
                                         <input class="file-input" name="thumbnail" type="file" id="formFile" accept=".png, .jpg, .jpeg ,.svg ,.webp" onchange="previewImage();" />
                                     </label>
                                 </div>
@@ -203,17 +218,26 @@
                                      <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
-                            </div>
-                            <div class="col-3 mt-5">
                                 <div class="preview-area">
-                                    <img id="imagePreview" src="{{  $product->thumbnail ?? ''}}" alt="Image preview" style="display: {{isset($category->icon) ?'block' : 'none'}};" width="200" height="200">
-                                    <div class="clear-image" onclick="clearImage();" style="display: none;">&times;</div>
-                                </div>
+                                <img id="imagePreview" src="{{  $product->thumbnail ?? ''}}" alt="Image preview" style="display: {{isset($category->icon) ?'block' : 'none'}};" width="200" height="200">
+                                <div class="clear-image" onclick="clearImage();" style="display: none;">x</div>
                             </div>
+                            </div>
+
                         </div>
                         <div class="card-body">
-                            <div id="dropzone">
+                            {{--<div id="dropzone">
                                 <input type="file" name="images[]" id="dropzon" multiple>
+                            </div>--}}
+                            <div id="dropzone">
+                                <div action="/upload" class="dropzone needsclick" id="my-awesome-upload">
+                                    <div class="dz-message needsclick">
+                                        Drop files <b>here</b> or <b>click</b> to upload.<br />
+                                        <span class="dz-note needsclick">
+        (This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)
+      </span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -345,7 +369,7 @@
     <script src="{{ asset('admin-panel/assets/plugins/jquery-migrate/dist/jquery-migrate.min.js') }}"></script>
     <script src="{{ asset('admin-panel/assets/plugins/tag-it/js/tag-it.min.js') }}"></script>
     <script src="{{ asset('admin-panel/assets/js/demo/product-details.demo.js') }}"></script>
-    <script src="{{asset('assets/plugins/select2/dist/js/select2.min.js')}}"></script>
+    <script src="{{ asset('admin-panel/assets/plugins/select2/dist/js/select2.min.js') }}"></script>
 
     <!-- ================== END page-js ================== -->
     <!-- script -->
@@ -408,7 +432,7 @@
                 var clearBtn = document.querySelector('.clear-image');
                 imgElement.src = e.target.result;
                 imgElement.style.display = 'block';
-                clearBtn.style.display = 'block';
+                clearBtn.style.display = 'flex';
             };
             reader.readAsDataURL(file);
         }
@@ -423,6 +447,8 @@
             clearBtn.style.display = 'none';
         }
     </script>
+
+   
 @endsection
 <!-- toggler -->
 

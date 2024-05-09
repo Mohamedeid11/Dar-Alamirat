@@ -1,8 +1,10 @@
 <?php
 
-namespace Modules\Admin\database\seeders;
+namespace Modules\Category\database\seeders;
 
 use Illuminate\Database\Seeder;
+use Modules\Category\Models\Category;
+use Modules\Category\database\seeders\CategoryDatabaseSeeder;
 
 class CategorySeeder extends Seeder
 {
@@ -11,6 +13,6 @@ class CategorySeeder extends Seeder
      */
     public function run(): void
     {
-        // $this->call([]);
+        Category::factory()->count(10)->create();
     }
 }

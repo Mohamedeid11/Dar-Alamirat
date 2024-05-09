@@ -10,105 +10,181 @@
 
     <!-- BEGIN #content -->
     <div id="content" class="app-content">
-        <div class="d-flex align-items-center mb-3">
-            <div>
-                <ul class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item"><a href="#">Extra</a></li>
-                    <li class="breadcrumb-item active">Orders</li>
-                </ul>
-                <h1 class="page-header mb-0">Orders</h1>
-            </div>
-        </div>
 
-        <!-- panel -->
-        <div class="panel panel-inverse">
-            <!-- panel heading -->
-            <div class="panel-heading ui-sortable-handle">
-                <h4 class="panel-title">Create Order</h4>
-                <div class="panel-heading-btn">
-                    <a href="javascript:;" class="btn btn-xs btn-icon btn-default" data-toggle="panel-expand"><i class="fa fa-expand"></i></a>
-                    <a href="javascript:;" class="btn btn-xs btn-icon btn-success" data-toggle="panel-reload"><i class="fa fa-redo"></i></a>
-                    <a href="javascript:;" class="btn btn-xs btn-icon btn-warning" data-toggle="panel-collapse"><i class="fa fa-minus"></i></a>
-                    <a href="javascript:;" class="btn btn-xs btn-icon btn-danger" data-toggle="panel-remove"><i class="fa fa-times"></i></a>
+        <!-- BEGIN breadcrumb -->
+        <ol class="breadcrumb float-xl-end">
+            <li class="breadcrumb-item"><a href="">Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="">Orders</a></li>
+            <li class="breadcrumb-item active">
+                Create Order
+            </li>
+        </ol>
+        <!-- END breadcrumb -->
+
+        <!-- BEGIN page-header -->
+        <h1 class="page-header">Create Order</h1>
+        <!-- END page-header -->
+
+        <!-- BEGIN col-6 -->
+        <div class="col-xl-6">
+            <!-- panel -->
+            <div class="panel panel-inverse">
+                <!-- panel heading -->
+                <div class="panel-heading ui-sortable-handle">
+                    <h4 class="panel-title">Create Order</h4>
+                    <div class="panel-heading-btn">
+                        <a href="javascript:;" class="btn btn-xs btn-icon btn-default" data-toggle="panel-expand"><i class="fa fa-expand"></i></a>
+                        <a href="javascript:;" class="btn btn-xs btn-icon btn-success" data-toggle="panel-reload"><i class="fa fa-redo"></i></a>
+                        <a href="javascript:;" class="btn btn-xs btn-icon btn-warning" data-toggle="panel-collapse"><i class="fa fa-minus"></i></a>
+                        <a href="javascript:;" class="btn btn-xs btn-icon btn-danger" data-toggle="panel-remove"><i class="fa fa-times"></i></a>
+                    </div>
                 </div>
-            </div>
-            <!-- ./panel heading -->
+                <!-- ./panel heading -->
 
-            <!-- panel body -->
-            <div class="panel-body p-0">
-                <form action="">
-                    <div class="row">
-                        <div class="col-4">
-                            <div class="m-3">
-                                <label class="form-label">Order Number</label>
-                                <input class="form-control" type="text" />
+                <!-- panel body -->
+                <div class="panel-body">
+                    <!-- FORM -->
+                    <form action="">
+
+                        <!-- item -->
+                        <div class="row mb-15px">
+                            <label class="form-label col-form-label col-md-3">Order Number</label>
+                            <div class="col-md-9">
+                                <input class="form-control" type="text" name='order_number' />
                             </div>
                         </div>
-                        <div class="col-4">
-                            <div class="m-3">
-                                <label class="form-label">Choose a Product</label>
-                                <select class="multiple-select2 form-control" multiple>
-                                    <optgroup label="body-care">
-                                        <option value="AK">Spray</option>
-                                        <option value="HI">loutions</option>
-                                    </optgroup>
-                                    <optgroup label="skin-care">
-                                        <option value="AK">Spray</option>
-                                        <option value="HI">loutions</option>
-                                    </optgroup>
-                                </select>
-                            </div>
-                        </div>
-                        {{-- <div class="col-4">
-                            <div class="m-3">
-                                <label class="form-label">Choose a Date</label>
+                        <!-- ./item -->
+
+                        <!-- item -->
+                        <div class="row mb-15px">
+                            <label class="form-label col-form-label col-md-3">Created Date</label>
+                            <div class="col-md-9">
                                 <input type="text" class="form-control" id="datepicker-autoClose" />
                             </div>
-                        </div> --}}
-                        <div class="col-4">
-                            <div class="m-3">
-                                <label class="form-label">Choose a Customer</label>
-                                <select class="multiple-select2 form-control" multiple>
-                                    <optgroup label="customer-name">
-                                        <option value="AK">haitham abdallah</option>
-                                        <option value="HI">mohamed zaki</option>
-                                        <option value="AK">Ahmed awad</option>
-                                        <option value="HI">Amr dalny</option>
-                                    </optgroup>
-                                </select>
-                            </div>
                         </div>
-                        <div class="col-4">
-                            <div class="m-3">
-                                <label class="form-label">Shipping method</label>
-                                <select class="form-select">
-                                    <option>Fast Shipping</option>
-                                    <option>Local Shipping</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-4">
-                            <div class="m-3">
-                                <label class="form-label">Total Amount</label>
-                                <br>
-                                <label class="form-label mt-3">$398.00</label>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="text-center m-4">
-                                <button type="submit" class="btn btn-primary">
-                                    <span class="indicator-label">Save</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <!-- ./panel body -->
-        </div>
-        <!-- ./panel -->
+                        <!-- ./item -->
 
+                        <!-- item -->
+                        <div class="row mb-15px">
+                            <label class="form-label col-form-label col-md-3">Choose a Product</label>
+                            <div class="col-md-9">
+                                <select id="product-select" class="form-control" name="product_id">
+                                    <option value="">Select a Product</option>
+                                    @foreach($products as $product)
+                                        <option value="{{ $product->id }}" ><strong>{{ $product->title }}</strong> </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <!-- ./item -->
+
+                        <!-- item -->
+                        <div class="row mb-15px">
+                            <label class="form-label col-form-label col-md-3">Choose a Variant</label>
+                            <div class="col-md-9">
+                                <select id="variant-select" class="form-control" name="variant_id">
+                                    <!-- Variants will be dynamically populated here -->
+                                </select>
+                            </div>
+                        </div>
+                        <!-- ./item -->
+
+                        <!-- item -->
+                        <div class="row mb-15px">
+                            <label class="form-label col-form-label col-md-3">Quantity</label>
+                            <div class="col-md-9">
+                                <input type="number" class="form-control amount-input" name="quantity" value="" min="1">
+                            </div>
+                        </div>
+                        <!-- ./item -->
+
+                        <!-- item -->
+                        <div class="row mb-15px">
+                            <label class="form-label col-form-label col-md-3">Choose a Customer</label>
+                            <div class="col-md-9">
+                                <select id="customer-select" class="form-control" name="user_id">
+                                    <option value="">Select a Customer</option>
+                                    @foreach($clients as $client)
+                                        <option value="{{ $client->id }}">{{ $client->full_name }}</option>
+                                    @endforeach
+
+                                </select>
+                            </div>
+                        </div>
+                        <!-- ./item -->
+
+                        <!-- item -->
+                        <div class="row mb-15px">
+                            <label class="form-label col-form-label col-md-3">Shipping method</label>
+                            <div class="col-md-9">
+                                <select class="form-select" name="shipping_id">
+                                    <option value="">Select a Shipping</option>
+                                    @foreach($shippingMethods as $shippingMethod)
+                                        <option>{{ $shippingMethod->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <!-- ./item -->
+
+                        <!-- item -->
+                        <div class="row mb-15px">
+                            <label class="form-label col-form-label col-md-3">Payment method</label>
+                            <div class="col-md-9">
+                                <select class="form-select" name="">
+
+                                </select>
+                            </div>
+                        </div>
+                        <!-- ./item -->
+
+                        <!-- item -->
+                        <div class="row mb-15px">
+                            <label class="form-label col-form-label col-md-3">Payment Status</label>
+                            <div class="col-md-9">
+                                <select class="form-select" name="">
+
+                                </select>
+                            </div>
+                        </div>
+                        <!-- ./item -->
+
+                        <!-- item -->
+                        <div class="row mb-15px">
+                            <label class="form-label col-form-label col-md-3">Fulfillment status</label>
+                            <div class="col-md-9">
+                                <select class="form-select" name="">
+
+                                </select>
+                            </div>
+                        </div>
+                        <!-- ./item -->
+
+                        <!-- item -->
+                        <div class="row mb-15px">
+                            <label class="form-label col-form-label col-md-3">Total</label>
+                            <div class="col-md-9">
+                                <p class="form-control text-success">$398.00</p>
+                            </div>
+                        </div>
+                        <!-- ./item -->
+
+                        <!-- item -->
+                        <div class="row mb-15px">
+                            <div class="col-md-12">
+                                <button type="submit" class="btn btn-primary d-block w-100"><i class="fa-regular fa-floppy-disk"></i> Save</button>
+                            </div>
+                        </div>
+                        <!-- ./item -->
+
+                    </form>
+                    <!-- ./FORM -->
+                </div>
+                <!-- ./panel body -->
+            </div>
+            <!-- ./panel -->
+        </div>
+        <!-- ./END col-6 -->
     </div>
     <!-- END #content -->
 
@@ -124,8 +200,84 @@
 
         $("#datepicker-autoClose").datepicker({
             todayHighlight: true,
-            autoclose: true
+            autoclose: true,
+            format: 'D, dd, MM, yyyy',
         });
 
     </script>
+    {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#product-select').change(function () {
+                var productId = $(this).val();
+
+                $.ajax({
+                    url: '{{ route('get.variants') }}',
+                    type: 'GET',
+                    dataType: 'json',
+                    data: {
+                        product_id: productId
+                    },
+                    success: function (response) {
+                        // Clear previous options
+                        $('#variant-select').empty();
+
+                        // Append new options
+                        $.each(response, function (key, value) {
+                            $('#variant-select').append('<option value="' + value.id + '">' + value.color + ' - ' + value.size + '</option>');
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+{{-- <script type="text/javascript">
+    $(document).ready(function () {
+        // Add another product
+        $('.add-product').click(function () {
+            var productClone = $('.product-select').first().clone(); // Clone the product selection
+            var variantClone = $('.variant-select').first().clone(); // Clone the variant selection
+            var amountClone = $('.amount-input').first().clone(); // Clone the amount input
+
+            // Clear selected values in the cloned elements
+            variantClone.val('');
+            amountClone.val(1);
+
+            // Append the cloned elements to the form
+            $('.product-select').last().after(productClone);
+            $('.variant-select').last().after(variantClone);
+            $('.amount-input').last().after(amountClone);
+        });
+
+        // AJAX call to fetch variants based on product selection
+$(document).on('change', '.product-select', function () {
+    var productId = $(this).val();
+    var variantSelect = $(this).closest('.col-4').next().find('.variant-select');
+
+    // Make AJAX call to fetch variants based on productId and update variant dropdown
+    $.ajax({
+        url: '/get-variants', // Replace with your route to fetch variants
+        type: 'GET',
+        dataType: 'json',
+        data: {
+            product_id: productId
+        },
+        success: function (response) {
+            // Clear existing options
+            variantSelect.empty();
+
+            // Append new options
+            $.each(response, function (key, value) {
+                variantSelect.append('<option value="' + value.id + '">' + value.name + '</option>');
+            });
+        },
+        error: function (xhr, status, error) {
+            console.error(xhr.responseText);
+        }
+    });
+});
+
+    });
+</script> --}}
 @endsection

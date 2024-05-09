@@ -57,6 +57,7 @@ return [
         'status' => 'Status',
         'add' => 'Add Category',
         'edit' => 'Edit Category',
+        
         'delete' => 'Delete Category',
     ],
     'brands' => 'Brands',
