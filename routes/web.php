@@ -1,22 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Front\HomeController;
 
-Route::get('/', function () {
-    return view('front.index');
-});
-
-//Route::get('/category', function () {
-//    return view('dashboard.categories.categories');
-//})->name('category.index');
-
-//Route::get('/category/create', function () {
-//    return view('dashboard.categories.create_category');
-//})->name('category.create');
-//
-//Route::get('/category/edit', function () {
-//    return view('dashboard.categories.edit_category');
-//})->name('category.edit');
 
 /************************************ clients ****************************/
 
@@ -112,3 +98,24 @@ Route::get('/reports/edit', function () {
 Route::get('/settings', function () {
     return view('dashboard.settings.general-settings');
 })->name('settings.general-settings');
+
+
+
+/************************************ Front Routs ****************************/
+
+Route::get('/' , [HomeController::class , 'index'])->name('index');
+
+Route::get('/category' , function (){
+    return view('themes.theme1.category');
+})->name('front.category');
+Route::get('/cart-empty', function (){
+    return view('themes.theme1.cart-empty');
+})->name('cart-empty');
+
+Route::get('/offers', function (){
+    return view('themes.theme1.offers');
+})->name('offers');
+
+Route::get('/brands', function (){
+    return view('themes.theme1.brands');
+})->name('brands');
