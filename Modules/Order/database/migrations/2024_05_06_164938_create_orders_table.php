@@ -1,8 +1,10 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+use Modules\Order\Enums\OrderStatus;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+use Modules\Order\Enums\PaymentStatus;
 
 return new class extends Migration
 {
@@ -15,9 +17,11 @@ return new class extends Migration
             $table->id();
             $table->uuid('order_number');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->unsignedBigInteger('shipping_id');
+            $table->foreignId('shipping_id')->constrained()->onDelete('cascade');
+            $table->enum('payment_status', PaymentStatus::getValues())->default(PaymentStatus::PENDING);
+            $table->enum('status', OrderStatus::getValues())->default(OrderStatus::PENDING);
             $table->timestamps();
-            $table->foreign('shipping_id')->references('id')->on('shippings')->onDelete('cascade');
+
 
 
         });

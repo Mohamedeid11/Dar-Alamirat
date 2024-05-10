@@ -44,24 +44,28 @@
                 <!-- panel body -->
                 <div class="panel-body">
                     <!-- FORM -->
-                    <form action="">
-
+                    <form action="{{ route('order.store') }}" method="POST">
+                    @csrf
+                       @method('POST')
                         <!-- item -->
-                        <div class="row mb-15px">
+                        {{-- <div class="row mb-15px">
                             <label class="form-label col-form-label col-md-3">Order Number</label>
                             <div class="col-md-9">
-                                <input class="form-control" type="text" name='order_number' />
+                                <input class="form-control" type="number" name='order_number' />
+                                @error('order_number')
+                                <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
-                        </div>
+                        </div> --}}
                         <!-- ./item -->
 
                         <!-- item -->
-                        <div class="row mb-15px">
+                        {{-- <div class="row mb-15px">
                             <label class="form-label col-form-label col-md-3">Created Date</label>
                             <div class="col-md-9">
                                 <input type="text" class="form-control" id="datepicker-autoClose" />
                             </div>
-                        </div>
+                        </div> --}}
                         <!-- ./item -->
 
                         <!-- item -->
@@ -74,6 +78,9 @@
                                         <option value="{{ $product->id }}" ><strong>{{ $product->title }}</strong> </option>
                                     @endforeach
                                 </select>
+                                @error('product_id')
+                                <div class="text-danger">{{ $message }}</div>
+                              @enderror
                             </div>
                         </div>
                         <!-- ./item -->
@@ -94,6 +101,9 @@
                             <label class="form-label col-form-label col-md-3">Quantity</label>
                             <div class="col-md-9">
                                 <input type="number" class="form-control amount-input" name="quantity" value="" min="1">
+                                @error('quantity')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                             </div>
                         </div>
                         <!-- ./item -->
@@ -109,6 +119,9 @@
                                     @endforeach
 
                                 </select>
+                                @error('user_id')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                             </div>
                         </div>
                         <!-- ./item -->
@@ -120,53 +133,56 @@
                                 <select class="form-select" name="shipping_id">
                                     <option value="">Select a Shipping</option>
                                     @foreach($shippingMethods as $shippingMethod)
-                                        <option>{{ $shippingMethod->name }}</option>
+                                        <option value="{{ $shippingMethod->id }}">{{ $shippingMethod->name }}</option>
                                     @endforeach
                                 </select>
+                                @error('shipping_id')
+                       <div class="text-danger">{{ $message }}</div>
+                        @enderror
                             </div>
                         </div>
                         <!-- ./item -->
 
                         <!-- item -->
-                        <div class="row mb-15px">
+                        {{-- <div class="row mb-15px">
                             <label class="form-label col-form-label col-md-3">Payment method</label>
                             <div class="col-md-9">
                                 <select class="form-select" name="">
 
                                 </select>
                             </div>
-                        </div>
+                        </div> --}}
                         <!-- ./item -->
 
                         <!-- item -->
-                        <div class="row mb-15px">
+                        {{-- <div class="row mb-15px">
                             <label class="form-label col-form-label col-md-3">Payment Status</label>
                             <div class="col-md-9">
                                 <select class="form-select" name="">
 
                                 </select>
                             </div>
-                        </div>
+                        </div> --}}
                         <!-- ./item -->
 
                         <!-- item -->
-                        <div class="row mb-15px">
+                        {{-- <div class="row mb-15px">
                             <label class="form-label col-form-label col-md-3">Fulfillment status</label>
                             <div class="col-md-9">
                                 <select class="form-select" name="">
 
                                 </select>
                             </div>
-                        </div>
+                        </div> --}}
                         <!-- ./item -->
 
                         <!-- item -->
-                        <div class="row mb-15px">
+                        {{-- <div class="row mb-15px">
                             <label class="form-label col-form-label col-md-3">Total</label>
                             <div class="col-md-9">
                                 <p class="form-control text-success">$398.00</p>
                             </div>
-                        </div>
+                        </div> --}}
                         <!-- ./item -->
 
                         <!-- item -->
