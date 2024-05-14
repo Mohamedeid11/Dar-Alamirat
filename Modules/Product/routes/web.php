@@ -16,5 +16,4 @@ use Modules\Product\Http\Controllers\ProductController;
 
 Route::group(['middleware' => 'admin'], function () {
     Route::resource('product', ProductController::class)->names('product');
-    Route::post('toggleChoice', [ProductController::class , 'toggleChoice'])->name('product.toggleChoice');
 });
