@@ -63,8 +63,7 @@
             overflow: inherit; /* Hide the overflow to maintain the area size */
         }
 
-        #imagePreview,
-        #bannerImagePreview {
+        #imagePreview {
             max-width: 100px;
             max-height: 100px;
             border-radius: 10px;
@@ -148,18 +147,36 @@
 
                     <!-- BEGIN panel-body -->
                     <div class="panel-body">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+
                         <form action="{{ $action }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method($method)
+
+                            <div class="row mb-15px">
+                                <label class="form-label col-form-label col-md-3">Category Type :</label>
+                                <div class="col-sm-9">
+                                    <select class="default-select2 form-control" name="type" id="categoryType" required>
+                                        <option selected disabled> Select Type </option>
+                                        <option value="default"> Default </option>
+                                        <option value="banner"> Banner </option>
+                                    </select>
+                                </div>
+                            </div>
+
                             @foreach (Config('language') as $key => $lang)
-                                <div class="row mb-15px">
+                                <div class="row mb-15px categoryDetails" style="display: none;">
                                     <label class="form-label col-form-label col-md-3">Name In {{ $lang }} :</label>
                                     <div class="col-sm-9">
                                         <input type="text" class="form-control form-control-solid" value="{{ old('name.'.$key) ?? $category->getTranslation('name',$key)}}" placeholder="{{ 'name-'.$lang }}" name="name[{{ $key }}]" />
                                         @error('name.'.$key)
-                                        <span class="text-danger" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
+                                            <span class="text-danger" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
                                         @enderror
                                     </div>
                                 </div>
@@ -182,7 +199,7 @@
                                 </div>
                             </div>
 
-                            <div class="row mb-15px">
+                            <div class="row mb-15px categoryDetails" style="display: none;">
                                 <label class="form-label col-form-label col-md-3">Category image :</label>
                                 <div class="col-md-9">
                                     <div class="custom-file-upload">
@@ -204,24 +221,13 @@
                                 </div>
                             </div>
 
-                            <div class="row mb-15px">
-                                <label class="form-label col-form-label col-md-3">Category Type :</label>
-                                <div class="col-sm-9">
-                                    <select class="default-select2 form-control" name="type" required>
-                                        <option value="default"> Default </option>
-                                        <option value="banner"> Banner </option>
-                                    </select>
-                                </div>
-                            </div>
-
-
-                            <div class="row mb-15px">
+                            <div class="row mb-15px" id="bannerImagesRow" style="display: none;">
                                 <label class="form-label col-form-label col-md-3">Banner Images </label>
                                 <div class="col-sm-9">
                                     <div class="custom-file-upload">
                                         <label for="formFile" class="upload-area">
                                             <div class="icon-upload form-control"> <span class="p-1">Upload Banner Images </span></div>
-                                            <input class="file-input" name="banner_images" type="file" id="formFile" accept=".png, .jpg, .jpeg ,.svg ,.webp" multiple />
+                                            <input class="file-input" name="banner_images[]" type="file" accept=".png, .jpg, .jpeg ,.svg ,.webp" multiple />
                                         </label>
                                     </div>
                                     @error('icon')
@@ -231,7 +237,6 @@
                                     @enderror
                                 </div>
                             </div>
-
 
                             <div class="row mb-15px">
                                 <div class="col-md-12">
@@ -283,29 +288,27 @@
     </script>
 
     <script>
-        function previewImage() {
-            var file = document.getElementById('formFile').files[0];
-            var reader = new FileReader();
-            reader.onload = function(e) {
-                var imgElement = document.getElementById('imagePreview');
-                var clearBtn = document.querySelector('.clear-image');
-                imgElement.src = e.target.result;
-                imgElement.style.display = 'block';
-                clearBtn.style.display = 'flex';
-            };
-            reader.readAsDataURL(file);
-        }
+        $(document).ready(function() {
+            $('#categoryType').change(function() {
+                var selectedType = $(this).val();
+                if (selectedType === 'banner') {
+                    $('#bannerImagesRow').show();
+                } else {
+                    $('#bannerImagesRow').hide();
+                }
+            });
+        });
 
-        function clearImage() {
-            var fileInput = document.getElementById('formFile');
-            var imgElement = document.getElementById('imagePreview');
-            var clearBtn = document.querySelector('.clear-image');
-            fileInput.value = ''; // Clear the file input
-            imgElement.src = '';
-            imgElement.style.display = 'none';
-            clearBtn.style.display = 'none';
-        }
+        $(document).ready(function() {
+            $('#categoryType').change(function() {
+                var selectedType = $(this).val();
+                if (selectedType === 'default') {
+                    $('.categoryDetails').show();
+                } else {
+                    $('.categoryDetails').hide();
+                }
+            });
+        });
     </script>
-
 
 @endsection
