@@ -14,8 +14,8 @@ class HomeController extends Controller
     {
 //        $categories = Category::active()->limit(3)->get();
 
-        $normalCategories = Category::where('type', 'default')->get();
-        $barCategories = Category::where('type', 'banner')->get();
+        $normalCategories = Category::where('type', 'default')->orderBy('priority', 'asc')->get();
+        $barCategories = Category::where('type', 'banner')->orderBy('priority', 'asc')->get();
 
         $categories = collect();
         $maxCount = max($normalCategories->count(), $barCategories->count());
