@@ -74,32 +74,32 @@
                                     <td width="1%" class="fw-bold text-dark">{{ $loop->iteration }}</td>
 
                                     <td width="1%" class="with-img">
-                                        @foreach($category->banners as $banner)
-                                            <td>
-                                                <img src="{{storage_asset($banner->image)}}" class="rounded h-30px my-n1 mx-n1" />
-                                            </td>
+                                    @foreach($category->banners as $banner)
+                                        <td>
+                                            <img src="{{storage_asset($banner->image)}}" class="rounded h-30px my-n1 mx-n1" />
+                                        </td>
                                         @endforeach
-                                    </td>
-                                    <td>{{$category->priority}}</td>
-                                    {{-- <td>{{$category->status}}</td> --}}
-                                    <td>
-                                        <input type="checkbox" class="switch-status" data-url="{{ route('category.status' , $category->id) }}" @if($category->status) checked @endif/>
-                                    </td>
-                                    <td>{{$category->created_at->format('Y-m-d')}}</td>
-                                    <td nowrap="">
-                                        @adminCan('categories.edit')
-                                        <a href="{{route('category.edit' , $category->id)}}" class="btn btn-sm btn-primary"> <i class="fa-regular fa-pen-to-square"></i> {{__('dashboard.category.edit')}}</a>
-                                        @endadminCan
-                                    </td>
-                                    <td nowrap="">
-                                        @adminCan('categories.delete')
-                                        <form id="deleteForm{{$category->id}}" action="{{ route('category.destroy', $category->id) }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <a class="btn delete-btn btn-danger" data-id="{{$category->id}}"><i class="fa-solid fa-trash-can"></i> {{__('dashboard.category.delete')}}</a>
-                                        </form>
-                                        @endadminCan
-                                    </td>
+                                        </td>
+                                        <td>{{$category->priority}}</td>
+                                        {{-- <td>{{$category->status}}</td> --}}
+                                        <td>
+                                            <input type="checkbox" class="switch-status" data-url="{{ route('category.status' , $category->id) }}" @if($category->status) checked @endif/>
+                                        </td>
+                                        <td>{{$category->created_at->format('Y-m-d')}}</td>
+                                        <td nowrap="">
+                                            @adminCan('categories.edit')
+                                            <a href="{{route('category.edit' , $category->id)}}" class="btn btn-sm btn-primary"> <i class="fa-regular fa-pen-to-square"></i> {{__('dashboard.category.edit')}}</a>
+                                            @endadminCan
+                                        </td>
+                                        <td nowrap="">
+                                            @adminCan('categories.delete')
+                                            <form id="deleteForm{{$category->id}}" action="{{ route('category.destroy', $category->id) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <a class="btn delete-btn btn-danger" data-id="{{$category->id}}"><i class="fa-solid fa-trash-can"></i> {{__('dashboard.category.delete')}}</a>
+                                            </form>
+                                            @endadminCan
+                                        </td>
                                 </tr>
                             @endforeach
                             </tbody>

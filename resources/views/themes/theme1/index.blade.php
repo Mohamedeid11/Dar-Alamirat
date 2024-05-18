@@ -1,7 +1,7 @@
 @extends('themes.theme1.layouts.app')
 
 @section('content')
-{{--    @include('themes.theme1.index-layouts.categoryTabs')--}}
+    {{--    @include('themes.theme1.index-layouts.categoryTabs')--}}
     @foreach ($categories as $category)
         @if ($category->type === 'default')
             <section class="s-block">
@@ -124,6 +124,4 @@
             @endforeach
         @endif
     @endforeach
-
-
 @endsection

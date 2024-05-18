@@ -133,14 +133,14 @@
                 </div>
             </div>
 
-{{--            <div class="menu-item {{ activeLink('category') }}">--}}
-{{--                <a href="{{route('category.index')}}" class="menu-link">--}}
-{{--                    <div class="menu-icon">--}}
-{{--                        <i class="fa-solid fa-sitemap"></i>--}}
-{{--                    </div>--}}
-{{--                    <div class="menu-text">{{__('dashboard.categories')}}</div>--}}
-{{--                </a>--}}
-{{--            </div>--}}
+            {{--            <div class="menu-item {{ activeLink('category') }}">--}}
+            {{--                <a href="{{route('category.index')}}" class="menu-link">--}}
+            {{--                    <div class="menu-icon">--}}
+            {{--                        <i class="fa-solid fa-sitemap"></i>--}}
+            {{--                    </div>--}}
+            {{--                    <div class="menu-text">{{__('dashboard.categories')}}</div>--}}
+            {{--                </a>--}}
+            {{--            </div>--}}
             <!-- ./item -->
             <!-- item -->
             <div class="menu-item {{ activeLink('brand') }}">
@@ -206,15 +206,15 @@
                 </a>
             </div> --}}
             <!-- ./item -->
-             <!-- item -->
-             {{-- <div class="menu-item">
-                <a href="{{ route('announcement.index') }}" class="menu-link">
-                    <div class="menu-icon">
-                        <i class="fa-solid fa-gear"></i>
-                    </div>
-                    <div class="menu-text">Announcement</div>
-                </a>
-            </div> --}}
+            <!-- item -->
+            {{-- <div class="menu-item">
+               <a href="{{ route('announcement.index') }}" class="menu-link">
+                   <div class="menu-icon">
+                       <i class="fa-solid fa-gear"></i>
+                   </div>
+                   <div class="menu-text">Announcement</div>
+               </a>
+           </div> --}}
             <!-- ./item -->
 
 

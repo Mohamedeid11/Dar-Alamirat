@@ -174,7 +174,7 @@
                                     <div class="col-sm-9">
                                         <input type="text" class="form-control form-control-solid" value="{{ old('name.'.$key) ?? $category->getTranslation('name',$key)}}" placeholder="{{ 'name-'.$lang }}" name="name[{{ $key }}]" />
                                         @error('name.'.$key)
-                                            <span class="text-danger" role="alert">
+                                        <span class="text-danger" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
@@ -209,7 +209,7 @@
                                         </label>
                                     </div>
                                     @error('icon')
-                                        <span class="text-danger" role="alert">
+                                    <span class="text-danger" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
