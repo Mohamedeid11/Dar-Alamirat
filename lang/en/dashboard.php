@@ -57,7 +57,17 @@ return [
         'status' => 'Status',
         'add' => 'Add Category',
         'edit' => 'Edit Category',
-        
+
+        'delete' => 'Delete Category',
+    ],
+    'banners' => 'Banners',
+    'banner' => [
+        'name' => 'Name',
+        'image' => 'Image',
+        'status' => 'Status',
+        'add' => 'Add Banner',
+        'edit' => 'Edit Banner',
+
         'delete' => 'Delete Category',
     ],
     'brands' => 'Brands',
