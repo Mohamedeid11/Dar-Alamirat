@@ -48,9 +48,5 @@ class Category extends Model
         return $query->where('status', 1);
     }
 
-    public function scopeCategoryBanners($query)
-    {
-        return $query->where('type' , 'banner');
-    }
 
 }
