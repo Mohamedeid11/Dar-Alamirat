@@ -29,6 +29,21 @@ if (!function_exists('setting'))
     }
 }
 
+
+if (!function_exists('singleSetting'))
+{
+    function singleSetting($type)
+    {
+        $settings = Cache::get('singleSettings') == null ?
+            Cache::rememberForever('singleSettings', function () use ($type) {
+                return Setting::where('type' , $type)->first()->value;
+            })
+            : Cache::get('singleSettings');
+
+        return $settings;
+    }
+}
+
 if (!function_exists('gender'))
 {
     function gender()

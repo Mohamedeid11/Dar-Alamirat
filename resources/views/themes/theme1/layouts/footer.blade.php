@@ -111,13 +111,13 @@
                         <li>
                             <a href="">
                                 <i class="sicon-whatsapp2"></i>
-                                <span>{{ $setting->value['tel'] }}</span>
+                                <span>{{ singleSetting('company_phone') }}</span>
                             </a>
                         </li>
                         <li>
                             <a href="">
                                 <i class="sicon-iphone"></i>
-                                <span>{{ $setting->value['whats_app'] }}</span>
+                                <span>{{ singleSetting('whats_app') }}</span>
                             </a>
                         </li>
                         <li>
