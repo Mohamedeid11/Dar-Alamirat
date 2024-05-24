@@ -78,7 +78,7 @@
                                     <td>{{$category->name}}</td>
                                     <td>{{$category->slug}}</td>
                                     <td width="1%" class="with-img">
-                                        <img src="{{storage_asset($category->icon)}}" class="rounded h-30px my-n1 mx-n1" />
+                                        <img src="{{$category->icon}}" class="rounded h-30px my-n1 mx-n1" />
                                     </td>
                                     <td>{{$category->priority}}</td>
                                     {{-- <td>{{$category->status}}</td> --}}
