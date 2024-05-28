@@ -20,7 +20,9 @@
                     </a>
                     <div class="search-box">
                         <i class="fa-solid fa-magnifying-glass"></i>
-                        <input class="s-search-input" type="text" placeholder="Search">
+                        <form id="search-form" action="{{ route('products.search') }}" method="GET">
+                            <input class="s-search-input" type="text" placeholder="Search" name="query" id="product-search-input" onkeydown="if(event.key === 'Enter'){ this.form.submit(); return false; }">
+                        </form>
                     </div>
                 </div>
                 @guest
