@@ -32,9 +32,9 @@
             </div>
         </div>
 
-    @include('dashboard.layouts.alerts')
+        @include('dashboard.layouts.alerts')
 
-    <!-- start card -->
+        <!-- start card -->
         <div class="card border-0">
             <!-- content -->
             <div class="tab-content p-3">
