@@ -67,11 +67,9 @@ class HomeController extends Controller
             // Fetch products filtered by category and brand
             $products = Product::when($categoryId, function ($query, $categoryId) {
                 return $query->where('category_id', $categoryId);
-            })
-                ->when($brandId, function ($query, $brandId) {
+            })->when($brandId, function ($query, $brandId) {
                     return $query->where('brand_id', $brandId);
-                })
-                ->paginate(20);
+                })->paginate(20);
 //            $products = Product::active()->filter($request->filter)->latest()->paginate(20);
         }
 
