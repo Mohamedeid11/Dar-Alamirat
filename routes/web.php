@@ -8,6 +8,8 @@ use App\Http\Controllers\Front\ProductController;
 use App\Http\Controllers\Front\Order\CartController;
 use App\Http\Controllers\Dashboard\SettingsController;
 use App\Http\Controllers\Front\Profile\ProfileController;
+use App\Mail\YourMailable;
+use Illuminate\Support\Facades\Mail;
 
 /************************************ clients ****************************/
 
@@ -107,3 +109,8 @@ Route::get('/user/profile/{user}', [ProfileController::class, 'showProfile'])->n
 Route::put('/user/profile/{user}', [ProfileController::class, 'updateProfile'])->name('user.updateProfile');
 
 // Route::get('page/{page}',[HomeController::class,'showPage'])->name('fron.page.show');
+Route::get('/send-email', function () {
+    $data = ['name' => 'John Doe'];
+    Mail::to('memoeid1996@gmail.com')->send(new YourMailable($data));
+    return 'Email sent.';
+});
