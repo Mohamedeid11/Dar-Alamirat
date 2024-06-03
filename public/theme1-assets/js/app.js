@@ -344,6 +344,19 @@ $(window).on("load", function() {
         dateFormat: "Y-m-d",
     });
 
+    const input = document.querySelector("#phone");
+    window.intlTelInput(input, {
+        showSelectedDialCode: true,
+        initialCountry: "auto",
+        geoIpLookup: function(callback) {
+            fetch("https://ipapi.co/json")
+                .then(function(res) { return res.json(); })
+                .then(function(data) { callback(data.country_code); })
+                .catch(function() { callback(); });
+        },
+        utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@20.2.0/build/js/utils.js",
+    });
+
 });
 
 $( document ).ready(function() {
@@ -525,4 +538,3 @@ document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
         }
     });
 });
-

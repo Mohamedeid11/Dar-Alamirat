@@ -1,5 +1,10 @@
 @extends('themes.theme1.layouts.app')
 
+@section('customcss')
+    <link rel="stylesheet" href="{{ asset('theme1-assets/css/intlTelInput.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('theme1-assets/css/faltpicker.min.css') }}">
+@endsection
+
 @section('crumbs')
     <!-- breadcrumbs -->
     <section class="category-crumb">
