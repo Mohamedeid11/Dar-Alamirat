@@ -7,7 +7,7 @@
         @for ($letter = 'A'; $letter <= 'Z'; $letter++)
             <a href="#section-{{$letter}}" class="" data-id="{{$letter}}">{{$letter}}</a>
             @if($letter == 'Z')
-                <?php break ?>
+                    <?php break ?>
             @endif
         @endfor
     </nav>
