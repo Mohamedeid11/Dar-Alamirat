@@ -48,9 +48,7 @@ class CartController extends Controller
 
     public function showCart()
     {
-        $carts     = cache()->remember('cart', 60 * 60, function () {
-             return auth()->user()->carts;
-         });
+        $carts  = auth()->user()->carts;
 
         return view('themes.theme1.cart-page', compact('carts'));
     }
