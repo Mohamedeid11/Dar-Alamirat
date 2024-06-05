@@ -241,6 +241,22 @@
                                 </div>
                             </div>
 
+                            <label class="form-label col-form-label col-md-3">Product Images </label>
+                            <div class="row mb-15px" id="bannerImagesRow">
+                                <div class="col-sm-9">
+                                    <div class="custom-file-upload">
+                                        <label for="formFile" class="upload-area">
+                                            <div class="icon-upload form-control"> <span class="p-1">Upload Product Images </span></div>
+                                            <input class="file-input" name="images[]" type="file" accept=".png, .jpg, .jpeg ,.svg ,.webp" multiple />
+                                        </label>
+                                    </div>
+                                    @error('images')
+                                    <span class="text-danger" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                    @enderror
+                                </div>
+                            </div>
                         </div>
                         <div class="card-body" hidden>
                             {{-- <div id="dropzone">

@@ -12,7 +12,6 @@ class ProductController extends Controller
     public function showProduct($id)
     {
         $product=Product::find($id);
-        $product->load(['brand']);
         return view('themes.theme1.single-product',compact('product'));
     }
 }
