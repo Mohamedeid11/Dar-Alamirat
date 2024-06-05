@@ -80,7 +80,7 @@
                 <div class="section-brands">
                     <div class="s-block-title">
                         <h2>Browse All Brands</h2>
-                        <a href="#" class="">View All</a>
+                        <a href="{{route('brands.index')}}" class="">View All</a>
                     </div>
                     <div class="s-brands-list">
                         @foreach ($brands as $brand)
