@@ -38,8 +38,8 @@
                                 </div>
                                 <div class="swiper-wrapper">
 
-                                @foreach ($category->products as $product)
-                                    <!-- product item -->
+                                    @foreach ($category->products as $product)
+                                        <!-- product item -->
                                         <div class="swiper-slide">
                                             @include('themes.theme1.partials.item')
                                         </div>
