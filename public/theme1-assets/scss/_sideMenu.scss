@@ -1,4 +1,16 @@
 
+
+:dir(ltr) {
+    .offcanvas-header {
+        .btn-close {
+            margin: initial;
+            margin-left: auto;
+        }
+    }
+    .offcanvas-start {
+        transform: translateX(-100%);
+    }
+}
 .nav,
 .nav__sub {
   margin-top: 0;
